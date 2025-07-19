@@ -10,6 +10,7 @@ import BlogCategory from "./pages/blogs/BlogCategory";
 import CartApp from "./pages/CartApp";
 import AllCategories from "./pages/AllCategories";
 import CartOverview from "./pages/CartOverview";
+import CheckoutScreen from "./pages/CheckoutScreen";
 export default function App() {
   return (
     <BrowserRouter>
@@ -24,6 +25,7 @@ export default function App() {
           <Route path="contact" element={<Contact />} />
           <Route index element={<CartApp />} />
           <Route path="/cart" element={<CartOverview />} />
+          <Route path="/cart/checkout" element={<CheckoutScreen />} />
           <Route path="/category/:category" element={<AllCategories />} />
           <Route path="*" element={<NoFound />} />
         </Route>

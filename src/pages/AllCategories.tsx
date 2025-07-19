@@ -1,27 +1,3 @@
-// import { useParams, useNavigate } from "react-router-dom";
-// import { Button, VStack, Heading } from "@chakra-ui/react";
-// import { useEffect } from "react";
-
-// export default function AllCategories() {
-//   const { category } = useParams();
-//   const navigate = useNavigate();
-
-//   useEffect(() => {
-//     fetch(`https://dummyjson.com/products/category/${category}`)
-//       .then((res) => res.json())
-//       .then(console.log);
-//   }, []);
-//   return (
-//     <VStack spacing={4} mt={8}>
-//       <Heading size="md">Showing category: {category}</Heading>
-
-//       <Button colorScheme="teal" onClick={() => navigate(-1)}>
-//         ← Back
-//       </Button>
-//     </VStack>
-//   );
-// }
-
 import {
   Box,
   Grid,
@@ -31,42 +7,23 @@ import {
   VStack,
   Button,
   Stack,
-  //   useColorModeValue,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import LoadingSkeleton from "../components/LoadingSkeleton";
-// 🧠 Example: This would come from your API or router loader
-// const products = [
-//   {
-//     id: 154,
-//     title: 'Black Sun Glasses',
-//     description:
-//       'The Black Sun Glasses are a classic and stylish choice that provide both UV protection and a fashionable look.',
-//     category: 'sunglasses',
-//     price: 29.99,
-//     thumbnail: 'https://cdn.dummyjson.com/product-images/84/1.jpg',
-//   },
-//   {
-//     id: 155,
-//     title: 'Classic Sun Glasses',
-//     description:
-//       'The Classic Sun Glasses offer a timeless design with versatility for various occasions.',
-//     category: 'sunglasses',
-//     price: 24.99,
-//     thumbnail: 'https://cdn.dummyjson.com/product-images/85/1.jpg',
-//   },
-//   // ... add other products
-// ];
+import useCartStore from "../stores/useCartStore";
 
 export default function AllCategory() {
   const { category } = useParams();
   const navigate = useNavigate();
-
-  const cardBg = "#e0f0ee"; //useColorModeValue('white', 'gray.800');
-  const borderColor = "gray.700"; //useColorModeValue('gray.200', 'gray.700');
+  const addToCart = useCartStore(
+    (state: { addToCart: any }) => state.addToCart
+  );
+  const cart = useCartStore((state: { cart: any }) => state.cart);
+  const borderColor = "gray.700";
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     setLoading(true);
     fetch(`https://dummyjson.com/products/category/${category}`)
@@ -117,7 +74,7 @@ export default function AllCategory() {
             key={product?.id}
             borderRadius="lg"
             overflow="hidden"
-            bg={cardBg}
+            bg="#8ef1e4"
             borderColor={borderColor}
             shadow="md"
             _hover={{ transform: "scale(1.02)", transition: "0.2s" }}
@@ -148,7 +105,10 @@ export default function AllCategory() {
                   <Button
                     size="sm"
                     colorScheme="teal"
-                    onClick={() => console.log(product)}
+                    onClick={() => {
+                      addToCart(product);
+                      console.log(cart);
+                    }}
                     variant="outline"
                   >
                     Add to Cart

@@ -12,7 +12,7 @@ export default function NoFound() {
   return (
     <Center minH="100vh" bg="gray.50" px={4}>
       <VStack>
-        <Heading size="4xl" color="gray.700">
+        <Heading size="4xl" color="gray.300">
           404 - Page Not Found
         </Heading>
         <Text fontSize="lg" color="gray.600">
