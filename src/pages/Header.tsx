@@ -9,10 +9,11 @@ import {
 } from "@chakra-ui/react";
 import { Link as RouterLink, useMatch, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
-
+import { FaArrowCircleDown, FaArrowCircleUp, FaOpencart } from "react-icons/fa";
 const Links = [
   // { name: "Home", to: "/" },
   // { name: "Blogs", to: "/blogs" },
+  { name: "Home", to: "/" },
   { name: "Contact", to: "/contact" },
   { name: "Cart", to: "/cart" },
 ];
@@ -57,7 +58,7 @@ const NavLink = ({
 
 export default function Header() {
   const { onOpen, onClose } = useDisclosure();
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
   const opnen = () => {
@@ -80,24 +81,31 @@ export default function Header() {
       zIndex={1000}
       backdropFilter="blur(6.3px)"
     >
-      <Flex h={16} alignItems="center" justifyContent="space-between">
-        <Text
-          fontWeight="bold"
-          fontSize="xl"
-          color="teal.500"
-          onClick={() => navigate("/")}
-          style={{ cursor: "pointer" }}
-        >
-          Shop Easy
-        </Text>
+      <Flex h={24} alignItems="center" justifyContent="space-between" px={4}>
+        {/* Logo Section */}
+        <Flex align="center" gap={2}>
+          <FaOpencart size={64} color="#009688" />
+          <Text
+            fontWeight="bold"
+            fontSize="xl"
+            color="teal.500"
+            onClick={() => navigate("/")}
+            style={{ cursor: "pointer" }}
+          >
+            Shop Easy
+          </Text>
+        </Flex>
 
-        {/* Toggle Button */}
+        {/* Toggle Button (Mobile Only) */}
         <IconButton
           size="md"
+          bg="#14b8a6"
           aria-label="Toggle Menu"
           display={{ md: "none" }}
           onClick={() => (isOpen ? close() : opnen())}
-        />
+        >
+          {isOpen ? <FaArrowCircleUp /> : <FaArrowCircleDown />}
+        </IconButton>
 
         {/* Desktop Navigation */}
         <HStack display={{ base: "none", md: "flex" }}>

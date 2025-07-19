@@ -103,7 +103,13 @@ export default function ContactPage() {
                 </Field.Root>
               </Fieldset.Content>
 
-              <Button type="submit" alignSelf="flex-start" variant="outline">
+              <Button
+                type="submit"
+                alignSelf="flex-start"
+                variant="outline"
+                bg="#14b8a6"
+                color="#c9f9f4"
+              >
                 Submit
               </Button>
             </Fieldset.Root>

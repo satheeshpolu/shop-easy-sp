@@ -1,7 +1,6 @@
 import { Box, Flex, Heading, Text, VStack } from "@chakra-ui/react";
 import CategoryGrid from "./CategoryGrid";
-import ShoppingCartAnimation from "./ShoppingCartAnimation";
-import UnderDevelopment from "@/components/UnderDevelopment";
+import { FaOpencart } from "react-icons/fa";
 
 const Section = ({
   // bg,
@@ -46,8 +45,7 @@ const Section = ({
         zIndex={-1}
       >
         <Box transform="skewX(10deg)">
-          <UnderDevelopment />
-          <ShoppingCartAnimation />
+          <FaOpencart size={456} color="#rgb(8 86 79)" />
         </Box>
       </Box>
     </Flex>
