@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Field, defineStyle } from "@chakra-ui/react";
-
+import UnderDevelopment from '../components/UnderDevelopment';
 const CheckoutScreen = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -40,7 +40,9 @@ const CheckoutScreen = () => {
       pt={24}
       px={4}
     >
-      <Box maxW="400px" w="full" bg="white" p={8} rounded="md" shadow="md">
+      
+      <Box maxW="500px" w="full" bg="white" p={8} rounded="md" shadow="md">
+      <UnderDevelopment />
         <Heading size="md" mb={4} textAlign="center">
           Order Summary
         </Heading>

@@ -84,7 +84,12 @@ export default function Header() {
       <Flex h={24} alignItems="center" justifyContent="space-between" px={4}>
         {/* Logo Section */}
         <Flex align="center" gap={2}>
-          <FaOpencart size={64} color="#009688" />
+          <FaOpencart
+            size={64}
+            color="#009688"
+            onClick={() => navigate("/")}
+            style={{ cursor: "pointer" }}
+          />
           <Text
             fontWeight="bold"
             fontSize="xl"
