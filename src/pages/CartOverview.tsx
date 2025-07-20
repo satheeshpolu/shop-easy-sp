@@ -108,7 +108,7 @@ const CartOverview = () => {
     <>
       <Flex justify="flex-end" mt={4} mr={4} gap={8}>
         <Button
-          onClick={() => navigate(-1)}
+          onClick={() => navigate('/')}
           colorScheme="teal"
           variant="outline"
         >

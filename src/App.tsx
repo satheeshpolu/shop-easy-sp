@@ -11,6 +11,7 @@ import CartApp from "./pages/CartApp";
 import AllCategories from "./pages/AllCategories";
 import CartOverview from "./pages/CartOverview";
 import CheckoutScreen from "./pages/CheckoutScreen";
+import ProductDetails from "./pages/ProductDetails";
 export default function App() {
   return (
     <BrowserRouter>
@@ -27,6 +28,10 @@ export default function App() {
           <Route path="/cart" element={<CartOverview />} />
           <Route path="/cart/checkout" element={<CheckoutScreen />} />
           <Route path="/category/:category" element={<AllCategories />} />
+          <Route
+            path="/category/:category/:id/product_details"
+            element={<ProductDetails />}
+          />
           <Route path="*" element={<NoFound />} />
         </Route>
       </Routes>

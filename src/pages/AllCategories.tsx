@@ -7,6 +7,7 @@ import {
   VStack,
   Button,
   Stack,
+  Flex,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
@@ -15,6 +16,7 @@ import useCartStore from "../stores/useCartStore";
 import SimpleToast from "@/components/toast/SimpleToast";
 export default function AllCategory() {
   const { category } = useParams();
+  console.log("category =>", category);
   const navigate = useNavigate();
   const addToCart = useCartStore(
     (state: { addToCart: any }) => state.addToCart
@@ -36,14 +38,16 @@ export default function AllCategory() {
 
   return (
     <Box p={6}>
-      <Button
-        mt={8}
-        onClick={() => navigate(-1)}
-        colorScheme="teal"
-        variant="outline"
-      >
-        ← Back
-      </Button>
+      <Flex justify="flex-end" mt={4} mr={4} gap={8}>
+        <Button
+          onClick={() => navigate(-1)}
+          colorScheme="teal"
+          variant="outline"
+        >
+          ← Back
+        </Button>
+      </Flex>
+
       <Heading size="lg" mb={6}>
         Category: {category}
       </Heading>
@@ -102,6 +106,23 @@ export default function AllCategory() {
                   w="full"
                 >
                   <Text fontWeight="bold">${product.price}</Text>
+                  <Button
+                    type="submit"
+                    alignSelf="flex-start"
+                    variant="outline"
+                    bg="#0f695f"
+                    color="#c9f9f4"
+                    onClick={() => {
+                      navigate(
+                        `/category/${category}/${product.id}/product_details`,
+                        {
+                          state: { data: product },
+                        }
+                      );
+                    }}
+                  >
+                    View Details
+                  </Button>
                   <SimpleToast
                     buttonText="Add to cart"
                     title={`Product ${product.title} is added to the cart`}
