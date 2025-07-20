@@ -12,14 +12,14 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import LoadingSkeleton from "../components/LoadingSkeleton";
 import useCartStore from "../stores/useCartStore";
-
+import SimpleToast from "@/components/toast/SimpleToast";
 export default function AllCategory() {
   const { category } = useParams();
   const navigate = useNavigate();
   const addToCart = useCartStore(
     (state: { addToCart: any }) => state.addToCart
   );
-  const cart = useCartStore((state: { cart: any }) => state.cart);
+  // const cart = useCartStore((state: { cart: any }) => state.cart);
   const borderColor = "gray.700";
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -102,17 +102,11 @@ export default function AllCategory() {
                   w="full"
                 >
                   <Text fontWeight="bold">${product.price}</Text>
-                  <Button
-                    size="sm"
-                    colorScheme="teal"
-                    onClick={() => {
-                      addToCart(product);
-                      console.log(cart);
-                    }}
-                    variant="outline"
-                  >
-                    Add to Cart
-                  </Button>
+                  <SimpleToast
+                    buttonText="Add to cart"
+                    title={`Product ${product.title} is added to the cart`}
+                    onClick={() => addToCart(product)}
+                  />
                 </Stack>
               </VStack>
             </Box>
