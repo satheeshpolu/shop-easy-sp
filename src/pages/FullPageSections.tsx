@@ -1,6 +1,8 @@
 import { Box, Flex, Heading, Text, VStack } from "@chakra-ui/react";
 import CategoryGrid from "./CategoryGrid";
 import { FaOpencart } from "react-icons/fa";
+import AnimatedClock from "../components/AnimatedClock";
+import TodayDisplay from "@/components/TodayDisplay";
 
 const Section = ({
   // bg,
@@ -45,6 +47,8 @@ const Section = ({
         zIndex={-1}
       >
         <Box transform="skewX(10deg)">
+          <TodayDisplay />
+          <AnimatedClock />
           <FaOpencart size={456} color="#rgb(8 86 79)" />
         </Box>
       </Box>

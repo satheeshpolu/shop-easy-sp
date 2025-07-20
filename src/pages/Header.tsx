@@ -10,6 +10,7 @@ import {
 import { Link as RouterLink, useMatch, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import { FaArrowCircleDown, FaArrowCircleUp, FaOpencart } from "react-icons/fa";
+import useCartStore from "@/stores/useCartStore";
 const Links = [
   // { name: "Home", to: "/" },
   // { name: "Blogs", to: "/blogs" },
@@ -114,11 +115,38 @@ export default function Header() {
 
         {/* Desktop Navigation */}
         <HStack display={{ base: "none", md: "flex" }}>
-          {Links.map((link) => (
-            <NavLink key={link.to} to={link.to}>
-              {link.name}
-            </NavLink>
-          ))}
+          {Links.map((link) => {
+            const isCart = link.name === "Cart";
+            const cart = useCartStore((state) => state.cart);
+            const cartCount = cart?.length || 0;
+
+            return (
+              <NavLink key={link.to} to={link.to}>
+                <Flex align="center" gap={2} position="relative">
+                  {isCart && (
+                    <>
+                      {cartCount > 0 && (
+                        <Box
+                          position="absolute"
+                          top="-12px"
+                          right="-12px"
+                          bg="#20b3a5"
+                          color="white"
+                          fontSize="xs"
+                          fontWeight="bold"
+                          px={1.5}
+                          borderRadius="full"
+                        >
+                          {cartCount}
+                        </Box>
+                      )}
+                    </>
+                  )}
+                  <Text>{link.name}</Text>
+                </Flex>
+              </NavLink>
+            );
+          })}
         </HStack>
       </Flex>
 
