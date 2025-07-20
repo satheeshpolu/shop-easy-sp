@@ -121,7 +121,7 @@ export default function AllCategory() {
                       );
                     }}
                   >
-                    View Details
+                    Details
                   </Button>
                   <SimpleToast
                     buttonText="Add to cart"

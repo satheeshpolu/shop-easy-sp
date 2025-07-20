@@ -51,7 +51,7 @@ export default function ProductDetails() {
       boxShadow="lg"
     >
       <Button
-        onClick={() => navigate("/")}
+        onClick={() => navigate(-1)}
         colorScheme="teal"
         variant="outline"
       >
