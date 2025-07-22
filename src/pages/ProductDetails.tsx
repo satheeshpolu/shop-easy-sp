@@ -50,11 +50,7 @@ export default function ProductDetails() {
       rounded="xl"
       boxShadow="lg"
     >
-      <Button
-        onClick={() => navigate(-1)}
-        colorScheme="teal"
-        variant="outline"
-      >
+      <Button onClick={() => navigate(-1)} colorScheme="teal" variant="outline">
         ← Back
       </Button>
       <SimpleGrid columns={{ base: 1, md: 2 }}>
@@ -108,29 +104,33 @@ export default function ProductDetails() {
           <Text fontSize="md" color="gray.700">
             {product.description}
           </Text>
+          <Box p="8px" />
 
           <Badge
             colorScheme={
               product.availabilityStatus === "In Stock" ? "teal" : "red"
             }
             fontSize="0.9em"
+            colorPalette={
+              product.availabilityStatus === "In Stock" ? "green" : "red"
+            }
           >
             {product.availabilityStatus}
           </Badge>
 
           <Stack fontSize="sm" color="gray.600">
-            <Text>SKU: {product.sku}</Text>
             <Text>Stock: {product.stock}</Text>
             <Text>Min Order: {product.minimumOrderQuantity}</Text>
             <Text>Weight: {product.weight} kg</Text>
           </Stack>
+          <Box p="8px" />
 
           <Stack fontSize="sm" color="gray.600">
             <Text>Shipping: {product.shippingInformation}</Text>
             <Text>Warranty: {product.warrantyInformation}</Text>
             <Text>Return Policy: {product.returnPolicy}</Text>
           </Stack>
-
+          <Box p="8px" />
           <HStack>
             <Text>QR:</Text>
             <Image src={product.meta?.qrCode} alt="QR Code" boxSize="60px" />

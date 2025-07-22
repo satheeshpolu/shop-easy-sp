@@ -85,8 +85,8 @@ export default function ContactPage() {
                     <NativeSelect.Field name="country">
                       <For
                         each={[
-                          "Canada",
                           "Germany",
+                          "Canada",
                           "United Kingdom",
                           "United States",
                         ]}

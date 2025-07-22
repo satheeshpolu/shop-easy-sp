@@ -84,9 +84,9 @@ const CartOverview = () => {
   const removeFromCart = useCartStore(
     (state: { removeFromCart: any }) => state.removeFromCart
   );
-  // const addToCart = useCartStore(
-  //   (state: { addToCart: any }) => state.addToCart
-  // );
+  const clearCart = useCartStore(
+    (state: { clearCart: any }) => state.clearCart
+  );
   const navigate = useNavigate();
   console.log("CartOverview => ", cart.length);
   // const [amount, setAmount] = useState(0);
@@ -115,22 +115,36 @@ const CartOverview = () => {
           ← Back
         </Button>
         {!isCartEmpty && (
-          <Button
-            variant="outline"
-            bg="#14b8a6"
-            color="#c9f9f4"
-            _hover={{ bg: "teal.600" }}
-            onClick={() =>
-              navigate("/cart/checkout", {
-                state: {
-                  user: "Test User",
-                  amount: totalAmount,
-                },
-              })
-            }
-          >
-            Check Out
-          </Button>
+          <>
+            <Button
+              variant="outline"
+              bg="#14b8a6"
+              color="#c9f9f4"
+              _hover={{ bg: "teal.600" }}
+              onClick={() => {
+                clearCart();
+                navigate("/");
+              }}
+            >
+              Clear Cart
+            </Button>
+            <Button
+              variant="outline"
+              bg="#14b8a6"
+              color="#c9f9f4"
+              _hover={{ bg: "teal.600" }}
+              onClick={() =>
+                navigate("/cart/checkout", {
+                  state: {
+                    user: "Test User",
+                    amount: totalAmount,
+                  },
+                })
+              }
+            >
+              Check Out
+            </Button>
+          </>
         )}
       </Flex>
       <Flex style={{ margin: "30px" }}>
@@ -177,13 +191,15 @@ const CartOverview = () => {
                         alt={item?.title}
                         w="100px"
                         h="100px"
-                        onClick={() => navigate(
-                        `/category/${item.category}/${item.id}/product_details`,
-                        {
-                          state: { data: item },
+                        onClick={() =>
+                          navigate(
+                            `/category/${item.category}/${item.id}/product_details`,
+                            {
+                              state: { data: item },
+                            }
+                          )
                         }
-                      )}
-                      cursor={'pointer'}
+                        cursor={"pointer"}
                       />
                       <Button
                         variant="outline"

@@ -23,7 +23,10 @@ const useCartStore = create<CartState>()(
       addToCart: (item) =>
         set((state) => {
           const exists = state.cart.find((i) => i.id === item.id);
-          if (exists) return state;
+          if (exists) {
+            alert('Product is already added to the cart.');
+            return state;
+          }
           return { cart: [...state.cart, item] };
         }),
 
