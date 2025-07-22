@@ -106,7 +106,7 @@ const CheckoutScreen = () => {
             width="full"
             color="#c9f9f4"
             variant="outline"
-            onClick={() => console.log("Order is placed.")}
+            onClick={() => alert("Under development...!")}
             bg="#14b8a6"
           >
             Place Order

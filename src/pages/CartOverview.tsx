@@ -3,7 +3,7 @@ import useCartStore from "../stores/useCartStore";
 import { Table, Flex, Image } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { FaTrash, FaPlus   } from "react-icons/fa";
+import { FaTrash, FaPlus } from "react-icons/fa";
 import ZoomingCart from "@/components/ZoomingCart";
 interface Product {
   id: number;
@@ -84,9 +84,9 @@ const CartOverview = () => {
   const removeFromCart = useCartStore(
     (state: { removeFromCart: any }) => state.removeFromCart
   );
-  // const addToCart = useCartStore(
-  //   (state: { addToCart: any }) => state.addToCart
-  // );
+  const clearCart = useCartStore(
+    (state: { clearCart: any }) => state.clearCart
+  );
   const navigate = useNavigate();
   console.log("CartOverview => ", cart.length);
   // const [amount, setAmount] = useState(0);
@@ -108,50 +108,65 @@ const CartOverview = () => {
     <>
       <Flex justify="flex-end" mt={4} mr={4} gap={8}>
         <Button
-          onClick={() => navigate('/')}
+          onClick={() => navigate("/")}
           colorScheme="teal"
           variant="outline"
         >
           ← Back
         </Button>
         {!isCartEmpty && (
-          <Button
-            variant="outline"
-            bg="#14b8a6"
-            color="#c9f9f4"
-            _hover={{ bg: "teal.600" }}
-            onClick={() =>
-              navigate("/cart/checkout", {
-                state: {
-                  user: "Test User",
-                  amount: totalAmount,
-                },
-              })
-            }
-          >
-            Check Out
-          </Button>
+          <>
+            <Button
+              variant="outline"
+              bg="#14b8a6"
+              color="#c9f9f4"
+              _hover={{ bg: "teal.600" }}
+              onClick={() => {
+                clearCart();
+                navigate("/");
+              }}
+            >
+              Clear Cart
+            </Button>
+            <Button
+              variant="outline"
+              bg="#14b8a6"
+              color="#c9f9f4"
+              _hover={{ bg: "teal.600" }}
+              onClick={() =>
+                navigate("/cart/checkout", {
+                  state: {
+                    user: "Test User",
+                    amount: totalAmount,
+                  },
+                })
+              }
+            >
+              Check Out
+            </Button>
+          </>
         )}
       </Flex>
       <Flex style={{ margin: "30px" }}>
         {isCartEmpty && (
           <Box
-                  flex={1}
-                  // bg="gray.100"
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  borderRightRadius={{ md: "80px" }}
-                >
-                  <VStack textAlign="center" px={4}>
-                    <Heading fontSize={{ base: "3xl", md: "4xl" }}>{'Cart is empty'}</Heading>
-                    <Text fontSize={{ base: "md", md: "lg" }} maxW="md">
-                      {'- Please add items'}
-                    </Text>
-                              <ZoomingCart />
-                    
-                  </VStack>
-                </Box>
+            flex={1}
+            // bg="gray.100"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            borderRightRadius={{ md: "80px" }}
+          >
+            <VStack textAlign="center" px={4}>
+              <Heading fontSize={{ base: "3xl", md: "4xl" }}>
+                {"Cart is empty"}
+              </Heading>
+              <Text fontSize={{ base: "md", md: "lg" }} maxW="md">
+                {"- Please add items"}
+              </Text>
+              <ZoomingCart />
+            </VStack>
+          </Box>
         )}
         {!isCartEmpty && (
           <Table.Root size="sm">
@@ -176,6 +191,15 @@ const CartOverview = () => {
                         alt={item?.title}
                         w="100px"
                         h="100px"
+                        onClick={() =>
+                          navigate(
+                            `/category/${item.category}/${item.id}/product_details`,
+                            {
+                              state: { data: item },
+                            }
+                          )
+                        }
+                        cursor={"pointer"}
                       />
                       <Button
                         variant="outline"
