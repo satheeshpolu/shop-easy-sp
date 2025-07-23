@@ -14,6 +14,8 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { Accordion, Span } from "@chakra-ui/react";
+import WeeklyBuyersChart from "@/components/charts/WeeklyBuyersChart";
 
 export default function ProductDetails() {
   const [product, setProduct] = useState<any>(null);
@@ -52,6 +54,17 @@ export default function ProductDetails() {
     >
       <Button onClick={() => navigate(-1)} colorScheme="teal" variant="outline">
         ← Back
+      </Button>
+      <Button
+        type="submit"
+        alignSelf="flex-start"
+        variant="outline"
+        bg="#0f695f"
+        color="#c9f9f4"
+        onClick={() => addToCart(product)}
+        ml={4}
+      >
+        Add to Cart
       </Button>
       <SimpleGrid columns={{ base: 1, md: 2 }}>
         {/* Images Section */}
@@ -136,16 +149,20 @@ export default function ProductDetails() {
             <Image src={product.meta?.qrCode} alt="QR Code" boxSize="60px" />
           </HStack>
 
-          <Button
-            type="submit"
-            alignSelf="flex-start"
-            variant="outline"
-            bg="#0f695f"
-            color="#c9f9f4"
-            onClick={() => addToCart(product)}
-          >
-            Add to Cart
-          </Button>
+          <Accordion.Root collapsible defaultValue={["item.value"]}>
+            <Accordion.Item value={"item.value"}>
+              <Accordion.ItemTrigger>
+                <Span flex="1">{"Weekly product metrics overview"}</Span>
+                <Accordion.ItemIndicator />
+              </Accordion.ItemTrigger>
+              <Accordion.ItemContent>
+                <Accordion.ItemBody>
+                <WeeklyBuyersChart></WeeklyBuyersChart>
+                </Accordion.ItemBody>
+                
+              </Accordion.ItemContent>
+            </Accordion.Item>
+          </Accordion.Root>
         </VStack>
       </SimpleGrid>
     </Box>
