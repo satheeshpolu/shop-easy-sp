@@ -17,23 +17,25 @@ import SimpleToast from "@/components/toast/SimpleToast";
 import useProductStore from "@/stores/useProductStore";
 import { FaHeart, FaRegHeart } from "react-icons/fa6";
 
-export default function AllCategory() {
+export default function Favorite() {
   const { category } = useParams();
   const navigate = useNavigate();
   const addToCart = useCartStore(
     (state: { addToCart: any }) => state.addToCart
   );
-  // const cart = useCartStore((state: { cart: any }) => state.cart);
   const borderColor = "gray.700";
-  // const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
-  const { products, fetchProducts, toggleFavorite, favoriteProducts } =
-    useProductStore();
-  console.log("getFavorites => ", favoriteProducts.length);
+  const [isEmpty, setIsEmpty] = useState(true);
+  const { fetchProducts, toggleFavorite, favoriteProducts } = useProductStore();
   useEffect(() => {
     setLoading(false);
     fetchProducts(category as string);
-  }, [category]);
+    if (favoriteProducts.length === 0) {
+      setIsEmpty(true);
+    } else {
+      setIsEmpty(false);
+    }
+  }, [favoriteProducts]);
 
   return (
     <Box p={6}>
@@ -48,9 +50,32 @@ export default function AllCategory() {
       </Flex>
 
       <Heading size="lg" mb={6}>
-        Category: {category}
+        {favoriteProducts
+          ? "Your favorties:"
+          : `Category: {category}`}
       </Heading>
-
+      {isEmpty && (
+        <Flex justify="center" align="center" minH="60vh">
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            borderRightRadius={{ md: "80px" }}
+            px={4}
+            py={8}
+            bg="#8ef1e4"
+          >
+            <VStack textAlign="center">
+              <Heading fontSize={{ base: "3xl", md: "4xl" }}>
+                You don't have any favorite product(s)
+              </Heading>
+              <Text fontSize={{ base: "md", md: "lg" }} maxW="md">
+                - Please add favorite product(s)
+              </Text>
+            </VStack>
+          </Box>
+        </Flex>
+      )}
       <Grid
         templateColumns={{
           base: "repeat(1, 1fr)",
@@ -72,7 +97,8 @@ export default function AllCategory() {
             <LoadingSkeleton />
           </>
         )}
-        {products.map((product: any) => (
+
+        {favoriteProducts.map((product: any) => (
           <Box
             key={product?.id}
             borderRadius="lg"
@@ -83,7 +109,10 @@ export default function AllCategory() {
             _hover={{ transform: "scale(1.02)", transition: "0.2s" }}
           >
             <Box
-              onClick={() => toggleFavorite(product.id)}
+              onClick={() => {
+                debugger;
+                toggleFavorite(product.id, "favorite");
+              }}
               display="flex"
               justifyContent="flex-end"
               alignItems="center"
@@ -94,7 +123,7 @@ export default function AllCategory() {
               {product.isFavorite ? (
                 <FaHeart size={30} color="rgba(202, 39, 39, 1)" />
               ) : (
-                <FaRegHeart size={30} color="rgba(32, 134, 125, 1)"/>
+                <FaRegHeart size={30} color="rgba(32, 134, 125, 1)" />
               )}
             </Box>
             <Image

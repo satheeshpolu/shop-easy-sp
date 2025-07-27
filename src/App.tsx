@@ -12,6 +12,7 @@ import AllCategories from "./pages/AllCategories";
 import CartOverview from "./pages/CartOverview";
 import CheckoutScreen from "./pages/CheckoutScreen";
 import ProductDetails from "./pages/ProductDetails";
+import Favorite from "./pages/Favorite";
 export default function App() {
   return (
     <BrowserRouter>
@@ -24,6 +25,7 @@ export default function App() {
             <Route path="category/:category" element={<BlogCategory />} />
           </Route>
           <Route path="contact" element={<Contact />} />
+          <Route path="favorite" element={<Favorite />} />
           <Route index element={<CartApp />} />
           <Route path="/cart" element={<CartOverview />} />
           <Route path="/cart/checkout" element={<CheckoutScreen />} />
