@@ -50,11 +50,32 @@ export default function Favorite() {
       </Flex>
 
       <Heading size="lg" mb={6}>
-        {!isEmpty && favoriteProducts
+        {favoriteProducts
           ? "Your favorties:"
           : `Category: {category}`}
       </Heading>
-
+      {isEmpty && (
+        <Flex justify="center" align="center" minH="60vh">
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            borderRightRadius={{ md: "80px" }}
+            px={4}
+            py={8}
+            bg="#8ef1e4"
+          >
+            <VStack textAlign="center">
+              <Heading fontSize={{ base: "3xl", md: "4xl" }}>
+                You don't have any favorite product(s)
+              </Heading>
+              <Text fontSize={{ base: "md", md: "lg" }} maxW="md">
+                - Please add favorite product(s)
+              </Text>
+            </VStack>
+          </Box>
+        </Flex>
+      )}
       <Grid
         templateColumns={{
           base: "repeat(1, 1fr)",
@@ -76,7 +97,7 @@ export default function Favorite() {
             <LoadingSkeleton />
           </>
         )}
-        {isEmpty && <Text> Favorites is empty.</Text>}
+
         {favoriteProducts.map((product: any) => (
           <Box
             key={product?.id}
