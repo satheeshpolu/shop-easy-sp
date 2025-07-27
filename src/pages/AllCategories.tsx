@@ -89,6 +89,7 @@ export default function AllCategory() {
               alignItems="center"
               w="100%"
               p={4}
+              cursor={'pointer'}
             >
               {product.isFavorite ? (
                 <FaHeart size={30} color="rgba(202, 39, 39, 1)" />
