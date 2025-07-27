@@ -16,6 +16,7 @@ const Links = [
   // { name: "Blogs", to: "/blogs" },
   { name: "Home", to: "/" },
   { name: "Contact", to: "/contact" },
+  { name: "Favorite", to: "/favorite" },
   { name: "Cart", to: "/cart" },
 ];
 
