@@ -43,6 +43,7 @@ export default function App() {
               alignItems: "center",
               height: "100vh",
               justifyContent: "center",
+              fontSize: '36px'
             }}
           >
             Loading...
