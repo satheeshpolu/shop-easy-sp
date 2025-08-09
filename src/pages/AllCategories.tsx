@@ -9,13 +9,14 @@ import {
   Stack,
   Flex,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import LoadingSkeleton from "../components/LoadingSkeleton";
 import useCartStore from "../stores/useCartStore";
 import SimpleToast from "@/components/toast/SimpleToast";
 import useProductStore from "@/stores/useProductStore";
 import { FaHeart, FaRegHeart } from "react-icons/fa6";
+import React from "react";
 
 export default function AllCategory() {
   const { category } = useParams();
@@ -26,20 +27,26 @@ export default function AllCategory() {
   // const cart = useCartStore((state: { cart: any }) => state.cart);
   const borderColor = "gray.700";
   // const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const { products, fetchProducts, toggleFavorite, favoriteProducts } =
     useProductStore();
   console.log("getFavorites => ", favoriteProducts.length);
   useEffect(() => {
-    setLoading(false);
     fetchProducts(category as string);
+    setLoading(false);
   }, [category]);
+
+  const LoadingSkeletonMemo = React.memo(() => {return <LoadingSkeleton />});
+
+  const handleBackClick = useCallback(() => {
+    navigate(-1);
+  }, [navigate]);
 
   return (
     <Box p={6}>
       <Flex justify="flex-end" mt={4} mr={4} gap={8}>
         <Button
-          onClick={() => navigate(-1)}
+          onClick={handleBackClick}
           colorScheme="teal"
           variant="outline"
         >
@@ -62,14 +69,14 @@ export default function AllCategory() {
       >
         {loading && (
           <>
-            <LoadingSkeleton />
-            <LoadingSkeleton />
-            <LoadingSkeleton />
-            <LoadingSkeleton />
-            <LoadingSkeleton />
-            <LoadingSkeleton />
-            <LoadingSkeleton />
-            <LoadingSkeleton />
+            <LoadingSkeletonMemo />
+            <LoadingSkeletonMemo />
+            <LoadingSkeletonMemo />
+            <LoadingSkeletonMemo />
+            <LoadingSkeletonMemo />
+            <LoadingSkeletonMemo />
+            <LoadingSkeletonMemo />
+            <LoadingSkeletonMemo />
           </>
         )}
         {products.map((product: any) => (

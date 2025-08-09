@@ -38,7 +38,7 @@ export default function ProductDetails() {
   if (!product) {
     return (
       <Box p={6} maxW="6xl" mx="auto">
-        <Skeleton height="400px" />
+        <Skeleton height="600px" />
       </Box>
     );
   }
