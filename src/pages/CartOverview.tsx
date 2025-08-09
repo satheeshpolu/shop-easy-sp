@@ -3,7 +3,7 @@ import useCartStore from "../stores/useCartStore";
 import { Table, Flex, Image } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { FaTrash, FaPlus } from "react-icons/fa";
+import { FaTrash, FaPlus, FaMinus } from "react-icons/fa";
 import ZoomingCart from "@/components/ZoomingCart";
 interface Product {
   id: number;
@@ -189,8 +189,8 @@ const CartOverview = () => {
                       <Image
                         src={item?.thumbnail}
                         alt={item?.title}
-                        w="100px"
-                        h="100px"
+                        w="200px"
+                        h="200px"
                         onClick={() =>
                           navigate(
                             `/category/${item.category}/${item.id}/product_details`,
@@ -218,15 +218,23 @@ const CartOverview = () => {
                       <Button
                         variant={"outline"}
                         fontSize={16}
-                        color={"green"}
+                        color={"#009688"}
                         onClick={() => window.alert("It's under development.")}
                       >
                         <FaPlus />
                       </Button>
+                      <Button
+                        variant={"outline"}
+                        fontSize={16}
+                        color={"red"}
+                        onClick={() => window.alert("It's under development.")}
+                      >
+                        <FaMinus />
+                      </Button>
                     </HStack>
                   </Table.Cell>
                   <Table.Cell>{item.title}</Table.Cell>
-                  <Table.Cell>{item.category}</Table.Cell>
+                  <Table.Cell>1</Table.Cell>
                   <Table.Cell>{item.price}</Table.Cell>
                   <Table.Cell textAlign="end">{item.price}</Table.Cell>
                 </Table.Row>
