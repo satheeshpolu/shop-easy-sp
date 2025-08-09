@@ -61,6 +61,7 @@ export default function CategoryGrid() {
             transform: "scale(1.05)",
             cursor: "pointer",
             bg: "teal.200",
+            color: 'teal.500'
           }}
           onClick={() => navigate(`/category/${category}`)}
         >

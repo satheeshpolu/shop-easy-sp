@@ -65,7 +65,7 @@ export default function FullPageSections() {
       bg: "gray.100",
       title: "Welcome to ShopEasy",
       subtitle:
-        "Discover amazing products, unbeatable prices, and fast delivery —all in one place.",
+        "Discover amazing products, unbeatable prices, and fast delivery, all in one place.",
     },
     // {
     //   bg: "white",
