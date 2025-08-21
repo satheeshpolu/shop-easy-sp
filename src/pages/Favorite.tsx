@@ -129,7 +129,7 @@ export default function Favorite() {
             <Image
               src={product?.thumbnail}
               alt={product?.title}
-              objectFit="cover"
+              objectFit="scale-down"
               w="100%"
               h="200px"
             />
