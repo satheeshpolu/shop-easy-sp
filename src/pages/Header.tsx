@@ -85,19 +85,16 @@ export default function Header() {
     >
       <Flex h={24} alignItems="center" justifyContent="space-between" px={4}>
         {/* Logo Section */}
-        <Flex align="center" gap={2}>
+        <Flex align="center" cursor={"pointer"} onClick={() => navigate("/")}>
           <FaOpencart
-            size={64}
-            color="#009688"
-            onClick={() => navigate("/")}
-            style={{ cursor: "pointer" }}
+            size={96}
+            color="#b8e5e1ff"
           />
           <Text
             fontWeight="bold"
             fontSize="xl"
-            color="teal.500"
-            onClick={() => navigate("/")}
-            style={{ cursor: "pointer" }}
+            color="rgba(32, 134, 125, 1)"
+            marginLeft={'-95px'}
           >
             Shop Easy
           </Text>

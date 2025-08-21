@@ -16,26 +16,26 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Accordion, Span } from "@chakra-ui/react";
 import WeeklyBuyersChart from "@/components/charts/WeeklyBuyersChart";
+import useProduct from "@/hooks/useProduct";
+import { FaChartBar } from "react-icons/fa";
 
 export default function ProductDetails() {
-  const [product, setProduct] = useState<any>(null);
+  // const [product, setProduct] = useState<any>(null);
   const [mainImage, setMainImage] = useState<string>("");
   const { id } = useParams();
   const addToCart = useCartStore(
     (state: { addToCart: any }) => state.addToCart
   );
   const navigate = useNavigate();
+const { data: product, isLoading } = id ? useProduct(Number(id)) : { data: null, isLoading: true };
+  // const WeeklyBuyersChart = React.lazy(
+  //   () => import("@/components/charts/WeeklyBuyersChart")
+  // );
   useEffect(() => {
-    fetch(`https://dummyjson.com/products/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setProduct(data);
-        setMainImage(data.thumbnail || data.images?.[0]); // Default image
-      })
-      .catch((error) => console.error(error));
-  }, [id]);
+    setMainImage(product?.thumbnail || product?.images?.[0]); // Default image
+  }, [product]);
 
-  if (!product) {
+  if (isLoading) {
     return (
       <Box p={6} maxW="6xl" mx="auto">
         <Skeleton height="600px" />
@@ -149,17 +149,20 @@ export default function ProductDetails() {
             <Image src={product.meta?.qrCode} alt="QR Code" boxSize="60px" />
           </HStack>
 
-          <Accordion.Root collapsible defaultValue={["item.value"]}>
+          <Accordion.Root collapsible defaultValue={[]}>
             <Accordion.Item value={"item.value"}>
               <Accordion.ItemTrigger>
-                <Span flex="1">{"Weekly product metrics overview"}</Span>
+                <Span flex="1" display="inline-flex" alignItems="center" gap={2}>
+                  {" "}
+                  <FaChartBar />
+                   {"Weekly product metrics overview"}
+                </Span>
                 <Accordion.ItemIndicator />
               </Accordion.ItemTrigger>
               <Accordion.ItemContent>
                 <Accordion.ItemBody>
-                <WeeklyBuyersChart></WeeklyBuyersChart>
+                  <WeeklyBuyersChart />
                 </Accordion.ItemBody>
-                
               </Accordion.ItemContent>
             </Accordion.Item>
           </Accordion.Root>

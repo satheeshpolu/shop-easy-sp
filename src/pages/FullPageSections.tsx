@@ -49,7 +49,7 @@ const Section = ({
         <Box transform="skewX(10deg)">
           <TodayDisplay />
           <AnimatedClock />
-          <FaOpencart size={456} color="#rgb(8 86 79)" />
+          <FaOpencart size={456} />
         </Box>
       </Box>
     </Flex>
