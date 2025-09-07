@@ -1,13 +1,67 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="./src/assets/logo.png" />
+
+  <!-- Primary Meta Tags -->
+  <title>ShopEasy - Affordable Online Shopping</title>
+  <meta name="description"
+    content="ShopEasy is your one-stop online store for electronics, fashion, and more. Enjoy fast shipping and the best deals on top products." />
+  <meta name="keywords" content="ShopEasy, online shopping, electronics, fashion, deals, affordable, buy online" />
+  <meta name="author" content="ShopEasy Team" />
+  <link rel="canonical" href="https://satheeshpolu.vercel.app/" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="ShopEasy - Affordable Online Shopping" />
+  <meta property="og:description"
+    content="ShopEasy is your one-stop online store for electronics, fashion, and more. Enjoy fast shipping and the best deals on top products." />
+  <meta property="og:url" content="https://satheeshpolu.vercel.app/" />
+  <meta property="og:image" content="https://satheeshpolu.vercel.app/assets/logo.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ShopEasy - Affordable Online Shopping" />
+  <meta name="twitter:description"
+    content="ShopEasy is your one-stop online store for electronics, fashion, and more. Enjoy fast shipping and the best deals on top products." />
+  <meta name="twitter:image" content="https://www.shopeasy.com/images/og-image.jpg" />
+
+  <!-- Structured Data for JSON-LD (Website & Store Info) -->
+  <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Store",
+        "name": "ShopEasy",
+        "image": "https://www.shopeasy.com/images/logo.png",
+        "url": "https://www.shopeasy.com/",
+        "logo": "https://satheeshpolu.vercel.app/assets/logo.png",
+        "sameAs": [
+          "https://www.facebook.com/shopeasy",
+          "https://www.twitter.com/shopeasy",
+          "https://www.instagram.com/shopeasy"
+        ],
+        "description": "ShopEasy is your one-stop online store for electronics, fashion, and more. Enjoy fast shipping and the best deals on top products.",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "123 ShopEasy Street",
+          "addressLocality": "City Name",
+          "addressRegion": "State/Region",
+          "postalCode": "12345",
+          "addressCountry": "Country"
+        },
+        "telephone": "+49-123-123-4567"
+      }
+    </script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
 </html>
