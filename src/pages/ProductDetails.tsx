@@ -18,6 +18,8 @@ import { Accordion, Span } from "@chakra-ui/react";
 import WeeklyBuyersChart from "@/components/charts/WeeklyBuyersChart";
 import useProduct from "@/hooks/useProduct";
 import { FaChartBar } from "react-icons/fa";
+import { FaShare } from "react-icons/fa6";
+import { Product } from "@/utils/types";
 
 export default function ProductDetails() {
   // const [product, setProduct] = useState<any>(null);
@@ -27,7 +29,9 @@ export default function ProductDetails() {
     (state: { addToCart: any }) => state.addToCart
   );
   const navigate = useNavigate();
-const { data: product, isLoading } = id ? useProduct(Number(id)) : { data: null, isLoading: true };
+  const { data: product, isLoading } = id
+    ? useProduct(Number(id))
+    : { data: null, isLoading: true };
   // const WeeklyBuyersChart = React.lazy(
   //   () => import("@/components/charts/WeeklyBuyersChart")
   // );
@@ -42,6 +46,30 @@ const { data: product, isLoading } = id ? useProduct(Number(id)) : { data: null,
       </Box>
     );
   }
+
+  const shareProduct = async (product: Product) => {
+    debugger;
+    const _url = window.location.href;
+    const shareData = {
+      title: product.name,
+      text: `Check out this product: ${product.name}`,
+      url: _url,
+    };
+
+    // Check if browser supports Web Share API
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+        console.log("Product shared successfully!");
+      } catch (err) {
+        console.error("Error sharing:", err);
+      }
+    } else {
+      alert(
+        "Sharing is not supported in this browser. Please copy the URL manually."
+      );
+    }
+  };
 
   return (
     <Box
@@ -59,13 +87,22 @@ const { data: product, isLoading } = id ? useProduct(Number(id)) : { data: null,
         type="submit"
         alignSelf="flex-start"
         variant="outline"
-        bg="#0f695f"
-        color="#c9f9f4"
+        color="rgba(32, 134, 125, 1)"
         onClick={() => addToCart(product)}
         ml={4}
+        mr={4}
       >
         Add to Cart
       </Button>
+      {/* Share icon on the left */}
+      <Button colorScheme="teal" variant="outline">
+        <FaShare
+          size={24}
+          color="rgba(32, 134, 125, 1)"
+          onClick={() => shareProduct(product)}
+        />
+      </Button>
+
       <SimpleGrid columns={{ base: 1, md: 2 }}>
         {/* Images Section */}
         <VStack align="start">
@@ -152,10 +189,15 @@ const { data: product, isLoading } = id ? useProduct(Number(id)) : { data: null,
           <Accordion.Root collapsible defaultValue={[]}>
             <Accordion.Item value={"item.value"}>
               <Accordion.ItemTrigger>
-                <Span flex="1" display="inline-flex" alignItems="center" gap={2}>
+                <Span
+                  flex="1"
+                  display="inline-flex"
+                  alignItems="center"
+                  gap={2}
+                >
                   {" "}
                   <FaChartBar />
-                   {"Weekly product metrics overview"}
+                  {"Weekly product metrics overview"}
                 </Span>
                 <Accordion.ItemIndicator />
               </Accordion.ItemTrigger>

@@ -15,8 +15,15 @@ import LoadingSkeleton from "../components/LoadingSkeleton";
 import useCartStore from "../stores/useCartStore";
 import SimpleToast from "@/components/toast/SimpleToast";
 import useProductStore from "@/stores/useProductStore";
-import { FaHeart, FaRegHeart } from "react-icons/fa6";
+import {
+  FaHeart,
+  FaRegHeart,
+  FaShare,
+  FaShareNodes,
+  FaSlideshare,
+} from "react-icons/fa6";
 import React from "react";
+import { Product } from "@/utils/types";
 
 export default function AllCategory() {
   const { category } = useParams();
@@ -36,20 +43,42 @@ export default function AllCategory() {
     setLoading(false);
   }, [category]);
 
-  const LoadingSkeletonMemo = React.memo(() => {return <LoadingSkeleton />});
+  const LoadingSkeletonMemo = React.memo(() => {
+    return <LoadingSkeleton />;
+  });
 
   const handleBackClick = useCallback(() => {
     navigate(-1);
   }, [navigate]);
 
+  const shareProduct = async (product: Product) => {
+    debugger;
+    const _url = `${window.location.href}/${product.id}/product_details`;
+    const shareData = {
+      title: product.name,
+      text: `Check out this product: ${product.name}`,
+      url: _url,
+    };
+
+    // Check if browser supports Web Share API
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+        console.log("Product shared successfully!");
+      } catch (err) {
+        console.error("Error sharing:", err);
+      }
+    } else {
+      alert(
+        "Sharing is not supported in this browser. Please copy the URL manually."
+      );
+    }
+  };
+
   return (
     <Box p={6}>
       <Flex justify="flex-end" mt={4} mr={4} gap={8}>
-        <Button
-          onClick={handleBackClick}
-          colorScheme="teal"
-          variant="outline"
-        >
+        <Button onClick={handleBackClick} colorScheme="teal" variant="outline">
           ← Back
         </Button>
       </Flex>
@@ -90,20 +119,36 @@ export default function AllCategory() {
             _hover={{ transform: "scale(1.02)", transition: "0.2s" }}
           >
             <Box
-              onClick={() => toggleFavorite(product.id)}
               display="flex"
-              justifyContent="flex-end"
+              justifyContent="space-between" // push icons to left & right
               alignItems="center"
               w="100%"
               p={4}
-              cursor={'pointer'}
+              cursor="pointer"
             >
+              {/* Share icon on the left */}
+              <FaShare
+                size={24}
+                color="rgba(32, 134, 125, 1)"
+                onClick={() => shareProduct(product)}
+              />
+
+              {/* Favorite icon on the right */}
               {product.isFavorite ? (
-                <FaHeart size={30} color="rgba(202, 39, 39, 1)" />
+                <FaHeart
+                  size={30}
+                  color="rgba(202, 39, 39, 1)"
+                  onClick={() => toggleFavorite(product.id)}
+                />
               ) : (
-                <FaRegHeart size={30} color="rgba(32, 134, 125, 1)"/>
+                <FaRegHeart
+                  size={30}
+                  color="rgba(32, 134, 125, 1)"
+                  onClick={() => toggleFavorite(product.id)}
+                />
               )}
             </Box>
+
             <Image
               src={product?.thumbnail}
               alt={product?.title}
