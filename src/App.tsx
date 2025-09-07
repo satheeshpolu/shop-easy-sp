@@ -1,19 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import Layout from "./pages/Layout";
-// import Home from "./pages/Home";
-// import Blogs from "./pages/blogs/Blogs";
-// import Contact from "./pages/Contact";
-// import NoFound from "./pages/NoFound";
-// import BlogList from "./pages/blogs/BlogList";
-// import BlogPost from "./pages/blogs/BlogPost";
-// import BlogCategory from "./pages/blogs/BlogCategory";
-// import CartApp from "./pages/CartApp";
-// import AllCategories from "./pages/AllCategories";
-// import CartOverview from "./pages/CartOverview";
-// import CheckoutScreen from "./pages/CheckoutScreen";
-// import ProductDetails from "./pages/ProductDetails";
-// import Favorite from "./pages/Favorite";
 import { Suspense, lazy } from "react";
+import LoadingText from "./components/LoadingText";
+import CONSTANTS from "./utils/constants";
 
 // Lazy load all route components
 const Layout = lazy(() => import("./pages/Layout"));
@@ -37,17 +25,7 @@ export default function App() {
     <BrowserRouter>
       <Suspense
         fallback={
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              height: "100vh",
-              justifyContent: "center",
-              fontSize: '36px'
-            }}
-          >
-            Loading...
-          </div>
+          <LoadingText title={CONSTANTS.LOADING} />
         }
       >
         <Routes>
