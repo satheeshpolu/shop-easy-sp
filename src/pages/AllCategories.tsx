@@ -16,6 +16,7 @@ import useCartStore from "../stores/useCartStore";
 import SimpleToast from "@/components/toast/SimpleToast";
 import useProductStore from "@/stores/useProductStore";
 import {
+  FaCartPlus,
   FaHeart,
   FaRegHeart,
   FaShare,
@@ -24,6 +25,7 @@ import {
 } from "react-icons/fa6";
 import React from "react";
 import { Product } from "@/utils/types";
+import { formatText } from "@/utils/helpers";
 
 export default function AllCategory() {
   const { category } = useParams();
@@ -84,7 +86,7 @@ export default function AllCategory() {
       </Flex>
 
       <Heading size="lg" mb={6}>
-        Category: {category}
+        Category: {formatText(category as string)}
       </Heading>
 
       <Grid
@@ -189,11 +191,19 @@ export default function AllCategory() {
                   >
                     Details
                   </Button>
-                  <SimpleToast
+                  {/* <SimpleToast
                     buttonText="Add to cart"
                     title={`Product ${product.title} is added to the cart`}
                     onClick={() => addToCart(product)}
-                  />
+                  /> */}
+                  <Button
+                    onClick={() => addToCart(product)}
+                    colorScheme="teal"
+                    variant="outline"
+                  >
+                    <FaCartPlus />
+                  </Button>
+
                 </Stack>
               </VStack>
             </Box>

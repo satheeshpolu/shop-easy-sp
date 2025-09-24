@@ -25,10 +25,10 @@ const Section = ({
         borderRightRadius={{ md: "80px" }}
       >
         <VStack textAlign="center" px={4}>
-          <Heading fontSize={{ base: "3xl", md: "4xl" }}>{title}</Heading>
+          {/* <Heading fontSize={{ base: "3xl", md: "4xl" }}>{title}</Heading>
           <Text fontSize={{ base: "md", md: "lg" }} maxW="md">
             {subtitle}
-          </Text>
+          </Text> */}
           <CategoryGrid />
         </VStack>
       </Box>
@@ -47,9 +47,15 @@ const Section = ({
         zIndex={-1}
       >
         <Box transform="skewX(10deg)">
-          <TodayDisplay />
-          <AnimatedClock />
-          <FaOpencart size={456} />
+          {/* <TodayDisplay /> */}
+          {/* <AnimatedClock /> */}
+          <VStack textAlign="center" px={4}>
+            <Heading fontSize={{ base: "3xl", md: "4xl" }}>{title}</Heading>
+            <Text fontSize={{ base: "md", md: "lg" }} maxW="md">
+              {subtitle}
+            </Text>
+          </VStack>
+          {/* <FaOpencart size={456} /> */}
         </Box>
       </Box>
     </Flex>

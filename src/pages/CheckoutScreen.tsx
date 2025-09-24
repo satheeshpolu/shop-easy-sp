@@ -48,7 +48,7 @@ const CheckoutScreen = () => {
         </Heading>
 
         <Stack>
-          <Flex justify="space-between" fontWeight="bold">
+          <Flex justify="space-between" fontWeight="bold" mb={4} color={"teal.500"}>
             <Text>Total:</Text>
             <Text>${amount?.toFixed(2) || 0}</Text>
           </Flex>

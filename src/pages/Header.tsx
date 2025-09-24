@@ -16,7 +16,7 @@ const Links = [
   // { name: "Blogs", to: "/blogs" },
   { name: "Home", to: "/" },
   { name: "Contact", to: "/contact" },
-  { name: "Favorite", to: "/favorite" },
+  { name: "Wishlist", to: "/wishlist" },
   { name: "Cart", to: "/cart" },
 ];
 
@@ -36,7 +36,7 @@ const NavLink = ({
         padding: "0.5rem 0.75rem",
         borderRadius: "0.375rem",
         fontWeight: match ? "bold" : "normal",
-        color: match ? "#0d9488" : "#374151",
+        color: match ? "#0d9488" : "#0d9488",
         backgroundColor: match ? "#f3f4f6" : "transparent",
         textDecoration: "none",
         display: "block",
