@@ -5,7 +5,7 @@ import { Outlet, Link } from "react-router-dom";
 export default function Blogs() {
   return (
     <div>
-      <UnderDevelopment />
+      <UnderDevelopment /> {/* Remove this line when the page is ready */}
       <h1>Blogs</h1>
       <ul>
         <li><Link to="">All Posts</Link></li>
