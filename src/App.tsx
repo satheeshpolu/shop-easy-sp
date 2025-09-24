@@ -11,7 +11,7 @@ const BlogList = lazy(() => import("./pages/blogs/BlogList"));
 const BlogPost = lazy(() => import("./pages/blogs/BlogPost"));
 const BlogCategory = lazy(() => import("./pages/blogs/BlogCategory"));
 const Contact = lazy(() => import("./pages/Contact"));
-const Favorite = lazy(() => import("./pages/Favorite"));
+const Wishlist = lazy(() => import("./pages/Wishlist"));
 const CartApp = lazy(() => import("./pages/CartApp"));
 const CartOverview = lazy(() => import("./pages/CartOverview"));
 const CheckoutScreen = lazy(() => import("./pages/CheckoutScreen"));
@@ -37,7 +37,7 @@ export default function App() {
               <Route path="category/:category" element={<BlogCategory />} />
             </Route>
             <Route path="contact" element={<Contact />} />
-            <Route path="favorite" element={<Favorite />} />
+            <Route path="wishlist" element={<Wishlist />} />
             <Route index element={<CartApp />} />
             <Route path="/cart" element={<CartOverview />} />
             <Route path="/cart/checkout" element={<CheckoutScreen />} />

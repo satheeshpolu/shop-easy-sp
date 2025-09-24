@@ -172,7 +172,7 @@ const CartOverview = () => {
           <Table.Root size="sm">
             <Table.Header>
               <Table.Row>
-                <Table.ColumnHeader>Product</Table.ColumnHeader>
+                <Table.ColumnHeader>Product(s)</Table.ColumnHeader>
                 <Table.ColumnHeader>Title</Table.ColumnHeader>
                 <Table.ColumnHeader>Quantity</Table.ColumnHeader>
                 <Table.ColumnHeader>Total</Table.ColumnHeader>
@@ -184,7 +184,7 @@ const CartOverview = () => {
             <Table.Body>
               {cart.map((item: Product) => (
                 <Table.Row key={item.id}>
-                  <Table.Cell>
+                  <Table.Cell width={450}>
                     <HStack>
                       <Image
                         src={item?.thumbnail}
@@ -239,8 +239,8 @@ const CartOverview = () => {
                   <Table.Cell textAlign="end">{item.price}</Table.Cell>
                 </Table.Row>
               ))}
-              <Table.Row fontWeight="bold" bg="gray.100">
-                <Table.Cell>Total</Table.Cell>
+              <Table.Row fontWeight="bold" bg="gray.500">
+                <Table.Cell>Total:</Table.Cell>
                 <Table.Cell></Table.Cell>
                 <Table.Cell></Table.Cell>
                 <Table.Cell>${totalQuantity.toFixed(2)}</Table.Cell>

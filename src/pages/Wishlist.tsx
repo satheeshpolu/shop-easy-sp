@@ -15,9 +15,9 @@ import LoadingSkeleton from "../components/LoadingSkeleton";
 import useCartStore from "../stores/useCartStore";
 import SimpleToast from "@/components/toast/SimpleToast";
 import useProductStore from "@/stores/useProductStore";
-import { FaHeart, FaRegHeart } from "react-icons/fa6";
+import { FaCartPlus, FaHeart, FaRegHeart } from "react-icons/fa6";
 
-export default function Favorite() {
+export default function Wishlist() {
   const { category } = useParams();
   const navigate = useNavigate();
   const addToCart = useCartStore(
@@ -51,7 +51,7 @@ export default function Favorite() {
 
       <Heading size="lg" mb={6}>
         {favoriteProducts
-          ? "Your favorties:"
+          ? "Your Wishlist:"
           : `Category: {category}`}
       </Heading>
       {isEmpty && (
@@ -166,11 +166,13 @@ export default function Favorite() {
                   >
                     Details
                   </Button>
-                  <SimpleToast
-                    buttonText="Add to cart"
-                    title={`Product ${product.title} is added to the cart`}
+                  <Button
                     onClick={() => addToCart(product)}
-                  />
+                    colorScheme="teal"
+                    variant="outline"
+                  >
+                    <FaCartPlus />
+                  </Button>
                 </Stack>
               </VStack>
             </Box>

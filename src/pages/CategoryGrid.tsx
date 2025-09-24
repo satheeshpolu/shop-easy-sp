@@ -1,3 +1,4 @@
+import { formatText } from "@/utils/helpers";
 import { Box, Grid, Text, Icon, Flex } from "@chakra-ui/react";
 import { FaBoxOpen } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -28,9 +29,6 @@ const categories = [
   "womens-shoes",
   "womens-watches",
 ];
-
-const formatCategory = (cat: string) =>
-  cat.replace(/-/g, " ").replace(/\b\w/g, (char) => char.toUpperCase());
 
 export default function CategoryGrid() {
   const navigate = useNavigate();
@@ -68,8 +66,8 @@ export default function CategoryGrid() {
           <Flex justify="center" mb={2}>
             <Icon as={FaBoxOpen} w={6} h={6} color="teal.400" />
           </Flex>
-          <Text fontWeight="semibold" fontSize="sm">
-            {formatCategory(category)}
+          <Text fontWeight="semibold" fontSize="sm" color={"gray.600"}>
+            {formatText(category)}
           </Text>
         </Box>
       ))}
