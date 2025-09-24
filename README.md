@@ -1,21 +1,94 @@
-# React + TypeScript + Vite
-## How to run? ==> npm run dev
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 🛒 Shop Easy — Fast, Modern E-Commerce App
 
-While this project uses React, Vite supports many popular JS frameworks. [See all the supported frameworks](https://vitejs.dev/guide/#scaffolding-your-first-vite-project).
+Shop Easy is a blazing-fast and modern e-commerce web application built with the latest front-end technologies. It delivers a **smooth shopping experience**, **scalable architecture**, and a **clean, modern UI**. Powered by [Vite](https://vitejs.dev/) for lightning-fast builds and deployed seamlessly on [Vercel](https://vercel.com/), Shop Easy ensures effortless performance with zero downtime.
 
-## Deploy Your Own
+👉 **Live Demo**: [Shop Easy](https://satheeshpolu.vercel.app/)
 
-Deploy your own Vite project with Vercel.
+---
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/examples/tree/main/framework-boilerplates/vite-react&template=vite-react)
+## 🚀 Features
+- ⚡️ **High Performance** — Built with Vite for instant reloads and optimized builds.
+- 🎨 **Modern UI** — Styled with [Chakra UI](https://chakra-ui.com/) for accessible and responsive design.
+- 📦 **State Management** — Powered by [zustand](https://github.com/pmndrs/zustand) and [@tanstack/react-query](https://tanstack.com/query) for efficient data handling.
+- 🔗 **REST API Integration** — Product data fetched from [DummyJSON](https://dummyjson.com/products).
+- ✅ **Testing Ready** — Robust test coverage with Jest and React Testing Library.
 
-_Live Example: https://vite-react-example.vercel.app_
+---
 
-### Deploying From Your Terminal
+## 🛠️ Tech Stack
 
-You can deploy your new Vite project with a single command from your terminal using [Vercel CLI](https://vercel.com/download):
+### Frontend
+- [React](https://react.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Chakra UI](https://chakra-ui.com/)
+- [zustand](https://github.com/pmndrs/zustand)
+- [@tanstack/react-query](https://tanstack.com/query)
 
-```shell
-$ vercel
+### Testing
+- [Jest](https://jestjs.io/)
+- [@testing-library/react](https://testing-library.com/docs/react-testing-library/intro/)
+
+### Build Tool
+- [Vite](https://vitejs.dev/)
+
+### API
+- [DummyJSON Products API](https://dummyjson.com/products)
+
+---
+
+## 🌐 Deployment
+The app is deployed on [Vercel](https://vercel.com/), ensuring:
+- ⚡ Instant global edge deployment
+- 🔄 Continuous integration with GitHub
+- 🕒 Zero downtime updates
+
+---
+
+## 📸 Preview
+
+Take a quick look at **Shop Easy** in action!  
+From browsing products to managing your wishlist and cart, the app provides a smooth, modern shopping experience.
+
+- 🏠 **Home Page** — Clean, modern design showcasing products at a glance  
+  ![Home Page](./src/assets/image.png)
+
+- 📂 **Category Details Page** — Browse products by category with ease  
+  ![Category details Page](./src/assets/image-1.png)
+
+- 📞 **Contact Page** — Simple and intuitive way for customers to get in touch  
+  ![Contact Page](./src/assets/image-3.png)
+
+- 💖 **Wishlist Page** — Save favorite products for later with one click  
+  ![Wishlist Page](./src/assets/image-2.png)
+
+- 🛒 **Cart Page** — Smooth checkout flow with all your selected items  
+  ![Cart Page](./src/assets/image-5.png)
+
+
+## 📦 Getting Started
+
+### 1. Clone the repo
+```
+    git clone https://github.com/your-username/shop-easy.git
+    cd shop-easy 
+``` 
+
+### 2. Install dependencies
+
+```
+shop-easy > npm install
+```
+### 3. Start development server
+```
+shop-easy > npm run dev
+```
+
+### 4. Run tests
+```
+shop-easy > npm run test
+```
+
+### 5. Build the app
+```
+shop-easy > npm run build
 ```
