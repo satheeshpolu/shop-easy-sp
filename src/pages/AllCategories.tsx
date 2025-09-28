@@ -26,6 +26,7 @@ import {
 import React from "react";
 import { Product } from "@/utils/types";
 import { formatText } from "@/utils/helpers";
+import useShareProduct from "@/hooks/useShareProduct";
 
 export default function AllCategory() {
   const { category } = useParams();
@@ -39,7 +40,7 @@ export default function AllCategory() {
   const [loading, setLoading] = useState(true);
   const { products, fetchProducts, toggleFavorite, favoriteProducts } =
     useProductStore();
-  console.log("getFavorites => ", favoriteProducts.length);
+  const { shareProduct } = useShareProduct();
   useEffect(() => {
     fetchProducts(category as string);
     setLoading(false);
@@ -53,29 +54,6 @@ export default function AllCategory() {
     navigate(-1);
   }, [navigate]);
 
-  const shareProduct = async (product: Product) => {
-    debugger;
-    const _url = `${window.location.href}/${product.id}/product_details`;
-    const shareData = {
-      title: product.name,
-      text: `Check out this product: ${product.name}`,
-      url: _url,
-    };
-
-    // Check if browser supports Web Share API
-    if (navigator.share) {
-      try {
-        await navigator.share(shareData);
-        console.log("Product shared successfully!");
-      } catch (err) {
-        console.error("Error sharing:", err);
-      }
-    } else {
-      alert(
-        "Sharing is not supported in this browser. Please copy the URL manually."
-      );
-    }
-  };
 
   return (
     <Box p={6}>

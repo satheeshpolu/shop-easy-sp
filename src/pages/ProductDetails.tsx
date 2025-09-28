@@ -19,11 +19,12 @@ import WeeklyBuyersChart from "@/components/charts/WeeklyBuyersChart";
 import useProduct from "@/hooks/useProduct";
 import { FaChartBar } from "react-icons/fa";
 import { FaShare } from "react-icons/fa6";
-import { Product } from "@/utils/types";
+import useShareProduct from "@/hooks/useShareProduct";
 
 export default function ProductDetails() {
   // const [product, setProduct] = useState<any>(null);
   const [mainImage, setMainImage] = useState<string>("");
+  const { shareProduct } = useShareProduct();
   const { id } = useParams();
   const addToCart = useCartStore(
     (state: { addToCart: any }) => state.addToCart
@@ -46,30 +47,6 @@ export default function ProductDetails() {
       </Box>
     );
   }
-
-  const shareProduct = async (product: Product) => {
-    debugger;
-    const _url = window.location.href;
-    const shareData = {
-      title: product.name,
-      text: `Check out this product: ${product.name}`,
-      url: _url,
-    };
-
-    // Check if browser supports Web Share API
-    if (navigator.share) {
-      try {
-        await navigator.share(shareData);
-        console.log("Product shared successfully!");
-      } catch (err) {
-        console.error("Error sharing:", err);
-      }
-    } else {
-      alert(
-        "Sharing is not supported in this browser. Please copy the URL manually."
-      );
-    }
-  };
 
   return (
     <Box
