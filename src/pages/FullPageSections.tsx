@@ -1,8 +1,7 @@
-import { Box, Flex, Heading, Text, VStack } from "@chakra-ui/react";
+import { Box, Flex, Heading, Separator, Text, VStack } from "@chakra-ui/react";
 import CategoryGrid from "./CategoryGrid";
-import { FaOpencart } from "react-icons/fa";
-import AnimatedClock from "../components/AnimatedClock";
-import TodayDisplay from "@/components/TodayDisplay";
+import DateWidget from "@/components/DateWidget";
+import TimeWidget from "@/components/TimeWidget";
 
 const Section = ({
   // bg,
@@ -18,10 +17,6 @@ const Section = ({
       {/* Left Half */}
       <Box
         flex={1}
-        // bg="gray.100"
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
         borderRightRadius={{ md: "80px" }}
       >
         <VStack textAlign="center" px={4}>
@@ -47,15 +42,26 @@ const Section = ({
         zIndex={-1}
       >
         <Box transform="skewX(10deg)">
-          {/* <TodayDisplay /> */}
-          {/* <AnimatedClock /> */}
-          <VStack textAlign="center" px={4}>
+          <Box
+            w="500px"
+            h="500px"
+            position="fixed"
+            transform="rotate(50deg)"
+            bg="teal.400"
+            left={"10%"}
+            borderRadius="35% 35% 35% 35% / 35% 35% 35% 35%"
+            zIndex={-2}
+            animation="spin 20s linear infinite"
+          />
+          <VStack textAlign="center" py={4}>
             <Heading fontSize={{ base: "3xl", md: "4xl" }}>{title}</Heading>
             <Text fontSize={{ base: "md", md: "lg" }} maxW="md">
               {subtitle}
             </Text>
           </VStack>
-          {/* <FaOpencart size={456} /> */}
+          <Separator variant="dashed" bgColor={"teal.500"} />
+          <DateWidget />
+          <TimeWidget />
         </Box>
       </Box>
     </Flex>

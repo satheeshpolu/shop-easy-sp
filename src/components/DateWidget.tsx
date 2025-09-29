@@ -1,10 +1,10 @@
 import React from "react";
 
-const TodayDisplay: React.FC = () => {
+const DateWidget: React.FC = () => {
   const today = new Date();
 
   const day = today.getDate();
-  const month = today.toLocaleString("default", { month: "long" }); // "July"
+  const month = today.toLocaleString("default", { month: "long" });
   const year = today.getFullYear();
 
   return (
@@ -17,4 +17,4 @@ const TodayDisplay: React.FC = () => {
   );
 };
 
-export default TodayDisplay;
+export default DateWidget;
