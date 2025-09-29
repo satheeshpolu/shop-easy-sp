@@ -13,7 +13,7 @@ const Digit: React.FC<{ value: string }> = ({ value }) => {
 
     if (prevValue !== value) {
       el.classList.remove("animate");
-      void el.offsetWidth; // force reflow
+      void el.offsetWidth;
       el.textContent = value;
       el.classList.add("animate");
       setPrevValue(value);
@@ -29,7 +29,7 @@ const Digit: React.FC<{ value: string }> = ({ value }) => {
   );
 };
 
-const AnimatedClock: React.FC = () => {
+const TimeWidget: React.FC = () => {
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const AnimatedClock: React.FC = () => {
   const seconds = pad(time.getSeconds());
 
   return (
-    <div className="clock">
+    <div className="clock" style={{marginTop: '96px'}}>
       <Digit value={hours[0]} />
       <Digit value={hours[1]} />
       <div>:</div>
@@ -55,4 +55,4 @@ const AnimatedClock: React.FC = () => {
   );
 };
 
-export default AnimatedClock;
+export default TimeWidget;
