@@ -15,7 +15,7 @@ const Wishlist = lazy(() => import("./pages/Wishlist"));
 const CartApp = lazy(() => import("./pages/CartApp"));
 const CartOverview = lazy(() => import("./pages/CartOverview"));
 const CheckoutScreen = lazy(() => import("./pages/CheckoutScreen"));
-const AllCategories = lazy(() => import("./pages/AllCategories"));
+const CategoryProducts = lazy(() => import("./pages/CategoryProducts"));
 const ProductDetails = lazy(() => import("./pages/ProductDetails"));
 const NoFound = lazy(() => import("./pages/NoFound"));
 // const Loading = lazy(() => import("./components/LoadingSkeleton"));
@@ -41,7 +41,7 @@ export default function App() {
             <Route index element={<CartApp />} />
             <Route path="/cart" element={<CartOverview />} />
             <Route path="/cart/checkout" element={<CheckoutScreen />} />
-            <Route path="/category/:category" element={<AllCategories />} />
+            <Route path="/category/:category" element={<CategoryProducts />} />
             <Route
               path="/category/:category/:id/product_details"
               element={<ProductDetails />}

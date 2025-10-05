@@ -20,15 +20,14 @@ import {
   FaHeart,
   FaRegHeart,
   FaShare,
-  FaShareNodes,
-  FaSlideshare,
 } from "react-icons/fa6";
 import React from "react";
 import { Product } from "@/utils/types";
 import { formatText } from "@/utils/helpers";
 import useShareProduct from "@/hooks/useShareProduct";
+import SortDropdown from "@/components/SortDropdown";
 
-export default function AllCategory() {
+export default function CategoryProducts() {
   const { category } = useParams();
   const navigate = useNavigate();
   const addToCart = useCartStore(
@@ -38,8 +37,10 @@ export default function AllCategory() {
   const borderColor = "gray.700";
   // const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { products, fetchProducts, toggleFavorite, favoriteProducts } =
+  const [filterOption, setFilterOption] = useState("");
+  const { products, fetchProducts, toggleFavorite, favoriteProducts, sortProducts } =
     useProductStore();
+  const [filteredProducts, setFilteredProducts] = useState<Product[] | undefined>(undefined);
   const { shareProduct } = useShareProduct();
   useEffect(() => {
     fetchProducts(category as string);
@@ -54,13 +55,13 @@ export default function AllCategory() {
     navigate(-1);
   }, [navigate]);
 
-
   return (
     <Box p={6}>
       <Flex justify="flex-end" mt={4} mr={4} gap={8}>
         <Button onClick={handleBackClick} colorScheme="teal" variant="outline">
           ← Back
         </Button>
+        <SortDropdown onFilterChange={(value) => {sortProducts(value)}} />
       </Flex>
 
       <Heading size="lg" mb={6}>
