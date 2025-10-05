@@ -13,6 +13,7 @@ interface ProductStore {
   favoriteProducts: Product[];
   fetchProducts: (category: string) => Promise<void>;
   toggleFavorite: (productId: number, pageType?: string) => void;
+  sortProducts: (type: string) => void;
 }
 
 const useProductStore = create<ProductStore>()(
@@ -58,6 +59,22 @@ const useProductStore = create<ProductStore>()(
         set({
           favoriteProducts: updatedFavorites,
           products: updatedProducts,
+        });
+      },
+      sortProducts: (type: string) => {
+        const { products } = get();
+        const _sortBy = type === 'price' ? 'price' : 'title';
+        let sortedProducts: Product[] = [];
+        // a[_sortBy].localeCompare(b[_sortBy]));
+        // const sortedProducts = products.sort((a,b) => a[_sortBy].localeCompare(b[_sortBy]));
+        if(_sortBy === 'price') {
+          sortedProducts = products.sort((a,b) => a[_sortBy] - b[_sortBy]);
+        } else {  
+          sortedProducts = products.sort((a,b) => a[_sortBy].localeCompare(b[_sortBy]));
+        }
+        debugger
+        set({
+          products: sortedProducts,
         });
       },
     }),
