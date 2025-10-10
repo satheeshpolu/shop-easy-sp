@@ -3,6 +3,7 @@ import { Suspense, lazy } from "react";
 import LoadingText from "./components/LoadingText";
 import CONSTANTS from "./utils/constants";
 import RecentProducts from "./pages/RecentProducts";
+import { Box, Flex } from "@chakra-ui/react";
 
 // Lazy load all route components
 const Layout = lazy(() => import("./pages/Layout"));
@@ -26,7 +27,24 @@ export default function App() {
     <BrowserRouter>
       <Suspense
         fallback={
-          <LoadingText title={CONSTANTS.LOADING} />
+          <Flex
+            align="center"
+            justify="center"
+            h="100vh"
+            position="relative"
+          >
+            <Box
+              w="500px"
+              h="500px"
+              position="absolute"
+              transform="rotate(50deg)"
+              bg="teal.200"
+              borderRadius="35% 35% 35% 35% / 35% 35% 35% 35%"
+              zIndex={-1}
+              animation="spin 20s linear infinite"
+            />
+            <LoadingText title={CONSTANTS.LOADING} />
+          </Flex>
         }
       >
         <Routes>
