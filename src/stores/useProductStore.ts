@@ -1,20 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-
-interface Product {
-  id: number;
-  name: string;
-  isFavorite?: boolean;
-  [key: string]: any;
-}
-
-interface ProductStore {
-  products: Product[];
-  favoriteProducts: Product[];
-  fetchProducts: (category: string) => Promise<void>;
-  toggleFavorite: (productId: number, pageType?: string) => void;
-  sortProducts: (type: string) => void;
-}
+import { Product, ProductStore } from "./types";
 
 const useProductStore = create<ProductStore>()(
   persist(

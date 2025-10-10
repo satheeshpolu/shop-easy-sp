@@ -239,7 +239,7 @@ const CartOverview = () => {
                   <Table.Cell textAlign="end">{item.price}</Table.Cell>
                 </Table.Row>
               ))}
-              <Table.Row fontWeight="bold" bg="gray.500">
+              <Table.Row fontWeight="bold" bg="gray.300">
                 <Table.Cell>Total:</Table.Cell>
                 <Table.Cell></Table.Cell>
                 <Table.Cell></Table.Cell>

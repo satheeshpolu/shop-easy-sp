@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import LoadingText from "./components/LoadingText";
 import CONSTANTS from "./utils/constants";
+import RecentProducts from "./pages/RecentProducts";
 
 // Lazy load all route components
 const Layout = lazy(() => import("./pages/Layout"));
@@ -38,6 +39,7 @@ export default function App() {
             </Route>
             <Route path="contact" element={<Contact />} />
             <Route path="wishlist" element={<Wishlist />} />
+            <Route path="recent_products" element={<RecentProducts />} />
             <Route index element={<CartApp />} />
             <Route path="/cart" element={<CartOverview />} />
             <Route path="/cart/checkout" element={<CheckoutScreen />} />
