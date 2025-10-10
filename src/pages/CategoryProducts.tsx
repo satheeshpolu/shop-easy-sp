@@ -26,6 +26,7 @@ import { Product } from "@/utils/types";
 import { formatText } from "@/utils/helpers";
 import useShareProduct from "@/hooks/useShareProduct";
 import SortDropdown from "@/components/SortDropdown";
+import { useRecentStore } from "@/stores/useRecentStore";
 
 export default function CategoryProducts() {
   const { category } = useParams();
@@ -42,6 +43,8 @@ export default function CategoryProducts() {
     useProductStore();
   const [filteredProducts, setFilteredProducts] = useState<Product[] | undefined>(undefined);
   const { shareProduct } = useShareProduct();
+  const { addToRecent } = useRecentStore();
+
   useEffect(() => {
     fetchProducts(category as string);
     setLoading(false);
@@ -61,7 +64,7 @@ export default function CategoryProducts() {
         <Button onClick={handleBackClick} colorScheme="teal" variant="outline">
           ← Back
         </Button>
-        <SortDropdown onFilterChange={(value) => {sortProducts(value)}} />
+        <SortDropdown onFilterChange={(value) => { sortProducts(value) }} />
       </Flex>
 
       <Heading size="lg" mb={6}>
@@ -133,9 +136,10 @@ export default function CategoryProducts() {
             <Image
               src={product?.thumbnail}
               alt={product?.title}
-              objectFit="cover"
+              objectFit="scale-down"
               w="100%"
               h="200px"
+              _hover={{ transform: "scale(1.3)", transition: "0.5s", zIndex: -1}}
             />
 
             <Box p={4}>
@@ -160,6 +164,7 @@ export default function CategoryProducts() {
                     bg="#0f695f"
                     color="#c9f9f4"
                     onClick={() => {
+                      addToRecent(product)
                       navigate(
                         `/category/${category}/${product.id}/product_details`,
                         {

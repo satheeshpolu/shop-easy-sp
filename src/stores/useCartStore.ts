@@ -1,19 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-
-interface CartItem {
-  id: number;
-  title: string;
-  price: number;
-  [key: string]: any; // adjust based on your item structure
-}
-
-interface CartState {
-  cart: CartItem[];
-  addToCart: (item: CartItem) => void;
-  removeFromCart: (itemId: number) => void;
-  clearCart: () => void;
-}
+import { CartState } from "./types";
 
 const useCartStore = create<CartState>()(
   persist(

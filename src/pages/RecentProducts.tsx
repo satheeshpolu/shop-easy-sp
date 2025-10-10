@@ -13,11 +13,11 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import LoadingSkeleton from "../components/LoadingSkeleton";
 import useCartStore from "../stores/useCartStore";
-import SimpleToast from "@/components/toast/SimpleToast";
 import useProductStore from "@/stores/useProductStore";
 import { FaCartPlus, FaHeart, FaRegHeart } from "react-icons/fa6";
+import { useRecentStore } from "@/stores/useRecentStore";
 
-export default function Wishlist() {
+export default function RecentProducts() {
   const { category } = useParams();
   const navigate = useNavigate();
   const addToCart = useCartStore(
@@ -26,16 +26,17 @@ export default function Wishlist() {
   const borderColor = "gray.700";
   const [loading, setLoading] = useState(false);
   const [isEmpty, setIsEmpty] = useState(true);
+  const { recents } = useRecentStore();
   const { fetchProducts, toggleFavorite, favoriteProducts } = useProductStore();
   useEffect(() => {
     setLoading(false);
     fetchProducts(category as string);
-    if (favoriteProducts.length === 0) {
+    if (recents.length === 0) {
       setIsEmpty(true);
     } else {
       setIsEmpty(false);
     }
-  }, [favoriteProducts]);
+  }, [recents]);
 
   return (
     <Box p={6}>
@@ -51,7 +52,7 @@ export default function Wishlist() {
 
       <Heading size="lg" mb={6}>
         {favoriteProducts
-          ? "Your Wishlist:"
+          ? "Recently viewed product(s):"
           : `Category: {category}`}
       </Heading>
       {isEmpty && (
@@ -67,12 +68,13 @@ export default function Wishlist() {
           >
             <VStack textAlign="center">
               <Heading fontSize={{ base: "3xl", md: "4xl" }}>
-                You don't have any favorite product(s)
+                You haven’t viewed any products recently
               </Heading>
               <Text fontSize={{ base: "md", md: "lg" }} maxW="md">
-                - Please add favorite product(s)
+                Browse the home page to explore products
               </Text>
             </VStack>
+
           </Box>
         </Flex>
       )}
@@ -98,7 +100,7 @@ export default function Wishlist() {
           </>
         )}
 
-        {favoriteProducts.map((product: any) => (
+        {recents.map((product: any) => (
           <Box
             key={product?.id}
             borderRadius="lg"
@@ -120,11 +122,51 @@ export default function Wishlist() {
               p={4}
               cursor={'pointer'}
             >
-              {product.isFavorite ? (
+              {/* {product.isFavorite ? (
                 <FaHeart size={30} color="rgba(202, 39, 39, 1)" />
               ) : (
                 <FaRegHeart size={30} color="rgba(32, 134, 125, 1)" />
-              )}
+              )} */}
+              <Stack
+                direction="row"
+                align="center"
+                justify="space-between"
+                w="full"
+              >
+                <Text fontWeight="bold">${product.price}</Text>
+                <Button
+                  type="submit"
+                  alignSelf="flex-start"
+                  variant="outline"
+                  bg="#0f695f"
+                  color="#c9f9f4"
+                  onClick={() => {
+                    navigate(
+                      `/category/${category}/${product.id}/product_details`,
+                      {
+                        state: { data: product },
+                      }
+                    );
+                  }}
+                >
+                  Details 
+                </Button>
+                {/* <Button
+                    onClick={() => addToCart(product)}
+                    colorScheme="teal"
+                    variant="outline"
+                  >
+                    <FaCartPlus />
+                  </Button> */}
+                {/* {product.isFavorite ? (
+                  <FaHeart size={30} color="rgba(202, 39, 39, 1)" onClick={() => {
+                debugger;
+                toggleFavorite(product.id, "favorite");
+              }}/>
+                ) : (
+                  <FaRegHeart size={30} color="rgba(32, 134, 125, 1)" />
+                )} */}
+              </Stack>
             </Box>
             <Image
               src={product?.thumbnail}
@@ -132,49 +174,12 @@ export default function Wishlist() {
               objectFit="scale-down"
               w="100%"
               h="120px"
-              _hover={{ transform: "scale(1.5)", transition: "0.5s", zIndex: -1}}
+              _hover={{ transform: "scale(1.5)", transition: "0.5s", zIndex: -1 }}
             />
 
             <Box p={4}>
               <VStack>
-                <Heading fontSize="lg">{product.title}</Heading>
-
-                <Text fontSize="sm" color="gray.600">
-                  {product.description}
-                </Text>
-
-                <Stack
-                  direction="row"
-                  align="center"
-                  justify="space-between"
-                  w="full"
-                >
-                  <Text fontWeight="bold">${product.price}</Text>
-                  <Button
-                    type="submit"
-                    alignSelf="flex-start"
-                    variant="outline"
-                    bg="#0f695f"
-                    color="#c9f9f4"
-                    onClick={() => {
-                      navigate(
-                        `/category/${category}/${product.id}/product_details`,
-                        {
-                          state: { data: product },
-                        }
-                      );
-                    }}
-                  >
-                    Details
-                  </Button>
-                  <Button
-                    onClick={() => addToCart(product)}
-                    colorScheme="teal"
-                    variant="outline"
-                  >
-                    <FaCartPlus />
-                  </Button>
-                </Stack>
+                <Heading fontSize="lg" zIndex={1}>{product.title}</Heading>
               </VStack>
             </Box>
           </Box>

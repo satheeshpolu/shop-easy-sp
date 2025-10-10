@@ -17,6 +17,7 @@ const Links = [
   { name: "Home", to: "/" },
   { name: "Contact", to: "/contact" },
   { name: "Wishlist", to: "/wishlist" },
+  { name: "Recently Viewed", to: "/recent_products" },
   { name: "Cart", to: "/cart" },
 ];
 
