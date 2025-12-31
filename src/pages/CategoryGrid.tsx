@@ -37,7 +37,6 @@ export default function CategoryGrid() {
   const navigate = useNavigate();
 
   const categoriesList = useMemo(() => {
-    console.log('useMemo => ', searchInput);
     const query = searchInput.trim().toLowerCase();
     return categories.filter((category) =>
       category.toLowerCase().includes(query)
@@ -48,7 +47,11 @@ export default function CategoryGrid() {
     <VStack gap={6} align="stretch" p={6}>
       {/* Row 1: Search box */}
       <Box>
-        <SearchBox value={searchInput} onChange={setSearchInput} placeholder="Search category" />
+        <SearchBox
+          value={searchInput}
+          onChange={setSearchInput}
+          placeholder="Search category"
+        />
       </Box>
 
       {/* Row 2: Categories grid */}
@@ -62,7 +65,12 @@ export default function CategoryGrid() {
         gap={6}
       >
         {!categoriesList.length ? (
-          <Text fontSize="lg" color="gray.500" gridColumn="1 / -1" textAlign="center">
+          <Text
+            fontSize="lg"
+            color="gray.500"
+            gridColumn="1 / -1"
+            textAlign="center"
+          >
             No categories found. Try a different search.
           </Text>
         ) : (

@@ -1,5 +1,6 @@
-import React from "react";
+import { Accordion, Span } from "@chakra-ui/react";
 import { Chart } from "react-google-charts";
+import { FaChartBar } from "react-icons/fa6";
 import { useParams } from "react-router-dom";
 
 export const options = {
@@ -12,7 +13,7 @@ export const options = {
 
 const getRandomPositiveInt = (min = 1, max = 100) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+};
 
 const WeeklyBuyersChart = () => {
   const queryParams = useParams();
@@ -30,16 +31,32 @@ const WeeklyBuyersChart = () => {
   ];
 
   return (
-    <div>
-      <Chart
-        chartType="ColumnChart"
-        width="100%"
-        height="100%"
-        data={data}
-        options={options}
-      />
-    </div>
+    <>
+      <Accordion.Root collapsible defaultValue={[]}>
+        <Accordion.Item value={"item.value"}>
+          <Accordion.ItemTrigger>
+            <Span flex="1" display="inline-flex" alignItems="center" gap={2}>
+              {" "}
+              <FaChartBar />
+              {"Weekly product metrics overview"}
+            </Span>
+            <Accordion.ItemIndicator />
+          </Accordion.ItemTrigger>
+          <Accordion.ItemContent>
+            <Accordion.ItemBody>
+              <Chart
+                chartType="ColumnChart"
+                width="100%"
+                height="100%"
+                data={data}
+                options={options}
+              />
+            </Accordion.ItemBody>
+          </Accordion.ItemContent>
+        </Accordion.Item>
+      </Accordion.Root>
+    </>
   );
 };
 
-export default React.memo(WeeklyBuyersChart);
+export default WeeklyBuyersChart;

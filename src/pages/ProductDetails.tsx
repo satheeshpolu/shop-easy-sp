@@ -58,9 +58,6 @@ export default function ProductDetails() {
       rounded="xl"
       boxShadow="lg"
     >
-      {/* <Button onClick={() => navigate(-1)} colorScheme="teal" variant="outline">
-        ← Back
-      </Button> */}
       <BackButton />
       <Button
         type="submit"
@@ -164,29 +161,7 @@ export default function ProductDetails() {
             <Text>QR:</Text>
             <Image src={product.meta?.qrCode} alt="QR Code" boxSize="60px" />
           </HStack>
-
-          <Accordion.Root collapsible defaultValue={[]}>
-            <Accordion.Item value={"item.value"}>
-              <Accordion.ItemTrigger>
-                <Span
-                  flex="1"
-                  display="inline-flex"
-                  alignItems="center"
-                  gap={2}
-                >
-                  {" "}
-                  <FaChartBar />
-                  {"Weekly product metrics overview"}
-                </Span>
-                <Accordion.ItemIndicator />
-              </Accordion.ItemTrigger>
-              <Accordion.ItemContent>
-                <Accordion.ItemBody>
-                  <WeeklyBuyersChart />
-                </Accordion.ItemBody>
-              </Accordion.ItemContent>
-            </Accordion.Item>
-          </Accordion.Root>
+          <WeeklyBuyersChart />
         </VStack>
       </SimpleGrid>
     </Box>

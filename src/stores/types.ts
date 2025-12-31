@@ -1,3 +1,5 @@
+import { Product } from "@/utils/types";
+
 interface RecentStore {
     recents: Product[];
     addToRecent: (product: Product) => void;
@@ -18,13 +20,6 @@ interface CartState {
   clearCart: () => void;
 }
 
-interface Product {
-  id: number;
-  name: string;
-  isFavorite?: boolean;
-  isWatched?: boolean;
-  [key: string]: any;
-}
 
 interface ProductStore {
   products: Product[];

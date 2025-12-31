@@ -7,12 +7,11 @@ type Props = {
   onClick: () => void;
 };
 
-const SimpleToast = ({buttonText, title, onClick}: Props) => {
+const SimpleToast = ({ buttonText, title, onClick }: Props) => {
   const [show, setShow] = useState(false);
 
   const showToast = () => {
-    debugger;
-    if(onClick) {
+    if (onClick) {
       onClick();
     }
     setShow(true);
@@ -22,9 +21,7 @@ const SimpleToast = ({buttonText, title, onClick}: Props) => {
   return (
     <>
       <button onClick={showToast}>{buttonText}</button>
-      <div className={`toast ${show ? "show" : ""}`}>
-        {title}
-      </div>
+      <div className={`toast ${show ? "show" : ""}`}>{title}</div>
     </>
   );
 };

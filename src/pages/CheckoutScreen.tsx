@@ -117,13 +117,6 @@ const CheckoutScreen = () => {
             Place Order
           </Button>
           <BackButton />
-          {/* <Button
-            onClick={() => navigate(-1)}
-            colorScheme="teal"
-            variant="outline"
-          >
-            ← Back
-          </Button> */}
         </Stack>
       </Box>
     </Flex>

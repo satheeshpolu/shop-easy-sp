@@ -9,17 +9,16 @@ import {
   Stack,
   Flex,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { lazy, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import LoadingSkeleton from "../components/LoadingSkeleton";
 import useCartStore from "../stores/useCartStore";
-import SimpleToast from "@/components/toast/SimpleToast";
 import useProductStore from "@/stores/useProductStore";
-import { FaCartPlus, FaHeart, FaRegHeart } from "react-icons/fa6";
-import { BackButton } from "@/components/shared";
+import { BackButton, ProductCardHeader } from "@/components/shared";
+import { ProductCardFooter } from "@/components/shared/product/ProductCardFooter";
 
 export default function Wishlist() {
   const { category } = useParams();
+  // console.log("category => ", category);
   const navigate = useNavigate();
   const addToCart = useCartStore(
     (state: { addToCart: any }) => state.addToCart
@@ -41,13 +40,6 @@ export default function Wishlist() {
   return (
     <Box p={6}>
       <Flex justify="flex-end" mt={4} mr={4} gap={8}>
-        {/* <Button
-          onClick={() => navigate(-1)}
-          colorScheme="teal"
-          variant="outline"
-        >
-          ← Back
-        </Button> */}
         <BackButton />
       </Flex>
 
@@ -85,19 +77,6 @@ export default function Wishlist() {
         }}
         gap={6}
       >
-        {loading && (
-          <>
-            <LoadingSkeleton />
-            <LoadingSkeleton />
-            <LoadingSkeleton />
-            <LoadingSkeleton />
-            <LoadingSkeleton />
-            <LoadingSkeleton />
-            <LoadingSkeleton />
-            <LoadingSkeleton />
-          </>
-        )}
-
         {favoriteProducts.map((product: any) => (
           <Box
             key={product?.id}
@@ -108,24 +87,7 @@ export default function Wishlist() {
             shadow="md"
             _hover={{ transform: "scale(1.02)", transition: "0.2s" }}
           >
-            <Box
-              onClick={() => {
-                debugger;
-                toggleFavorite(product.id, "favorite");
-              }}
-              display="flex"
-              justifyContent="flex-end"
-              alignItems="center"
-              w="100%"
-              p={4}
-              cursor={"pointer"}
-            >
-              {product.isFavorite ? (
-                <FaHeart size={30} color="rgba(202, 39, 39, 1)" />
-              ) : (
-                <FaRegHeart size={30} color="rgba(32, 134, 125, 1)" />
-              )}
-            </Box>
+            <ProductCardHeader product={product} />
             <Image
               src={product?.thumbnail}
               alt={product?.title}
@@ -153,31 +115,7 @@ export default function Wishlist() {
                   justify="space-between"
                   w="full"
                 >
-                  <Text fontWeight="bold">${product.price}</Text>
-                  <Button
-                    type="submit"
-                    alignSelf="flex-start"
-                    variant="outline"
-                    bg="#0f695f"
-                    color="#c9f9f4"
-                    onClick={() => {
-                      navigate(
-                        `/category/${category}/${product.id}/product_details`,
-                        {
-                          state: { data: product },
-                        }
-                      );
-                    }}
-                  >
-                    Details
-                  </Button>
-                  <Button
-                    onClick={() => addToCart(product)}
-                    colorScheme="teal"
-                    variant="outline"
-                  >
-                    <FaCartPlus />
-                  </Button>
+                  <ProductCardFooter product={product} />
                 </Stack>
               </VStack>
             </Box>

@@ -28,7 +28,7 @@ const useProductStore = create<ProductStore>()(
 
       toggleFavorite: (productId, pageType) => {
         const { favoriteProducts, products } = get();
-        const dataCollectoin = pageType === 'favorite' ? favoriteProducts : products;
+        const dataCollectoin = pageType === 'wishlist' ? favoriteProducts : products;
         const productToToggle = dataCollectoin.find((p) => p.id === productId); // TODO
         if (!productToToggle) return;
 

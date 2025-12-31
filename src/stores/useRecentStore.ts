@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { Product, RecentStore } from "./types";
+import { RecentStore } from "./types";
+import { Product } from "@/utils/types";
 
 export const useRecentStore = create<RecentStore>()(
   persist(

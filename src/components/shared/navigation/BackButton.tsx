@@ -6,7 +6,7 @@ const BackButtonComponent = () => {
   console.log("BackButtonComponent");
   const navigate = useNavigate();
   return (
-    <Button onClick={() => navigate("/")} colorScheme="teal" variant="outline">
+    <Button onClick={() => navigate(-1)} colorScheme="teal" variant="outline">
       ← Back
     </Button>
   );

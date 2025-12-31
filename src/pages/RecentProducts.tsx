@@ -113,7 +113,6 @@ export default function RecentProducts() {
           >
             <Box
               onClick={() => {
-                debugger;
                 toggleFavorite(product.id, "favorite");
               }}
               display="flex"
@@ -152,21 +151,6 @@ export default function RecentProducts() {
                 >
                   Details
                 </Button>
-                {/* <Button
-                    onClick={() => addToCart(product)}
-                    colorScheme="teal"
-                    variant="outline"
-                  >
-                    <FaCartPlus />
-                  </Button> */}
-                {/* {product.isFavorite ? (
-                  <FaHeart size={30} color="rgba(202, 39, 39, 1)" onClick={() => {
-                debugger;
-                toggleFavorite(product.id, "favorite");
-              }}/>
-                ) : (
-                  <FaRegHeart size={30} color="rgba(32, 134, 125, 1)" />
-                )} */}
               </Stack>
             </Box>
             <Image

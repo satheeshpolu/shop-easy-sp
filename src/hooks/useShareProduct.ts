@@ -8,7 +8,6 @@ const useShareProduct = () => {
             text: `Check out this product: ${product.name}`,
             url: productUrl,
         };
-        debugger
         if (navigator.share) {
             try {
                 await navigator.share(shareData);
