@@ -15,18 +15,14 @@ import LoadingSkeleton from "../components/LoadingSkeleton";
 import useCartStore from "../stores/useCartStore";
 import SimpleToast from "@/components/toast/SimpleToast";
 import useProductStore from "@/stores/useProductStore";
-import {
-  FaCartPlus,
-  FaHeart,
-  FaRegHeart,
-  FaShare,
-} from "react-icons/fa6";
+import { FaCartPlus, FaHeart, FaRegHeart, FaShare } from "react-icons/fa6";
 import React from "react";
 import { Product } from "@/utils/types";
 import { formatText } from "@/utils/helpers";
 import useShareProduct from "@/hooks/useShareProduct";
 import SortDropdown from "@/components/SortDropdown";
 import { useRecentStore } from "@/stores/useRecentStore";
+import { BackButton } from "@/components/shared";
 
 export default function CategoryProducts() {
   const { category } = useParams();
@@ -39,9 +35,16 @@ export default function CategoryProducts() {
   // const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filterOption, setFilterOption] = useState("");
-  const { products, fetchProducts, toggleFavorite, favoriteProducts, sortProducts } =
-    useProductStore();
-  const [filteredProducts, setFilteredProducts] = useState<Product[] | undefined>(undefined);
+  const {
+    products,
+    fetchProducts,
+    toggleFavorite,
+    favoriteProducts,
+    sortProducts,
+  } = useProductStore();
+  const [filteredProducts, setFilteredProducts] = useState<
+    Product[] | undefined
+  >(undefined);
   const { shareProduct } = useShareProduct();
   const { addToRecent } = useRecentStore();
 
@@ -61,10 +64,15 @@ export default function CategoryProducts() {
   return (
     <Box p={6}>
       <Flex justify="flex-end" mt={4} mr={4} gap={8}>
-        <Button onClick={handleBackClick} colorScheme="teal" variant="outline">
+        <BackButton />
+        {/* <Button onClick={handleBackClick} colorScheme="teal" variant="outline">
           ← Back
-        </Button>
-        <SortDropdown onFilterChange={(value) => { sortProducts(value) }} />
+        </Button> */}
+        <SortDropdown
+          onFilterChange={(value) => {
+            sortProducts(value);
+          }}
+        />
       </Flex>
 
       <Heading size="lg" mb={6}>
@@ -139,7 +147,11 @@ export default function CategoryProducts() {
               objectFit="scale-down"
               w="100%"
               h="200px"
-              _hover={{ transform: "scale(1.3)", transition: "0.5s", zIndex: -1}}
+              _hover={{
+                transform: "scale(1.3)",
+                transition: "0.5s",
+                zIndex: -1,
+              }}
             />
 
             <Box p={4}>
@@ -164,7 +176,7 @@ export default function CategoryProducts() {
                     bg="#0f695f"
                     color="#c9f9f4"
                     onClick={() => {
-                      addToRecent(product)
+                      addToRecent(product);
                       navigate(
                         `/category/${category}/${product.id}/product_details`,
                         {
@@ -187,7 +199,6 @@ export default function CategoryProducts() {
                   >
                     <FaCartPlus />
                   </Button>
-
                 </Stack>
               </VStack>
             </Box>

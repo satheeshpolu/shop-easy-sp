@@ -16,6 +16,7 @@ import useCartStore from "../stores/useCartStore";
 import useProductStore from "@/stores/useProductStore";
 import { FaCartPlus, FaHeart, FaRegHeart } from "react-icons/fa6";
 import { useRecentStore } from "@/stores/useRecentStore";
+import { BackButton } from "@/components/shared";
 
 export default function RecentProducts() {
   const { category } = useParams();
@@ -41,13 +42,14 @@ export default function RecentProducts() {
   return (
     <Box p={6}>
       <Flex justify="flex-end" mt={4} mr={4} gap={8}>
-        <Button
+        <BackButton />
+        {/* <Button
           onClick={() => navigate(-1)}
           colorScheme="teal"
           variant="outline"
         >
           ← Back
-        </Button>
+        </Button> */}
       </Flex>
 
       <Heading size="lg" mb={6}>
@@ -74,7 +76,6 @@ export default function RecentProducts() {
                 Browse the home page to explore products
               </Text>
             </VStack>
-
           </Box>
         </Flex>
       )}
@@ -120,7 +121,7 @@ export default function RecentProducts() {
               alignItems="center"
               w="100%"
               p={4}
-              cursor={'pointer'}
+              cursor={"pointer"}
             >
               {/* {product.isFavorite ? (
                 <FaHeart size={30} color="rgba(202, 39, 39, 1)" />
@@ -149,7 +150,7 @@ export default function RecentProducts() {
                     );
                   }}
                 >
-                  Details 
+                  Details
                 </Button>
                 {/* <Button
                     onClick={() => addToCart(product)}
@@ -174,12 +175,18 @@ export default function RecentProducts() {
               objectFit="scale-down"
               w="100%"
               h="120px"
-              _hover={{ transform: "scale(1.5)", transition: "0.5s", zIndex: -1 }}
+              _hover={{
+                transform: "scale(1.5)",
+                transition: "0.5s",
+                zIndex: -1,
+              }}
             />
 
             <Box p={4}>
               <VStack>
-                <Heading fontSize="lg" zIndex={1}>{product.title}</Heading>
+                <Heading fontSize="lg" zIndex={1}>
+                  {product.title}
+                </Heading>
               </VStack>
             </Box>
           </Box>

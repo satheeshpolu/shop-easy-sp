@@ -2,77 +2,11 @@ import { Box, Button, Heading, HStack, Text, VStack } from "@chakra-ui/react";
 import useCartStore from "../stores/useCartStore";
 import { Table, Flex, Image } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { FaTrash, FaPlus, FaMinus } from "react-icons/fa";
 import ZoomingCart from "@/components/ZoomingCart";
-interface Product {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  discountPercentage: number;
-  rating: number;
-  stock: number;
-  category: string;
-  availabilityStatus: string;
-  minimumOrderQuantity: number;
-  shippingInformation: string;
-  returnPolicy: string;
-  warrantyInformation: string;
-  weight: number;
-  sku: string;
-  tags: string[];
-  images: string[];
-  thumbnail: string;
-  dimensions: {
-    width: number;
-    height: number;
-    depth: number;
-  };
-  meta: {
-    createdAt: string; // ISO date string
-    updatedAt: string;
-    barcode: string;
-    qrCode: string;
-  };
-  reviews: Array<Record<string, any>>; // You can replace with a proper Review interface if needed
-}
-
-interface Dimensions {
-  width: number;
-  height: number;
-  depth: number;
-}
-
-interface MetaData {
-  createdAt: string;
-  updatedAt: string;
-  barcode: string;
-  qrCode: string;
-}
-
-interface Product {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  discountPercentage: number;
-  rating: number;
-  stock: number;
-  category: string;
-  availabilityStatus: string;
-  minimumOrderQuantity: number;
-  shippingInformation: string;
-  returnPolicy: string;
-  warrantyInformation: string;
-  weight: number;
-  sku: string;
-  tags: string[];
-  images: string[];
-  thumbnail: string;
-  dimensions: Dimensions;
-  meta: MetaData;
-}
+import { BackButton } from "@/components/shared";
+import { Product } from "@/utils/types";
 
 const CartOverview = () => {
   const [isCartEmpty, setIsCartEmpty] = useState(true);
@@ -107,13 +41,8 @@ const CartOverview = () => {
   return (
     <>
       <Flex justify="flex-end" mt={4} mr={4} gap={8}>
-        <Button
-          onClick={() => navigate("/")}
-          colorScheme="teal"
-          variant="outline"
-        >
-          ← Back
-        </Button>
+        <BackButton />
+
         {!isCartEmpty && (
           <>
             <Button

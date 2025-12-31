@@ -16,6 +16,7 @@ import useCartStore from "../stores/useCartStore";
 import SimpleToast from "@/components/toast/SimpleToast";
 import useProductStore from "@/stores/useProductStore";
 import { FaCartPlus, FaHeart, FaRegHeart } from "react-icons/fa6";
+import { BackButton } from "@/components/shared";
 
 export default function Wishlist() {
   const { category } = useParams();
@@ -40,19 +41,18 @@ export default function Wishlist() {
   return (
     <Box p={6}>
       <Flex justify="flex-end" mt={4} mr={4} gap={8}>
-        <Button
+        {/* <Button
           onClick={() => navigate(-1)}
           colorScheme="teal"
           variant="outline"
         >
           ← Back
-        </Button>
+        </Button> */}
+        <BackButton />
       </Flex>
 
       <Heading size="lg" mb={6}>
-        {favoriteProducts
-          ? "Your Wishlist:"
-          : `Category: {category}`}
+        {favoriteProducts ? "Your Wishlist:" : `Category: {category}`}
       </Heading>
       {isEmpty && (
         <Flex justify="center" align="center" minH="60vh">
@@ -118,7 +118,7 @@ export default function Wishlist() {
               alignItems="center"
               w="100%"
               p={4}
-              cursor={'pointer'}
+              cursor={"pointer"}
             >
               {product.isFavorite ? (
                 <FaHeart size={30} color="rgba(202, 39, 39, 1)" />
@@ -132,7 +132,11 @@ export default function Wishlist() {
               objectFit="scale-down"
               w="100%"
               h="120px"
-              _hover={{ transform: "scale(1.5)", transition: "0.5s", zIndex: -1}}
+              _hover={{
+                transform: "scale(1.5)",
+                transition: "0.5s",
+                zIndex: -1,
+              }}
             />
 
             <Box p={4}>

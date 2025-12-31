@@ -10,7 +10,8 @@ import {
 } from "@chakra-ui/react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Field, defineStyle } from "@chakra-ui/react";
-import UnderDevelopment from '../components/UnderDevelopment';
+import UnderDevelopment from "../components/UnderDevelopment";
+import { BackButton } from "@/components/shared";
 const CheckoutScreen = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -40,15 +41,19 @@ const CheckoutScreen = () => {
       pt={24}
       px={4}
     >
-      
       <Box maxW="500px" w="full" bg="white" p={8} rounded="md" shadow="md">
-      <UnderDevelopment />
+        <UnderDevelopment />
         <Heading size="md" mb={4} textAlign="center">
           Order Summary
         </Heading>
 
         <Stack>
-          <Flex justify="space-between" fontWeight="bold" mb={4} color={"teal.500"}>
+          <Flex
+            justify="space-between"
+            fontWeight="bold"
+            mb={4}
+            color={"teal.500"}
+          >
             <Text>Total:</Text>
             <Text>${amount?.toFixed(2) || 0}</Text>
           </Flex>
@@ -111,14 +116,14 @@ const CheckoutScreen = () => {
           >
             Place Order
           </Button>
-
-          <Button
+          <BackButton />
+          {/* <Button
             onClick={() => navigate(-1)}
             colorScheme="teal"
             variant="outline"
           >
             ← Back
-          </Button>
+          </Button> */}
         </Stack>
       </Box>
     </Flex>

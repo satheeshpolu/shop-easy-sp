@@ -20,6 +20,7 @@ import useProduct from "@/hooks/useProduct";
 import { FaChartBar } from "react-icons/fa";
 import { FaShare } from "react-icons/fa6";
 import useShareProduct from "@/hooks/useShareProduct";
+import { BackButton } from "@/components/shared";
 
 export default function ProductDetails() {
   // const [product, setProduct] = useState<any>(null);
@@ -57,9 +58,10 @@ export default function ProductDetails() {
       rounded="xl"
       boxShadow="lg"
     >
-      <Button onClick={() => navigate(-1)} colorScheme="teal" variant="outline">
+      {/* <Button onClick={() => navigate(-1)} colorScheme="teal" variant="outline">
         ← Back
-      </Button>
+      </Button> */}
+      <BackButton />
       <Button
         type="submit"
         alignSelf="flex-start"
