@@ -15,17 +15,22 @@ import useCartStore from "../stores/useCartStore";
 import useProductStore from "@/stores/useProductStore";
 import { BackButton, ProductCardHeader } from "@/components/shared";
 import { ProductCardFooter } from "@/components/shared/product/ProductCardFooter";
+import { t } from "i18next";
+import { useTranslation } from "react-i18next";
+import { EmptyState } from "@/components/shared/empty/EmptyState";
 
 export default function Wishlist() {
   const { category } = useParams();
   // console.log("category => ", category);
-  const navigate = useNavigate();
-  const addToCart = useCartStore(
-    (state: { addToCart: any }) => state.addToCart
-  );
+  // const navigate = useNavigate();
+  // const addToCart = useCartStore(
+  //   (state: { addToCart: any }) => state.addToCart,
+  // );
+
   const borderColor = "gray.700";
   const [loading, setLoading] = useState(false);
   const [isEmpty, setIsEmpty] = useState(true);
+  const { t } = useTranslation();
   const { fetchProducts, toggleFavorite, favoriteProducts } = useProductStore();
   useEffect(() => {
     setLoading(false);
@@ -44,30 +49,10 @@ export default function Wishlist() {
       </Flex>
 
       <Heading size="lg" mb={6}>
-        {favoriteProducts ? "Your Wishlist:" : `Category: {category}`}
+        {favoriteProducts ? t("contact.title") : `Category: {category}`}
       </Heading>
-      {isEmpty && (
-        <Flex justify="center" align="center" minH="60vh">
-          <Box
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            borderRightRadius={{ md: "80px" }}
-            px={4}
-            py={8}
-            bg="#8ef1e4"
-          >
-            <VStack textAlign="center">
-              <Heading fontSize={{ base: "3xl", md: "4xl" }}>
-                You don't have any favorite product(s)
-              </Heading>
-              <Text fontSize={{ base: "md", md: "lg" }} maxW="md">
-                - Please add favorite product(s)
-              </Text>
-            </VStack>
-          </Box>
-        </Flex>
-      )}
+
+      {isEmpty && <EmptyState type={"wishlist"} />}
       <Grid
         templateColumns={{
           base: "repeat(1, 1fr)",

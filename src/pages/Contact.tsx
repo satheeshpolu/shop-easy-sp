@@ -13,8 +13,11 @@ import {
   For,
   NativeSelect,
 } from "@chakra-ui/react";
+import { useTranslation } from "react-i18next";
 
 export default function ContactPage() {
+  const { t } = useTranslation();
+
   return (
     <Box
       position="relative"
@@ -50,11 +53,10 @@ export default function ContactPage() {
       <Container maxW="lg" centerContent position="relative" zIndex={1} pt={16}>
         <VStack textAlign="center">
           <Heading fontSize={{ base: "3xl", md: "4xl" }} color="teal.600">
-            Get in Touch
+            {t("contact.title")}
           </Heading>
           <Text fontSize="lg" color="gray.600">
-            We'd love to hear from you. Fill out the form below and we’ll get
-            back to you soon!
+            {t("contact.description")}
           </Text>
         </VStack>
 
@@ -62,25 +64,25 @@ export default function ContactPage() {
           <SimpleGrid>
             <Fieldset.Root size="lg" maxW="md">
               <Stack>
-                <Fieldset.Legend>Contact details</Fieldset.Legend>
+                <Fieldset.Legend>{t("contact.form.title")}</Fieldset.Legend>
                 <Fieldset.HelperText>
-                  Please provide your contact details below.
+                  {t("contact.form.description")}
                 </Fieldset.HelperText>
               </Stack>
 
               <Fieldset.Content>
                 <Field.Root>
-                  <Field.Label>Name</Field.Label>
+                  <Field.Label>{t("contact.form.name")}</Field.Label>
                   <Input name="name" />
                 </Field.Root>
 
                 <Field.Root>
-                  <Field.Label>Email address</Field.Label>
+                  <Field.Label>{t("contact.form.email")}</Field.Label>
                   <Input name="email" type="email" />
                 </Field.Root>
 
                 <Field.Root>
-                  <Field.Label>Country</Field.Label>
+                  <Field.Label>{t("contact.form.country")}</Field.Label>
                   <NativeSelect.Root>
                     <NativeSelect.Field name="country">
                       <For
@@ -110,7 +112,7 @@ export default function ContactPage() {
                 bg="#14b8a6"
                 color="#c9f9f4"
               >
-                Submit
+                {t("contact.form.action")}
               </Button>
             </Fieldset.Root>
           </SimpleGrid>

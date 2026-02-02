@@ -11,14 +11,16 @@ import { Link as RouterLink, useMatch, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import { FaArrowCircleDown, FaArrowCircleUp, FaOpencart } from "react-icons/fa";
 import useCartStore from "@/stores/useCartStore";
+import { useTranslation } from "react-i18next";
+import { t } from "i18next";
+import { LanguageSwitcher } from "@/components/shared/languageSwitcher/LanguageSwitcher";
+
 const Links = [
-  // { name: "Home", to: "/" },
-  // { name: "Blogs", to: "/blogs" },
-  { name: "Home", to: "/" },
-  { name: "Contact", to: "/contact" },
-  { name: "Wishlist", to: "/wishlist" },
-  { name: "Recently Viewed", to: "/recent_products" },
-  { name: "Cart", to: "/cart" },
+  { name: t("app.navigation.home"), to: "/" },
+  { name: t("app.navigation.contact"), to: "/contact" },
+  { name: t("app.navigation.wishlist"), to: "/wishlist" },
+  { name: t("app.navigation.recentlyViewed"), to: "/recent_products" },
+  { name: t("app.navigation.cart"), to: "/cart" },
 ];
 
 const NavLink = ({
@@ -61,16 +63,17 @@ const NavLink = ({
 
 export default function Header() {
   const { onOpen, onClose } = useDisclosure();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenMenu, setIsOpenMenu] = useState(false);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
-  const opnen = () => {
-    setIsOpen(true);
+  const opnenMenu = () => {
+    setIsOpenMenu(true);
     onOpen();
   };
 
-  const close = () => {
-    setIsOpen(false);
+  const closeMenu = () => {
+    setIsOpenMenu(false);
     onClose();
   };
 
@@ -87,17 +90,14 @@ export default function Header() {
       <Flex h={24} alignItems="center" justifyContent="space-between" px={4}>
         {/* Logo Section */}
         <Flex align="center" cursor={"pointer"} onClick={() => navigate("/")}>
-          <FaOpencart
-            size={96}
-            color="#b8e5e1ff"
-          />
+          <FaOpencart size={96} color="#b8e5e1ff" />
           <Text
             fontWeight="bold"
             fontSize="xl"
             color="rgba(32, 134, 125, 1)"
-            marginLeft={'-95px'}
+            marginLeft={"-95px"}
           >
-            Shop Easy
+            {t("app.title")}
           </Text>
         </Flex>
 
@@ -107,9 +107,9 @@ export default function Header() {
           bg="#14b8a6"
           aria-label="Toggle Menu"
           display={{ md: "none" }}
-          onClick={() => (isOpen ? close() : opnen())}
+          onClick={() => (isOpenMenu ? closeMenu() : opnenMenu())}
         >
-          {isOpen ? <FaArrowCircleUp /> : <FaArrowCircleDown />}
+          {isOpenMenu ? <FaArrowCircleUp /> : <FaArrowCircleDown />}
         </IconButton>
 
         {/* Desktop Navigation */}
@@ -146,11 +146,12 @@ export default function Header() {
               </NavLink>
             );
           })}
+          {/* <LanguageSwitcher /> */}
         </HStack>
       </Flex>
 
       {/* Mobile Navigation */}
-      {isOpen && (
+      {isOpenMenu && (
         <Box pb={4} display={{ md: "none" }}>
           <Stack as="nav">
             {Links.map((link) => (

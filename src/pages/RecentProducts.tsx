@@ -17,17 +17,20 @@ import useProductStore from "@/stores/useProductStore";
 import { FaCartPlus, FaHeart, FaRegHeart } from "react-icons/fa6";
 import { useRecentStore } from "@/stores/useRecentStore";
 import { BackButton } from "@/components/shared";
+import { t } from "i18next";
+import { EmptyState } from "@/components/shared/empty/EmptyState";
 
 export default function RecentProducts() {
   const { category } = useParams();
   const navigate = useNavigate();
   const addToCart = useCartStore(
-    (state: { addToCart: any }) => state.addToCart
+    (state: { addToCart: any }) => state.addToCart,
   );
   const borderColor = "gray.700";
   const [loading, setLoading] = useState(false);
   const [isEmpty, setIsEmpty] = useState(true);
   const { recents } = useRecentStore();
+
   const { fetchProducts, toggleFavorite, favoriteProducts } = useProductStore();
   useEffect(() => {
     setLoading(false);
@@ -53,10 +56,10 @@ export default function RecentProducts() {
       </Flex>
 
       <Heading size="lg" mb={6}>
-        {favoriteProducts
-          ? "Recently viewed product(s):"
-          : `Category: {category}`}
+        {favoriteProducts ? t("recentlyViewed.title") : `Category: {category}`}
       </Heading>
+      {isEmpty && <EmptyState type={"recentlyViewed"} />}
+
       {isEmpty && (
         <Flex justify="center" align="center" minH="60vh">
           <Box
@@ -145,7 +148,7 @@ export default function RecentProducts() {
                       `/category/${category}/${product.id}/product_details`,
                       {
                         state: { data: product },
-                      }
+                      },
                     );
                   }}
                 >
