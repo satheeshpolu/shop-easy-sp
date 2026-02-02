@@ -7,6 +7,7 @@ Shop Easy is a blazing-fast and modern e-commerce web application built with the
 ---
 
 ## 🚀 Features
+
 - ⚡️ **High Performance** — Built with Vite for instant reloads and optimized builds.
 - 🎨 **Modern UI** — Styled with [Chakra UI](https://chakra-ui.com/) for accessible and responsive design.
 - 📦 **State Management** — Powered by [zustand](https://github.com/pmndrs/zustand) and [@tanstack/react-query](https://tanstack.com/query) for efficient data handling.
@@ -18,6 +19,7 @@ Shop Easy is a blazing-fast and modern e-commerce web application built with the
 ## 🛠️ Tech Stack
 
 ### Frontend
+
 - [React](https://react.dev/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Chakra UI](https://chakra-ui.com/)
@@ -25,19 +27,24 @@ Shop Easy is a blazing-fast and modern e-commerce web application built with the
 - [@tanstack/react-query](https://tanstack.com/query)
 
 ### Testing
+
 - [Jest](https://jestjs.io/)
 - [@testing-library/react](https://testing-library.com/docs/react-testing-library/intro/)
 
 ### Build Tool
+
 - [Vite](https://vitejs.dev/)
 
 ### API
+
 - [DummyJSON Products API](https://dummyjson.com/products)
 
 ---
 
 ## 🌐 Deployment
+
 The app is deployed on [Vercel](https://vercel.com/), ensuring:
+
 - ⚡ Instant global edge deployment
 - 🔄 Continuous integration with GitHub
 - 🕒 Zero downtime updates
@@ -64,31 +71,42 @@ From browsing products to managing your wishlist and cart, the app provides a sm
 - 🛒 **Cart Page** — Smooth checkout flow with all your selected items  
   ![Cart Page](./src/assets/image-5.png)
 
-
 ## 📦 Getting Started
 
 ### 1. Clone the repo
+
 ```
     git clone https://github.com/your-username/shop-easy.git
-    cd shop-easy 
-``` 
+    cd shop-easy
+```
 
 ### 2. Install dependencies
 
 ```
 shop-easy > npm install
 ```
+
 ### 3. Start development server
+
 ```
 shop-easy > npm run dev
 ```
 
 ### 4. Run tests
+
 ```
 shop-easy > npm run test
 ```
 
 ### 5. Build the app
+
 ```
 shop-easy > npm run build
 ```
+
+---
+
+### i18next setup
+
+- npm i i18next react-i18next i18next-browser-languagedetector
+- npm i i18next-http-backend

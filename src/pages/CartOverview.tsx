@@ -7,19 +7,20 @@ import { FaTrash, FaPlus, FaMinus } from "react-icons/fa";
 import ZoomingCart from "@/components/ZoomingCart";
 import { BackButton } from "@/components/shared";
 import { Product } from "@/utils/types";
+import { useTranslation } from "react-i18next";
 
 const CartOverview = () => {
   const [isCartEmpty, setIsCartEmpty] = useState(true);
-
+  const { t } = useTranslation();
   const cart = useCartStore((state: { cart: any }) => state.cart);
   useEffect(() => {
     cart.length ? setIsCartEmpty(false) : setIsCartEmpty(true);
   }, [cart]);
   const removeFromCart = useCartStore(
-    (state: { removeFromCart: any }) => state.removeFromCart
+    (state: { removeFromCart: any }) => state.removeFromCart,
   );
   const clearCart = useCartStore(
-    (state: { clearCart: any }) => state.clearCart
+    (state: { clearCart: any }) => state.clearCart,
   );
   const navigate = useNavigate();
   console.log("CartOverview => ", cart.length);
@@ -27,11 +28,11 @@ const CartOverview = () => {
   // Calculate totals
   const totalQuantity = cart.reduce(
     (acc: number, item: Product) => acc + item.price,
-    0
+    0,
   );
   const totalAmount = cart.reduce(
     (acc: number, item: Product) => acc + item.price,
-    0
+    0,
   );
   // const totalDiscounted = cart.reduce(
   //   (acc: number, item: Product) => acc + item.discountPercentage,
@@ -55,7 +56,7 @@ const CartOverview = () => {
                 navigate("/");
               }}
             >
-              Clear Cart
+              {t("cart.clearCart")}
             </Button>
             <Button
               variant="outline"
@@ -71,7 +72,7 @@ const CartOverview = () => {
                 })
               }
             >
-              Check Out
+              {t("cart.checkOut")}
             </Button>
           </>
         )}
@@ -101,12 +102,20 @@ const CartOverview = () => {
           <Table.Root size="sm">
             <Table.Header>
               <Table.Row>
-                <Table.ColumnHeader>Product(s)</Table.ColumnHeader>
-                <Table.ColumnHeader>Title</Table.ColumnHeader>
-                <Table.ColumnHeader>Quantity</Table.ColumnHeader>
-                <Table.ColumnHeader>Total</Table.ColumnHeader>
+                <Table.ColumnHeader>
+                  {t("cart.details.header")}
+                </Table.ColumnHeader>
+                <Table.ColumnHeader>
+                  {t("cart.details.title")}
+                </Table.ColumnHeader>
+                <Table.ColumnHeader>
+                  {t("cart.details.quantity")}
+                </Table.ColumnHeader>
+                <Table.ColumnHeader>
+                  {t("cart.details.total")}
+                </Table.ColumnHeader>
                 <Table.ColumnHeader textAlign="end">
-                  Discounted Total
+                  {t("cart.details.discount")}
                 </Table.ColumnHeader>
               </Table.Row>
             </Table.Header>
@@ -125,7 +134,7 @@ const CartOverview = () => {
                             `/category/${item.category}/${item.id}/product_details`,
                             {
                               state: { data: item },
-                            }
+                            },
                           )
                         }
                         cursor={"pointer"}
@@ -169,7 +178,7 @@ const CartOverview = () => {
                 </Table.Row>
               ))}
               <Table.Row fontWeight="bold" bg="gray.300">
-                <Table.Cell>Total:</Table.Cell>
+                <Table.Cell> {t("cart.details.total")}:</Table.Cell>
                 <Table.Cell></Table.Cell>
                 <Table.Cell></Table.Cell>
                 <Table.Cell>${totalQuantity.toFixed(2)}</Table.Cell>

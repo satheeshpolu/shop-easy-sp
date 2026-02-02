@@ -1,0 +1,13 @@
+{
+  "app": {
+    "title": "Shop Easy",
+    "welcome": "Willkommen",
+    "navigation": {
+      "home": "Startseite",
+      "contact": "Kontakt",
+      "wishlist": "Wunschliste",
+      "recentlyViewed": "Kürzlich angesehen",
+      "cart": "Warenkorb"
+    }
+  }
+}

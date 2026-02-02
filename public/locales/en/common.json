@@ -1,0 +1,58 @@
+{
+  "app": {
+    "title": "Shop Easy",
+    "welcome": "Welcome",
+    "navigation": {
+      "home": "Home",
+      "contact": "Contact",
+      "wishlist": "Wishlist",
+      "recentlyViewed": "Recently Viewed",
+      "cart": "Cart"
+    }
+  },
+  "cart": {
+    "title": "Your Cart",
+    "empty": "Your cart is empty",
+    "clearCart": "Clear ",
+    "checkOut": "Check Out",
+    "details": {
+      "header": "Product(s)",
+      "title": "Title",
+      "quantity": "Quantity",
+      "total": "Total",
+      "discount": "Discounted Price"      
+    }
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "description": "We'd love to hear from you. Fill out the form below and we’ll get back to you soon!",
+    "form": {
+      "title": "Contact details",
+      "description": "Please provide your contact details below.",
+      "name": "Name",
+      "email": "Email",
+      "country": "Country",
+      "action": "Submit"
+    }
+  },
+  "wishlist": {
+    "title": "Your Wishlist:",
+    "categoryTitle": "",
+    "emptyState": {
+      "title": "You don't have any favorite product(s)",
+      "description": "- Please add favorite product(s)"
+    }
+  },
+  "recentlyViewed": {
+    "title": "Recently viewed product(s):",
+    "emptyState": {
+      "title": "You haven’t viewed any products recently",
+      "description": "Browse the home page to explore products"
+    }
+  },
+  "shared": {
+    "actions": {
+      "back": "← Back"
+    }
+  }
+}

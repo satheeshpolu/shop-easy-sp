@@ -1,13 +1,14 @@
 import { Button } from "@chakra-ui/react";
 import { memo } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const BackButtonComponent = () => {
-  console.log("BackButtonComponent");
   const navigate = useNavigate();
+  const { t } = useTranslation();
   return (
     <Button onClick={() => navigate(-1)} colorScheme="teal" variant="outline">
-      ← Back
+      {t("shared.actions.back")}
     </Button>
   );
 };
