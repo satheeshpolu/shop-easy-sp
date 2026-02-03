@@ -16,11 +16,11 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Accordion, Span } from "@chakra-ui/react";
 import WeeklyBuyersChart from "@/components/charts/WeeklyBuyersChart";
-import useProduct from "@/hooks/useProduct";
 import { FaChartBar } from "react-icons/fa";
 import { FaShare } from "react-icons/fa6";
 import useShareProduct from "@/hooks/useShareProduct";
 import { BackButton } from "@/components/shared";
+import { useProduct } from "@/hooks/useProduct";
 
 export default function ProductDetails() {
   // const [product, setProduct] = useState<any>(null);
@@ -28,7 +28,7 @@ export default function ProductDetails() {
   const { shareProduct } = useShareProduct();
   const { id } = useParams();
   const addToCart = useCartStore(
-    (state: { addToCart: any }) => state.addToCart
+    (state: { addToCart: any }) => state.addToCart,
   );
   const navigate = useNavigate();
   const { data: product, isLoading } = id
