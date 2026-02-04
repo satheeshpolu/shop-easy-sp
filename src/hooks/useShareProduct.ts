@@ -4,8 +4,8 @@ const useShareProduct = () => {
     const shareProduct = async (product: Product) => {
         const productUrl = `${window.location.href}/${product.id}/product_details`;
         const shareData = {
-            title: product.name,
-            text: `Check out this product: ${product.name}`,
+            title: product.title,
+            text: `Check out this product: ${product.title}`,
             url: productUrl,
         };
         if (navigator.share) {

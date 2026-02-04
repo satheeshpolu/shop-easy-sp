@@ -31,9 +31,10 @@ export default function ProductDetails() {
     (state: { addToCart: any }) => state.addToCart,
   );
   const navigate = useNavigate();
-  const { data: product, isLoading } = id
+  const { data: productResponse, isLoading } = id
     ? useProduct(Number(id))
     : { data: null, isLoading: true };
+  const product = productResponse?.data ?? null;
   // const WeeklyBuyersChart = React.lazy(
   //   () => import("@/components/charts/WeeklyBuyersChart")
   // );
@@ -84,7 +85,7 @@ export default function ProductDetails() {
         <VStack align="start">
           <Image
             src={mainImage}
-            alt={product.title}
+            alt={product?.title}
             borderRadius="md"
             w="100%"
             h="auto"
@@ -93,7 +94,7 @@ export default function ProductDetails() {
           />
 
           <HStack wrap="wrap">
-            {product.images.slice(0, 5).map((img: string, idx: number) => (
+            {product?.images?.slice(0, 5).map((img: string, idx: number) => (
               <Image
                 key={idx}
                 src={img}
@@ -112,54 +113,54 @@ export default function ProductDetails() {
 
         {/* Details Section */}
         <VStack align="start">
-          <Heading size="lg">{product.title}</Heading>
+          <Heading size="lg">{product?.title}</Heading>
           <Text color="gray.600" fontSize="md">
-            <strong>Brand:</strong> {product.brand} | <strong>Category:</strong>{" "}
-            {product.category}
+            <strong>Brand:</strong> {product?.brand} | <strong>Category:</strong>{" "}
+            {product?.category}
           </Text>
 
           <HStack>
             <Text fontSize="2xl" fontWeight="bold" color="teal.600">
-              ${product.price}
+              ${product?.price}
             </Text>
             <Badge colorScheme="green" fontSize="0.9em">
-              -{product.discountPercentage}%
+              -{product?.discountPercentage}%
             </Badge>
           </HStack>
 
           <Text fontSize="md" color="gray.700">
-            {product.description}
+            {product?.description}
           </Text>
           <Box p="8px" />
 
           <Badge
             colorScheme={
-              product.availabilityStatus === "In Stock" ? "teal" : "red"
+              product?.availabilityStatus === "In Stock" ? "teal" : "red"
             }
             fontSize="0.9em"
             colorPalette={
-              product.availabilityStatus === "In Stock" ? "green" : "red"
+              product?.availabilityStatus === "In Stock" ? "green" : "red"
             }
           >
-            {product.availabilityStatus}
+            {product?.availabilityStatus}
           </Badge>
 
           <Stack fontSize="sm" color="gray.600">
-            <Text>Stock: {product.stock}</Text>
-            <Text>Min Order: {product.minimumOrderQuantity}</Text>
-            <Text>Weight: {product.weight} kg</Text>
+            <Text>Stock: {product?.stock}</Text>
+            <Text>Min Order: {product?.minimumOrderQuantity}</Text>
+            <Text>Weight: {product?.weight} kg</Text>
           </Stack>
           <Box p="8px" />
 
           <Stack fontSize="sm" color="gray.600">
-            <Text>Shipping: {product.shippingInformation}</Text>
-            <Text>Warranty: {product.warrantyInformation}</Text>
-            <Text>Return Policy: {product.returnPolicy}</Text>
+            <Text>Shipping: {product?.shippingInformation}</Text>
+            <Text>Warranty: {product?.warrantyInformation}</Text>
+            <Text>Return Policy: {product?.returnPolicy}</Text>
           </Stack>
           <Box p="8px" />
           <HStack>
             <Text>QR:</Text>
-            <Image src={product.meta?.qrCode} alt="QR Code" boxSize="60px" />
+            <Image src={product?.meta?.qrCode} alt="QR Code" boxSize="60px" />
           </HStack>
           <WeeklyBuyersChart />
         </VStack>

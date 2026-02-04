@@ -36,6 +36,8 @@ export interface Product {
     barcode: string;
     qrCode: string;
   };
+  images?: string[];
+  brand?: string;
   reviews: Array<Record<string, any>>; // You can replace with a proper Review interface if needed
 }
 
