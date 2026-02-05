@@ -35,12 +35,12 @@ export default function RecentProducts() {
   useEffect(() => {
     setLoading(false);
     fetchProducts(category as string);
-    if (recents.length === 0) {
+    if (recents?.length === 0) {
       setIsEmpty(true);
     } else {
       setIsEmpty(false);
     }
-  }, [recents]);
+  }, [fetchProducts, recents]);
 
   return (
     <Box p={6}>
@@ -56,7 +56,7 @@ export default function RecentProducts() {
       </Flex>
 
       <Heading size="lg" mb={6}>
-        {favoriteProducts ? t("recentlyViewed.title") : `Category: {category}`}
+        {favoriteProducts ? t("recentlyViewed.title") : `Category: ${category}`}
       </Heading>
       {isEmpty && <EmptyState type={"recentlyViewed"} />}
 
@@ -104,7 +104,7 @@ export default function RecentProducts() {
           </>
         )}
 
-        {recents.map((product: any) => (
+        {recents?.map((product: any) => (
           <Box
             key={product?.id}
             borderRadius="lg"

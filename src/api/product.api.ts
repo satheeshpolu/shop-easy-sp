@@ -1,10 +1,9 @@
-import { httpClient } from "@/shared/lib/http";
-import { Product } from "@/utils/types";
+// Legacy API file - re-exports from entities layer for backward compatibility
+import { productApi } from '@/entities/product';
+import { Product } from '@/entities/product';
 
 export const fetchProductById = (id: number) => {
-  return httpClient.get<Product>(`/products/${id}`);
+  return productApi.getById(id);
 };
 
-// export const fetchProductById = (id: number) => {
-//   return httpClient.get(`/products/${id}`);
-// };
+export type { Product };

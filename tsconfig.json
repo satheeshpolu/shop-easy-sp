@@ -7,12 +7,21 @@
     "esModuleInterop": true,
     "strict": true,
     "baseUrl": "./",
-    "paths": { "@/*": ["src/*"] },
+    "paths": {
+      "@/*": ["src/*"],
+      "@/app/*": ["src/app/*"],
+      "@/entities/*": ["src/entities/*"],
+      "@/features/*": ["src/features/*"],
+      "@/widgets/*": ["src/widgets/*"],
+      "@/pages/*": ["src/pages/*"],
+      "@/shared/*": ["src/shared/*"],
+      "@/components/*": ["src/components/*"]
+    },
     "types": ["jest", "node", "@testing-library/jest-dom"],
     "jsx": "react-jsx"
   },
   "include": ["src"],
   "references": [
-    { "path": "./tsconfig.app.json" }
+    // { "path": "./tsconfig.app.json" }
   ]
 }

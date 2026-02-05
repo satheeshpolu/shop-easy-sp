@@ -23,7 +23,6 @@ const CartOverview = () => {
     (state: { clearCart: any }) => state.clearCart,
   );
   const navigate = useNavigate();
-  console.log("CartOverview => ", cart.length);
   // const [amount, setAmount] = useState(0);
   // Calculate totals
   const totalQuantity = cart.reduce(

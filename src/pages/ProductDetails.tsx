@@ -27,14 +27,13 @@ export default function ProductDetails() {
   const [mainImage, setMainImage] = useState<string>("");
   const { shareProduct } = useShareProduct();
   const { id } = useParams();
-  const addToCart = useCartStore(
-    (state: { addToCart: any }) => state.addToCart,
-  );
+  const addToCart = useCartStore((state) => state.addToCart);
   const navigate = useNavigate();
   const { data: productResponse, isLoading } = id
     ? useProduct(Number(id))
     : { data: null, isLoading: true };
-  const product = productResponse?.data ?? null;
+  const product = productResponse ?? null;
+  console.log("Product Details:", productResponse);
   // const WeeklyBuyersChart = React.lazy(
   //   () => import("@/components/charts/WeeklyBuyersChart")
   // );
