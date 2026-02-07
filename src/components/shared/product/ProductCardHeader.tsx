@@ -12,7 +12,6 @@ const Header = ({ product }: HeaderProps) => {
   const { shareProduct } = useShareProduct();
   const location = useLocation();
   const pathName = location.pathname === '/wishlist' ? 'wishlist' : '';
-  console.log(location);
   return (
     <>
       <Box

@@ -80,15 +80,17 @@ export default function Wishlist() {
 
             <Box p={4}>
               <VStack>
-                <Heading fontSize="lg">{product.title}</Heading>
+                <Heading fontSize="lg" whiteSpace="nowrap" overflow="hidden">
+                  {product.title}
+                </Heading>
 
-                <Text fontSize="sm" color="gray.600">
-                  {product.description}
-                </Text>
+                <Box height={150}>
+                  <Text fontSize="sm" color="gray.600">
+                    {product.description}
+                  </Text>
+                </Box>
 
-                <Stack direction="row" align="center" justify="space-between" w="full">
-                  <ProductCardFooter product={product} />
-                </Stack>
+                <ProductCardFooter product={product} />
               </VStack>
             </Box>
           </Box>

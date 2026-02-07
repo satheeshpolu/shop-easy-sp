@@ -5,7 +5,6 @@ import { Text } from '@chakra-ui/react';
 import { Box, Image, Heading, VStack } from '@chakra-ui/react';
 import { FaShare } from 'react-icons/fa';
 import { FaHeart, FaRegHeart } from 'react-icons/fa6';
-
 import { ProductCardFooter } from './shared/product/ProductCardFooter';
 
 type ProductCardProps = {
@@ -17,7 +16,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
   return (
     <>
-      {/* <ProductCardHeader product={product} /> */}
+      {/* <ProductCardHeader product={product} /> */} {/* TODO */}
       <Box
         onClick={() => {
           toggleFavorite(product.id);
@@ -49,14 +48,18 @@ const ProductCard = ({ product }: ProductCardProps) => {
           zIndex: -1,
         }}
       />
-
       <Box p={4}>
-        <VStack direction="row" align="center" justify="space-between" w="full">
-          <Heading fontSize="lg">{product.title}</Heading>
-          <Text fontSize="sm" color="gray.600">
-            {product.description}
-          </Text>
-          {/* <Stack direction="row" align="center" justify="space-between" w="full"></Stack> */}
+        <VStack>
+          <Heading fontSize="lg" whiteSpace="nowrap" overflow="hidden">
+            {product.title}
+          </Heading>
+
+          <Box height={150}>
+            <Text fontSize="sm" color="gray.600">
+              {product.description}
+            </Text>
+          </Box>
+
           <ProductCardFooter product={product} />
         </VStack>
       </Box>
