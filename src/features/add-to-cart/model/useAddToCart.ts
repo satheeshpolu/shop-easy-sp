@@ -6,6 +6,7 @@ export const useAddToCart = () => {
   const { addItem, items } = useCartStore();
 
   const addToCart = (product: Product) => {
+    debugger
     const isAlreadyInCart = items.some((item) => item.id === product.id);
 
     if (isAlreadyInCart) {

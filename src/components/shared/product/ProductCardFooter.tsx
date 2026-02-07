@@ -1,3 +1,4 @@
+import { useAddToCart } from "@/features/add-to-cart";
 import useCartStore from "@/stores/useCartStore";
 import { useRecentStore } from "@/stores/useRecentStore";
 import { Product } from "@/utils/types";
@@ -10,11 +11,12 @@ type FooterComponentProps = {
 };
 
 const FooterComponent = ({ product }: FooterComponentProps) => {
-  const { addToRecent } = useRecentStore();
+  const { addToRecent } = useRecentStore(); 
   const navigate = useNavigate();
-  const addToCart = useCartStore(
-    (state: { addToCart: any }) => state.addToCart
-  );
+  const { addToCart } = useAddToCart();
+  // const addToCart = useCartStore(
+  //   (state: { addToCart: any }) => state.addToCart
+  // );
   const { category } = useParams();
   return (
     <>

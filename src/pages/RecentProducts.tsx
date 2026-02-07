@@ -23,9 +23,9 @@ import { EmptyState } from "@/components/shared/empty/EmptyState";
 export default function RecentProducts() {
   const { category } = useParams();
   const navigate = useNavigate();
-  const addToCart = useCartStore(
-    (state: { addToCart: any }) => state.addToCart,
-  );
+  // const addToCart = useCartStore(
+  //   (state: { addToCart: any }) => state.addToCart,
+  // );
   const borderColor = "gray.700";
   const [loading, setLoading] = useState(false);
   const [isEmpty, setIsEmpty] = useState(true);

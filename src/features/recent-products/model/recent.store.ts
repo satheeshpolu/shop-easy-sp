@@ -15,14 +15,16 @@ export const useRecentProductsStore = create<RecentProductsState>()(
     (set) => ({
       items: [],
 
-      addToRecent: (product) =>
+      addToRecent: (product) => {
+        debugger
         set((state) => {
           // Remove if already exists
           const filtered = state.items.filter((p) => p.id !== product.id);
           // Add to front, limit to max
           const updated = [product, ...filtered].slice(0, MAX_RECENT_ITEMS);
           return { items: updated };
-        }),
+        });
+      },
 
       clearRecent: () => set({ items: [] }),
     }),

@@ -6,33 +6,28 @@ import { memo, useEffect, useState } from "react";
 import { FaTrash, FaPlus, FaMinus } from "react-icons/fa";
 import ZoomingCart from "@/components/ZoomingCart";
 import { BackButton } from "@/components/shared";
-import { Product } from "@/utils/types";
 import { useTranslation } from "react-i18next";
 
 const CartOverview = () => {
   const [isCartEmpty, setIsCartEmpty] = useState(true);
   const { t } = useTranslation();
-  const cart = useCartStore((state: { cart: any }) => state.cart);
+  const{items, getTotal, removeItem} = useCartStore();
+  
+  console.log(items);
+  // const cart = useCartStore((state: { cart: any }) => state.cart);
   useEffect(() => {
-    cart.length ? setIsCartEmpty(false) : setIsCartEmpty(true);
-  }, [cart]);
-  const removeFromCart = useCartStore(
-    (state: { removeFromCart: any }) => state.removeFromCart,
-  );
+    items?.length ? setIsCartEmpty(false) : setIsCartEmpty(true);
+  }, [items]);
+    const removeFromCart = useCartStore();
   const clearCart = useCartStore(
     (state: { clearCart: any }) => state.clearCart,
   );
   const navigate = useNavigate();
   // const [amount, setAmount] = useState(0);
   // Calculate totals
-  const totalQuantity = cart.reduce(
-    (acc: number, item: Product) => acc + item.price,
-    0,
-  );
-  const totalAmount = cart.reduce(
-    (acc: number, item: Product) => acc + item.price,
-    0,
-  );
+  const totalQuantity = items?.length || 0;
+  const totalAmount = getTotal() || 0;
+
   // const totalDiscounted = cart.reduce(
   //   (acc: number, item: Product) => acc + item.discountPercentage,
   //   0
@@ -119,7 +114,7 @@ const CartOverview = () => {
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {cart.map((item: Product) => (
+              {items?.map((item: any) => (
                 <Table.Row key={item.id}>
                   <Table.Cell width={450}>
                     <HStack>
@@ -146,7 +141,7 @@ const CartOverview = () => {
                           if (
                             window.confirm("Are you sure you want to delete?")
                           ) {
-                            removeFromCart(item.id);
+                            removeItem(item.id);
                           }
                         }}
                       >
@@ -179,8 +174,8 @@ const CartOverview = () => {
               <Table.Row fontWeight="bold" bg="gray.300">
                 <Table.Cell> {t("cart.details.total")}:</Table.Cell>
                 <Table.Cell></Table.Cell>
+                <Table.Cell>{totalQuantity}</Table.Cell>
                 <Table.Cell></Table.Cell>
-                <Table.Cell>${totalQuantity.toFixed(2)}</Table.Cell>
                 <Table.Cell textAlign="end">
                   ${totalAmount.toFixed(2)}
                 </Table.Cell>
