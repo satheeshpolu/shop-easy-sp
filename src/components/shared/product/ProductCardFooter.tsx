@@ -1,8 +1,8 @@
 import { useAddToCart } from '@/features/add-to-cart';
 import { useRecentStore } from '@/stores/useRecentStore';
 import { Product } from '@/utils/types';
-import { Button, Text } from '@chakra-ui/react';
-import { FaCartPlus } from 'react-icons/fa6';
+import { Button, HStack, Text } from '@chakra-ui/react';
+import { FaCartPlus, FaCircleInfo } from 'react-icons/fa6';
 import { useNavigate, useParams } from 'react-router-dom';
 type FooterComponentProps = {
   product: Product;
@@ -18,7 +18,7 @@ const FooterComponent = ({ product }: FooterComponentProps) => {
   // );
   const { category } = useParams();
   return (
-    <>
+    <HStack gap="6" maxW="xs" mt="auto">
       <Text fontWeight="bold">${product.price}</Text>
       <Button
         type="submit"
@@ -33,12 +33,12 @@ const FooterComponent = ({ product }: FooterComponentProps) => {
           });
         }}
       >
-        Details
+        <FaCircleInfo />
       </Button>
       <Button onClick={() => addToCart(product)} colorScheme="teal" variant="outline">
         <FaCartPlus />
       </Button>
-    </>
+    </HStack>
   );
 };
 

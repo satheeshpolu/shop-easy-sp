@@ -6,7 +6,6 @@ import {
   HStack,
   Image,
   SimpleGrid,
-  Skeleton,
   Stack,
   Text,
   VStack,
@@ -14,7 +13,7 @@ import {
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import WeeklyBuyersChart from '@/components/charts/WeeklyBuyersChart';
-import { FaShare } from 'react-icons/fa6';
+import { FaCartPlus, FaShare } from 'react-icons/fa6';
 import useShareProduct from '@/hooks/useShareProduct';
 import { BackButton } from '@/components/shared';
 import { useProduct } from '@/hooks/useProduct';
@@ -22,7 +21,7 @@ import { useAddToCart } from '@/features/add-to-cart';
 
 export default function ProductDetails() {
   // const [product, setProduct] = useState<any>(null);
-  const [mainImage, setMainImage] = useState<string>('');
+  const [mainImage, setMainImage] = useState();
   const { shareProduct } = useShareProduct();
   const { id } = useParams();
   // const addToCart = useCartStore((state) => state.addToCart);
@@ -31,21 +30,18 @@ export default function ProductDetails() {
 
   const { data: productResponse, isLoading } = useProduct(Number(id) || 0);
   const product = productResponse ?? null;
-  console.log('Product Details:', productResponse);
+  // console.log('Product Details:', productResponse);
   // const WeeklyBuyersChart = React.lazy(
   //   () => import("@/components/charts/WeeklyBuyersChart")
   // );
   useEffect(() => {
-    setMainImage(product?.thumbnail || product?.images?.[0]); // Default image
-  }, [product]);
+    setMainImage(productResponse?.thumbnail || productResponse?.images?.[0]); // Default image
+  }, [productResponse]);
 
   if (isLoading) {
-    return (
-      <Box p={6} maxW="6xl" mx="auto">
-        <Skeleton height="600px" />
-      </Box>
-    );
+    return;
   }
+  // TODO: Cleanup
 
   return (
     <Box p={{ base: 4, md: 8 }} maxW="6xl" mx="auto" bg="white" rounded="xl" boxShadow="lg">
@@ -59,7 +55,7 @@ export default function ProductDetails() {
         ml={4}
         mr={4}
       >
-        Add to Cart
+        <FaCartPlus />
       </Button>
       {/* Share icon on the left */}
       <Button colorScheme="teal" variant="outline">

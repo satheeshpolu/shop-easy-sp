@@ -1,4 +1,4 @@
-import { Box, Grid, Image, Text, Heading, VStack, Stack, Flex } from '@chakra-ui/react';
+import { Box, Grid, Image, Text, Heading, VStack, Stack, Flex, Button } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import LoadingSkeleton from '../components/LoadingSkeleton';
@@ -18,19 +18,19 @@ export default function RecentProducts() {
   const borderColor = 'gray.700';
   const [loading, setLoading] = useState(false);
   const [isEmpty, setIsEmpty] = useState(true);
-  const { recents } = useRecentStore();
+  const { items } = useRecentStore();
 
   const { fetchProducts, toggleFavorite, favoriteProducts } = useProductStore();
 
   useEffect(() => {
     setLoading(false);
     fetchProducts(category as string);
-    if (recents?.length === 0) {
+    if (items?.length === 0) {
       setIsEmpty(true);
     } else {
       setIsEmpty(false);
     }
-  }, [fetchProducts, category, recents]);
+  }, [fetchProducts, category, items]);
 
   return (
     <Box p={6}>
@@ -94,7 +94,7 @@ export default function RecentProducts() {
           </>
         )}
 
-        {recents?.map((product: Product) => (
+        {items?.map((product: Product) => (
           <Box
             key={product?.id}
             borderRadius="lg"

@@ -23,7 +23,7 @@ export const useProduct = (id: number) => {
   });
 
   // Log the response
-  console.log('useProduct response:', query.data);
+  // console.log('useProduct response:', query.data);
 
   return query.data ? query : { ...query, data: undefined };
 };

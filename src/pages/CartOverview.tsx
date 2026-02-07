@@ -14,7 +14,7 @@ const CartOverview = () => {
   const { t } = useTranslation();
   const { items, getTotal, removeItem } = useCartStore();
 
-  console.log(items);
+  // console.log(items);
   // const cart = useCartStore((state: { cart: any }) => state.cart);
   useEffect(() => {
     setIsCartEmpty(!items?.length);
@@ -34,8 +34,6 @@ const CartOverview = () => {
   return (
     <>
       <Flex justify="flex-end" mt={4} mr={4} gap={8}>
-        <BackButton />
-
         {!isCartEmpty && (
           <>
             <Button
@@ -66,6 +64,7 @@ const CartOverview = () => {
             >
               {t('cart.checkOut')}
             </Button>
+            <BackButton />
           </>
         )}
       </Flex>

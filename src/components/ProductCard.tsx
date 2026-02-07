@@ -2,7 +2,7 @@ import useShareProduct from '@/hooks/useShareProduct';
 import useProductStore from '@/stores/useProductStore';
 import { Product } from '@/utils/types';
 import { Text } from '@chakra-ui/react';
-import { Box, Image, Heading, VStack, Stack } from '@chakra-ui/react';
+import { Box, Image, Heading, VStack } from '@chakra-ui/react';
 import { FaShare } from 'react-icons/fa';
 import { FaHeart, FaRegHeart } from 'react-icons/fa6';
 
@@ -51,14 +51,13 @@ const ProductCard = ({ product }: ProductCardProps) => {
       />
 
       <Box p={4}>
-        <VStack>
+        <VStack direction="row" align="center" justify="space-between" w="full">
           <Heading fontSize="lg">{product.title}</Heading>
           <Text fontSize="sm" color="gray.600">
             {product.description}
           </Text>
-          <Stack direction="row" align="center" justify="space-between" w="full">
-            <ProductCardFooter product={product} />
-          </Stack>
+          {/* <Stack direction="row" align="center" justify="space-between" w="full"></Stack> */}
+          <ProductCardFooter product={product} />
         </VStack>
       </Box>
     </>

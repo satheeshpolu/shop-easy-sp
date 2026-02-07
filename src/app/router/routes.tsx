@@ -1,7 +1,7 @@
 import { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { LoadingFallback } from './LoadingFallback';
-import CategoryGrid from '@/pages/CategoryGrid';
+import Home from '@/pages/Home';
 
 // Lazy load all route components
 const Layout = lazy(() => import('@/pages/Layout'));
@@ -19,7 +19,7 @@ export function AppRoutes() {
     <Suspense fallback={<LoadingFallback />}>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<CategoryGrid />} />
+          <Route index element={<Home />} />
           {/* <Route path="blogs" element={<Blogs />}>
             <Route index element={<BlogList />} />
             <Route path=":id" element={<BlogPost />} />

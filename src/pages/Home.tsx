@@ -1,195 +1,97 @@
-import { Box, Flex, VStack, Text, Button, Heading } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
-import UCard from '../components/UCard';
-import ArticleCard, { Article } from '../components/ArticleCard';
-import QuoteCard from '../components/QuoteCard ';
-import ScrollingAds from '../components/ScrollingAds';
-import UnderDevelopment from '@/components/UnderDevelopment';
+import { Box, Flex, Heading, Separator, Text, VStack } from '@chakra-ui/react';
+import CategoryGrid from './CategoryGrid';
+import DateWidget from '@/components/DateWidget';
+import TimeWidget from '@/components/TimeWidget';
 
-// Define allowed keys
-type MenuKey = 'dashboard' | 'profile' | 'settings' | 'news_app' | 'quotes_app';
-
-// Item structure
-interface Item {
-  id: number;
+const Section = ({
+  // bg,
+  title,
+  subtitle,
+}: {
+  // bg: string;
   title: string;
-  detail: string;
-}
-
-// Menu item structure with MenuKey
-interface MenuItem {
-  id: MenuKey;
-  label: string;
-}
-
-// Menu items with typed keys
-const menuItems: MenuItem[] = [
-  { id: 'dashboard', label: 'Dashboard' },
-  { id: 'profile', label: 'Profile' },
-  { id: 'settings', label: 'Settings' },
-  { id: 'news_app', label: 'News App' },
-  { id: 'quotes_app', label: 'Quotes App' },
-];
-
-// Static data per menu category
-const contentData: Record<MenuKey, Item[]> = {
-  dashboard: [
-    { id: 1, title: 'Sales Report', detail: 'Detailed sales analysis for Q2.' },
-    { id: 2, title: 'User Growth', detail: 'User growth increased by 20%.' },
-  ],
-  profile: [
-    { id: 1, title: 'John Doe', detail: 'Email: john@example.com' },
-    { id: 2, title: 'Jane Smith', detail: 'Email: jane@example.com' },
-  ],
-  settings: [
-    { id: 1, title: 'Privacy', detail: 'Manage your privacy preferences.' },
-    { id: 2, title: 'Notifications', detail: 'Control email and push alerts.' },
-  ],
-  news_app: [],
-  quotes_app: [],
-};
-
-type Quote = {
-  quote: string;
-  author: string;
-};
-
-export default function Home() {
-  const [selectedMenu, setSelectedMenu] = useState<MenuItem>(menuItems[0]);
-  const [selectedItem, setSelectedItem] = useState<Item>(contentData.dashboard[0]);
-  const [quotes, setQuotes] = useState<Quote[]>([]);
-  const [items, setItems] = useState<Item[]>([]);
-  const [newsData, setNewsData] = useState([]);
-  const [loadingNewsData, setLoadingNewsData] = useState(false);
-  const [articleData, setArticleData] = useState({
-    author: '',
-    content: '',
-    description: '',
-    publishedAt: '',
-    source: { id: '', name: '' },
-    title: '',
-    url: '',
-    urlToImage: '',
-  });
-
-  const today = new Date();
-  today.setDate(today.getDate() - 1); // Subtract one day
-  // const formattedDate = today.toISOString().split("T")[0];
-  // const NEWS_API_KEY = import.meta.env.VITE_NEWS_API_KEY;
-  // Load items when selectedMenu changes
-  useEffect(() => {
-    setItems(contentData[selectedMenu.id]);
-    setSelectedItem(contentData[selectedMenu.id][0]); // optional: auto-select first item
-  }, [selectedMenu]);
-  useEffect(() => {
-    const today = new Date();
-    const isDevelopment = import.meta.env.DEV;
-    today.setDate(today.getDate() - 1); // Subtract one day
-    const formattedDate = today.toISOString().split('T')[0];
-    const NEWS_API_KEY = import.meta.env.VITE_NEWS_API_KEY;
-    const apiUrl = isDevelopment
-      ? `https://newsapi.org/v2/everything?q=Apple&from=${formattedDate}&sortBy=popularity&apiKey=${NEWS_API_KEY}`
-      : `https://newsapi.org/v2/everything?q=Apple&from=${formattedDate}&sortBy=popularity&apiKey=${NEWS_API_KEY}`;
-
-    setLoadingNewsData(true);
-    fetch(apiUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.articles);
-        setNewsData(data.articles);
-        setLoadingNewsData(false);
-      });
-  }, []);
-  useEffect(() => {
-    fetch('https://dummyjson.com/quotes')
-      .then((res) => res.json())
-      .then((data) => setQuotes(data?.quotes));
-  }, []);
-
-  return (
-    <Flex height="100vh" bg="gray.50">
-      {/* Left Sidebar */}
-      <Box width="250px" bg="#101f47" p={4} boxShadow="md">
-        <Box mb={6}>
-          <Flex align="center" justify="center" mb={6} height="60px">
-            <Heading color="#facc15">U App</Heading>
-          </Flex>
-          <hr />
-        </Box>
-
-        <VStack>
-          {menuItems.map((item) => (
-            <Button
-              key={item.id}
-              variant={selectedMenu.id === item.id ? 'solid' : 'ghost'}
-              colorScheme="teal"
-              color={selectedMenu.id === item.id ? '#3b82f6' : 'gray.700'}
-              onClick={() => setSelectedMenu(item)}
-              justifyContent="center"
-            >
-              {item.label}
-            </Button>
-          ))}
+  subtitle: string;
+}) => (
+  <Box h="95vh" w="100%">
+    <Flex h="100%" direction={{ base: 'column', md: 'row' }} overflow="hidden">
+      {/* Left Half */}
+      <Box flex={1} borderRightRadius={{ md: '80px' }}>
+        <VStack textAlign="center" px={4}>
+          {/* <Heading fontSize={{ base: "3xl", md: "4xl" }}>{title}</Heading>
+          <Text fontSize={{ base: "md", md: "lg" }} maxW="md">
+            {subtitle}
+          </Text> */}
+          <CategoryGrid />
         </VStack>
       </Box>
 
-      {/* Right Content Area: Two Columns */}
-      <Flex flex="1" p={6} gap={6}>
-        {/* Left: Item List */}
-        <Box width="450px" bg="#a3cfff" p={4} borderRadius="md" boxShadow="sm" overflow="auto">
-          <Text fontSize="xl" fontWeight="bold" mb={4}>
-            {selectedMenu.label}
-          </Text>
-          <VStack>
-            {items.map((item) => (
-              <Button
-                key={item.id}
-                onClick={() => setSelectedItem(item)}
-                justifyContent="flex-start"
-                variant="outline"
-                colorScheme="teal"
-              >
-                {item.title}
-              </Button>
-            ))}
-            {selectedMenu.id == 'quotes_app' &&
-              quotes.map((quote) => <QuoteCard quote={quote?.quote} author={quote?.author} />)}
+      {/* Right Half with Tilt and Rounded Edge */}
+      <Box
+        flex={1}
+        position="relative"
+        overflow="hidden"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        bg="teal.500"
+        transform="skewX(-20deg)"
+        borderLeftRadius={{ md: '80px' }}
+        zIndex={-1}
+      >
+        <Box transform="skewX(10deg)">
+          <Box
+            w="500px"
+            h="500px"
+            position="fixed"
+            transform="rotate(50deg)"
+            bg="teal.400"
+            left={'10%'}
+            borderRadius="35% 35% 35% 35% / 35% 35% 35% 35%"
+            zIndex={-2}
+            animation="spin 20s linear infinite"
+          />
+          <VStack textAlign="center" py={4}>
+            <Heading fontSize={{ base: '3xl', md: '4xl' }}>{title}</Heading>
+            <Text fontSize={{ base: 'md', md: 'lg' }} maxW="md">
+              {subtitle}
+            </Text>
           </VStack>
-          {selectedMenu.id === 'news_app' && loadingNewsData && <p>Loading News Data... </p>}
-          {selectedMenu.id === 'news_app' &&
-            !loadingNewsData &&
-            newsData?.map((newsInfo: Article) => (
-              <UCard
-                key={newsInfo?.title}
-                author={newsInfo?.author}
-                title={newsInfo?.title}
-                description={newsInfo?.description}
-                urlToImage={newsInfo?.urlToImage}
-                onClick={() => setArticleData(newsInfo)}
-              ></UCard>
-            ))}
+          <Separator variant="dashed" bgColor={'teal.500'} />
+          <DateWidget />
+          <TimeWidget />
         </Box>
-
-        {/* Right: Detail View */}
-        <Box width="530px" bg="white" p={4} borderRadius="md" boxShadow="sm" overflow="auto">
-          {selectedMenu.id != 'news_app' && (
-            <>
-              <Text fontSize="xl" fontWeight="bold" mb={4}>
-                {selectedItem ? selectedItem.title : 'Select an item'}
-              </Text>
-              <Text>
-                {selectedItem
-                  ? selectedItem.detail
-                  : 'Details will appear here once you select an item from the list.'}
-              </Text>
-            </>
-          )}
-
-          {selectedMenu.id === 'news_app' && <ArticleCard article={articleData}></ArticleCard>}
-        </Box>
-        <UnderDevelopment />
-        <ScrollingAds />
-      </Flex>
+      </Box>
     </Flex>
+  </Box>
+);
+
+export default function FullPageSections() {
+  // const bg1 = "gray.100";
+  // const bg2 = "white";
+  // const bg3 = "teal.50";
+  const sectionsData = [
+    {
+      bg: 'gray.100',
+      title: 'Welcome to ShopEasy',
+      subtitle:
+        'Discover amazing products, unbeatable prices, and fast delivery, all in one place.',
+    },
+    // {
+    //   bg: "white",
+    //   title: "About Us",
+    //   subtitle: "We build amazing UIs with Chakra and React.",
+    // },
+    // {
+    //   bg: "teal.50",
+    //   title: "Get in Touch",
+    //   subtitle: "Contact us to start building something great together.",
+    // },
+  ];
+  return (
+    <Box>
+      {sectionsData.map((section, index) => (
+        <Section key={index} title={section.title} subtitle={section.subtitle} />
+      ))}
+    </Box>
   );
 }
