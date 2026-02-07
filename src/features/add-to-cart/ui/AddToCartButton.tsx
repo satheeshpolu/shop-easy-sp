@@ -9,10 +9,7 @@ interface AddToCartButtonProps {
   variant?: 'button' | 'icon';
 }
 
-export function AddToCartButton({
-  product,
-  variant = 'button',
-}: AddToCartButtonProps) {
+export function AddToCartButton({ product, variant = 'button' }: AddToCartButtonProps) {
   const { addToCart } = useAddToCart();
   const isInCart = useIsInCart(product.id);
 

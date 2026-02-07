@@ -1,5 +1,5 @@
-import { useState } from "react";
-import "./SimpleToast.css";
+import { useState } from 'react';
+import './SimpleToast.css';
 
 type Props = {
   title: string;
@@ -21,7 +21,7 @@ const SimpleToast = ({ buttonText, title, onClick }: Props) => {
   return (
     <>
       <button onClick={showToast}>{buttonText}</button>
-      <div className={`toast ${show ? "show" : ""}`}>{title}</div>
+      <div className={`toast ${show ? 'show' : ''}`}>{title}</div>
     </>
   );
 };

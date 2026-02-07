@@ -1,13 +1,12 @@
-import useShareProduct from "@/hooks/useShareProduct";
-import useProductStore from "@/stores/useProductStore";
-import { Product } from "@/utils/types";
-import { Text } from "@chakra-ui/react";
-import { Box, Image, Heading, VStack, Stack } from "@chakra-ui/react";
-import { FaShare } from "react-icons/fa";
-import { FaHeart, FaRegHeart } from "react-icons/fa6";
+import useShareProduct from '@/hooks/useShareProduct';
+import useProductStore from '@/stores/useProductStore';
+import { Product } from '@/utils/types';
+import { Text } from '@chakra-ui/react';
+import { Box, Image, Heading, VStack, Stack } from '@chakra-ui/react';
+import { FaShare } from 'react-icons/fa';
+import { FaHeart, FaRegHeart } from 'react-icons/fa6';
 
-import { ProductCardFooter } from "./shared/product/ProductCardFooter";
-import { ProductCardHeader } from "./shared";
+import { ProductCardFooter } from './shared/product/ProductCardFooter';
 
 type ProductCardProps = {
   product: Product;
@@ -28,14 +27,10 @@ const ProductCard = ({ product }: ProductCardProps) => {
         alignItems="center"
         w="100%"
         p={4}
-        cursor={"pointer"}
+        cursor={'pointer'}
       >
         {/* Share icon on the left */}
-        <FaShare
-          size={24}
-          color="rgba(32, 134, 125, 1)"
-          onClick={() => shareProduct(product)}
-        />
+        <FaShare size={24} color="rgba(32, 134, 125, 1)" onClick={() => shareProduct(product)} />
         {product.isFavorite ? (
           <FaHeart size={30} color="rgba(202, 39, 39, 1)" />
         ) : (
@@ -49,8 +44,8 @@ const ProductCard = ({ product }: ProductCardProps) => {
         w="100%"
         h="200px"
         _hover={{
-          transform: "scale(1.3)",
-          transition: "0.5s",
+          transform: 'scale(1.3)',
+          transition: '0.5s',
           zIndex: -1,
         }}
       />
@@ -61,12 +56,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           <Text fontSize="sm" color="gray.600">
             {product.description}
           </Text>
-          <Stack
-            direction="row"
-            align="center"
-            justify="space-between"
-            w="full"
-          >
+          <Stack direction="row" align="center" justify="space-between" w="full">
             <ProductCardFooter product={product} />
           </Stack>
         </VStack>

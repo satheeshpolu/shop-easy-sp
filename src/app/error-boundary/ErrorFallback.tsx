@@ -7,13 +7,7 @@ interface ErrorFallbackProps {
 
 export function ErrorFallback({ error, resetErrorBoundary }: ErrorFallbackProps) {
   return (
-    <Box
-      display="flex"
-      alignItems="center"
-      justifyContent="center"
-      minH="100vh"
-      p={4}
-    >
+    <Box display="flex" alignItems="center" justifyContent="center" minH="100vh" p={4}>
       <VStack gap={4} textAlign="center">
         <Heading size="lg" color="red.500">
           Oops! Something went wrong

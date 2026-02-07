@@ -16,7 +16,6 @@ export const useRecentProductsStore = create<RecentProductsState>()(
       items: [],
 
       addToRecent: (product) => {
-        debugger
         set((state) => {
           // Remove if already exists
           const filtered = state.items.filter((p) => p.id !== product.id);

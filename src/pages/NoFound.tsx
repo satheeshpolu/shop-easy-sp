@@ -1,12 +1,12 @@
 // pages/NoPage.tsx
-import { Button, Center, Heading, Text, VStack } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+import { Button, Center, Heading, Text, VStack } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 
 export default function NoFound() {
-  const navigate  = useNavigate();
+  const navigate = useNavigate();
 
   const handleBack = () => {
-    navigate ("/");
+    navigate('/');
   };
 
   return (

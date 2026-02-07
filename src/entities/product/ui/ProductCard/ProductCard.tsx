@@ -11,12 +11,7 @@ interface ProductCardProps {
   renderFooter?: () => React.ReactNode;
 }
 
-export function ProductCard({
-  product,
-  onClick,
-  renderActions,
-  renderFooter,
-}: ProductCardProps) {
+export function ProductCard({ product, onClick, renderActions, renderFooter }: ProductCardProps) {
   const discountedPrice = getDiscountedPrice(product);
 
   return (
@@ -58,11 +53,7 @@ export function ProductCard({
                 {getFormattedPrice(discountedPrice)}
               </Text>
               {product.discountPercentage > 0 && (
-                <Text
-                  fontSize="sm"
-                  textDecoration="line-through"
-                  color="gray.400"
-                >
+                <Text fontSize="sm" textDecoration="line-through" color="gray.400">
                   {getFormattedPrice(product.price)}
                 </Text>
               )}

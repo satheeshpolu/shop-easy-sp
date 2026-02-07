@@ -1,23 +1,12 @@
-import {
-  Box,
-  Grid,
-  Image,
-  Text,
-  Heading,
-  VStack,
-  Button,
-  Stack,
-  Flex,
-} from "@chakra-ui/react";
-import { lazy, useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import useCartStore from "../stores/useCartStore";
-import useProductStore from "@/stores/useProductStore";
-import { BackButton, ProductCardHeader } from "@/components/shared";
-import { ProductCardFooter } from "@/components/shared/product/ProductCardFooter";
-import { t } from "i18next";
-import { useTranslation } from "react-i18next";
-import { EmptyState } from "@/components/shared/empty/EmptyState";
+import { Box, Grid, Image, Text, Heading, VStack, Stack, Flex } from '@chakra-ui/react';
+import { useEffect, useState, useCallback } from 'react';
+import { useParams } from 'react-router-dom';
+import useProductStore from '@/stores/useProductStore';
+import { BackButton, ProductCardHeader } from '@/components/shared';
+import { ProductCardFooter } from '@/components/shared/product/ProductCardFooter';
+import { useTranslation } from 'react-i18next';
+import { EmptyState } from '@/components/shared/empty/EmptyState';
+import { Product } from '@/utils/types';
 
 export default function Wishlist() {
   const { category } = useParams();
@@ -27,20 +16,23 @@ export default function Wishlist() {
   //   (state: { addToCart: any }) => state.addToCart,
   // );
 
-  const borderColor = "gray.700";
-  const [loading, setLoading] = useState(false);
+  const borderColor = 'gray.700';
   const [isEmpty, setIsEmpty] = useState(true);
   const { t } = useTranslation();
-  const { fetchProducts, toggleFavorite, favoriteProducts } = useProductStore();
-  useEffect(() => {
-    setLoading(false);
+  const { fetchProducts, favoriteProducts } = useProductStore();
+
+  const loadProducts = useCallback(() => {
     fetchProducts(category as string);
+  }, [fetchProducts, category]);
+
+  useEffect(() => {
+    loadProducts();
     if (favoriteProducts.length === 0) {
       setIsEmpty(true);
     } else {
       setIsEmpty(false);
     }
-  }, [favoriteProducts]);
+  }, [loadProducts, favoriteProducts]);
 
   return (
     <Box p={6}>
@@ -49,20 +41,20 @@ export default function Wishlist() {
       </Flex>
 
       <Heading size="lg" mb={6}>
-        {favoriteProducts ? t("contact.title") : `Category: {category}`}
+        {favoriteProducts ? t('contact.title') : `Category: {category}`}
       </Heading>
 
-      {isEmpty && <EmptyState type={"wishlist"} />}
+      {isEmpty && <EmptyState type={'wishlist'} />}
       <Grid
         templateColumns={{
-          base: "repeat(1, 1fr)",
-          sm: "repeat(2, 1fr)",
-          md: "repeat(3, 1fr)",
-          lg: "repeat(4, 1fr)",
+          base: 'repeat(1, 1fr)',
+          sm: 'repeat(2, 1fr)',
+          md: 'repeat(3, 1fr)',
+          lg: 'repeat(4, 1fr)',
         }}
         gap={6}
       >
-        {favoriteProducts.map((product: any) => (
+        {favoriteProducts.map((product: Product) => (
           <Box
             key={product?.id}
             borderRadius="lg"
@@ -70,7 +62,7 @@ export default function Wishlist() {
             bg="#8ef1e4"
             borderColor={borderColor}
             shadow="md"
-            _hover={{ transform: "scale(1.02)", transition: "0.2s" }}
+            _hover={{ transform: 'scale(1.02)', transition: '0.2s' }}
           >
             <ProductCardHeader product={product} />
             <Image
@@ -80,8 +72,8 @@ export default function Wishlist() {
               w="100%"
               h="120px"
               _hover={{
-                transform: "scale(1.5)",
-                transition: "0.5s",
+                transform: 'scale(1.5)',
+                transition: '0.5s',
                 zIndex: -1,
               }}
             />
@@ -94,12 +86,7 @@ export default function Wishlist() {
                   {product.description}
                 </Text>
 
-                <Stack
-                  direction="row"
-                  align="center"
-                  justify="space-between"
-                  w="full"
-                >
+                <Stack direction="row" align="center" justify="space-between" w="full">
                   <ProductCardFooter product={product} />
                 </Stack>
               </VStack>

@@ -1,5 +1,5 @@
-import { Box, Text, Flex, Icon } from "@chakra-ui/react";
-import { FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
+import { Box, Text, Flex, Icon } from '@chakra-ui/react';
+import { FaQuoteLeft, FaQuoteRight } from 'react-icons/fa';
 
 type QuoteProps = {
   quote: string;
@@ -7,7 +7,6 @@ type QuoteProps = {
 };
 
 const QuoteCard = ({ quote, author }: QuoteProps) => {
-
   return (
     <Box
       maxW="lg"

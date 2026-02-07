@@ -3,6 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { QueryProvider } from './QueryProvider';
 import { ThemeProvider } from './ThemeProvider';
 import { ErrorBoundary } from '../error-boundary';
+import { Toaster } from '@/components/ui/toaster';
 
 interface AppProvidersProps {
   children: ReactNode;
@@ -15,11 +16,12 @@ interface AppProvidersProps {
 export function AppProviders({ children }: AppProvidersProps) {
   return (
     <ThemeProvider>
-      {/* <ErrorBoundary> */}
+      <ErrorBoundary>
         <QueryProvider>
           <BrowserRouter>{children}</BrowserRouter>
         </QueryProvider>
-      {/* </ErrorBoundary> */}
+      </ErrorBoundary>
+      <Toaster />
     </ThemeProvider>
   );
 }

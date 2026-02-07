@@ -7,15 +7,14 @@ import { APP_CONSTANTS } from '@/app/config';
 export const productKeys = {
   all: ['products'] as const,
   lists: () => [...productKeys.all, 'list'] as const,
-  list: (filters: Record<string, unknown>) =>
-    [...productKeys.lists(), filters] as const,
+  list: (filters: Record<string, unknown>) => [...productKeys.lists(), filters] as const,
   details: () => [...productKeys.all, 'detail'] as const,
   detail: (id: number) => [...productKeys.details(), id] as const,
   categories: () => [...productKeys.all, 'categories'] as const,
 };
 
 export const useProduct = (id: number) => {
-    const query = useQuery({
+  const query = useQuery({
     queryKey: productKeys.detail(id),
     queryFn: () => productApi.getById(id),
     staleTime: APP_CONSTANTS.STALE_TIME,

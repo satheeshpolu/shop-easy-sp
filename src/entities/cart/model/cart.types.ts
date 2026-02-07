@@ -5,6 +5,7 @@ export interface CartItem {
   quantity: number;
   thumbnail: string;
   discountPercentage?: number;
+  category?: string;
 }
 
 export interface CartState {

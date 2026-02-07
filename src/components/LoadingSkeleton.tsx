@@ -1,10 +1,4 @@
-import {
-  HStack,
-  Skeleton,
-  SkeletonCircle,
-  SkeletonText,
-  Stack,
-} from "@chakra-ui/react"
+import { HStack, Skeleton, SkeletonCircle, SkeletonText, Stack } from '@chakra-ui/react';
 
 const LoadingSkeleton = () => {
   return (
@@ -15,7 +9,7 @@ const LoadingSkeleton = () => {
       </HStack>
       <Skeleton height="200px" />
     </Stack>
-  )
-}
+  );
+};
 
 export default LoadingSkeleton;

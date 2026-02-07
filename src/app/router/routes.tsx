@@ -5,14 +5,8 @@ import CategoryGrid from '@/pages/CategoryGrid';
 
 // Lazy load all route components
 const Layout = lazy(() => import('@/pages/Layout'));
-const Home = lazy(() => import('@/pages/Home'));
-const Blogs = lazy(() => import('@/pages/blogs/Blogs'));
-const BlogList = lazy(() => import('@/pages/blogs/BlogList'));
-const BlogPost = lazy(() => import('@/pages/blogs/BlogPost'));
-const BlogCategory = lazy(() => import('@/pages/blogs/BlogCategory'));
 const Contact = lazy(() => import('@/pages/Contact'));
 const Wishlist = lazy(() => import('@/pages/Wishlist'));
-const CartApp = lazy(() => import('@/pages/CartApp'));
 const CartOverview = lazy(() => import('@/pages/CartOverview'));
 const CheckoutScreen = lazy(() => import('@/pages/CheckoutScreen'));
 const CategoryProducts = lazy(() => import('@/pages/CategoryProducts'));
@@ -37,10 +31,7 @@ export function AppRoutes() {
           <Route path="cart" element={<CartOverview />} />
           <Route path="cart/checkout" element={<CheckoutScreen />} />
           <Route path="category/:category" element={<CategoryProducts />} />
-          <Route
-            path="category/:category/:id/product_details"
-            element={<ProductDetails />}
-          />
+          <Route path="category/:category/:id/product_details" element={<ProductDetails />} />
           <Route path="*" element={<NoFound />} />
         </Route>
       </Routes>

@@ -1,6 +1,6 @@
-import { Button, CloseButton, Drawer, Portal } from "@chakra-ui/react";
-import { useState } from "react";
-import FullPageSections from "./FullPageSections";
+import { Button, CloseButton, Drawer, Portal } from '@chakra-ui/react';
+import { useState } from 'react';
+import FullPageSections from './FullPageSections';
 export default function CartApp() {
   const [open, setOpen] = useState(false);
 
@@ -9,7 +9,7 @@ export default function CartApp() {
       <FullPageSections />
       <Drawer.Root open={open} onOpenChange={(e) => setOpen(e.open)}>
         <Drawer.Trigger asChild>
-          <Button variant="outline" size="sm" style={{display: 'none'}}>
+          <Button variant="outline" size="sm" style={{ display: 'none' }}>
             Open Drawer
           </Button>
         </Drawer.Trigger>
@@ -22,8 +22,8 @@ export default function CartApp() {
               </Drawer.Header>
               <Drawer.Body>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+                  incididunt ut labore et dolore magna aliqua.
                 </p>
               </Drawer.Body>
               <Drawer.Footer>

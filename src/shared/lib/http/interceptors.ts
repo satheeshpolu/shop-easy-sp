@@ -1,5 +1,5 @@
-import { httpClient } from "./client";
-import { normalizeApiError } from "./errors";
+import { httpClient } from './client';
+import { normalizeApiError } from './errors';
 
 export const setupInterceptors = () => {
   httpClient.interceptors.request.use(

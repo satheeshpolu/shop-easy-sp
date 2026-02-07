@@ -1,7 +1,7 @@
-import { Input, InputGroup } from "@chakra-ui/react";
-import { FaSearch } from "react-icons/fa";
-import { FaDeleteLeft } from "react-icons/fa6";
-import { useCallback, useMemo } from "react";
+import { Input, InputGroup } from '@chakra-ui/react';
+import { FaSearch } from 'react-icons/fa';
+import { FaDeleteLeft } from 'react-icons/fa6';
+import { useCallback, useMemo } from 'react';
 
 type SearchBoxProps = {
   value: string;
@@ -18,7 +18,7 @@ export default function SearchBox({ value, onChange, placeholder }: SearchBoxPro
   );
 
   const handleClear = useCallback(() => {
-    onChange("");
+    onChange('');
   }, [onChange]);
 
   const endElement = useMemo(
@@ -30,7 +30,7 @@ export default function SearchBox({ value, onChange, placeholder }: SearchBoxPro
     <InputGroup startElement={<FaSearch />} endElement={endElement}>
       <Input
         aria-label="Search"
-        placeholder={placeholder || "Search..."}
+        placeholder={placeholder || 'Search...'}
         onChange={handleChange}
         value={value}
         w="100%"

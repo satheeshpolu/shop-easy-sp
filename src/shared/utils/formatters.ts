@@ -9,18 +9,13 @@ export const formatCurrency = (
   }).format(amount);
 };
 
-export const formatDate = (
-  date: string | Date,
-  options?: Intl.DateTimeFormatOptions
-): string => {
+export const formatDate = (date: string | Date, options?: Intl.DateTimeFormatOptions): string => {
   const defaultOptions: Intl.DateTimeFormatOptions = {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
   };
-  return new Intl.DateTimeFormat('en-US', options ?? defaultOptions).format(
-    new Date(date)
-  );
+  return new Intl.DateTimeFormat('en-US', options ?? defaultOptions).format(new Date(date));
 };
 
 export const formatNumber = (num: number): string => {

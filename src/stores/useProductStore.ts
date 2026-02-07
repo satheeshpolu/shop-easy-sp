@@ -2,7 +2,6 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { Product, ProductStore } from './types';
 import { productApi, sortProducts } from '@/entities/product';
-import { env } from '@/app/config';
 
 const useProductStore = create<ProductStore>()(
   persist(
@@ -14,7 +13,7 @@ const useProductStore = create<ProductStore>()(
         try {
           const response = await productApi.getByCategory(category);
           const data = response as unknown as { products: Product[] };
-          
+
           const favoriteIds = get().favoriteProducts.map((f) => f.id);
 
           const initializedProducts = data.products.map((product: Product) => ({

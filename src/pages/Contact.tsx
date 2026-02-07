@@ -12,8 +12,8 @@ import {
   SimpleGrid,
   For,
   NativeSelect,
-} from "@chakra-ui/react";
-import { useTranslation } from "react-i18next";
+} from '@chakra-ui/react';
+import { useTranslation } from 'react-i18next';
 
 export default function ContactPage() {
   const { t } = useTranslation();
@@ -52,11 +52,11 @@ export default function ContactPage() {
 
       <Container maxW="lg" centerContent position="relative" zIndex={1} pt={16}>
         <VStack textAlign="center">
-          <Heading fontSize={{ base: "3xl", md: "4xl" }} color="teal.600">
-            {t("contact.title")}
+          <Heading fontSize={{ base: '3xl', md: '4xl' }} color="teal.600">
+            {t('contact.title')}
           </Heading>
           <Text fontSize="lg" color="gray.600">
-            {t("contact.description")}
+            {t('contact.description')}
           </Text>
         </VStack>
 
@@ -64,35 +64,26 @@ export default function ContactPage() {
           <SimpleGrid>
             <Fieldset.Root size="lg" maxW="md">
               <Stack>
-                <Fieldset.Legend>{t("contact.form.title")}</Fieldset.Legend>
-                <Fieldset.HelperText>
-                  {t("contact.form.description")}
-                </Fieldset.HelperText>
+                <Fieldset.Legend>{t('contact.form.title')}</Fieldset.Legend>
+                <Fieldset.HelperText>{t('contact.form.description')}</Fieldset.HelperText>
               </Stack>
 
               <Fieldset.Content>
                 <Field.Root>
-                  <Field.Label>{t("contact.form.name")}</Field.Label>
+                  <Field.Label>{t('contact.form.name')}</Field.Label>
                   <Input name="name" />
                 </Field.Root>
 
                 <Field.Root>
-                  <Field.Label>{t("contact.form.email")}</Field.Label>
+                  <Field.Label>{t('contact.form.email')}</Field.Label>
                   <Input name="email" type="email" />
                 </Field.Root>
 
                 <Field.Root>
-                  <Field.Label>{t("contact.form.country")}</Field.Label>
+                  <Field.Label>{t('contact.form.country')}</Field.Label>
                   <NativeSelect.Root>
                     <NativeSelect.Field name="country">
-                      <For
-                        each={[
-                          "Germany",
-                          "Canada",
-                          "United Kingdom",
-                          "United States",
-                        ]}
-                      >
+                      <For each={['Germany', 'Canada', 'United Kingdom', 'United States']}>
                         {(item) => (
                           <option key={item} value={item}>
                             {item}
@@ -112,7 +103,7 @@ export default function ContactPage() {
                 bg="#14b8a6"
                 color="#c9f9f4"
               >
-                {t("contact.form.action")}
+                {t('contact.form.action')}
               </Button>
             </Fieldset.Root>
           </SimpleGrid>

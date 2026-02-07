@@ -1,7 +1,7 @@
-import { Box, Flex, Heading, Separator, Text, VStack } from "@chakra-ui/react";
-import CategoryGrid from "./CategoryGrid";
-import DateWidget from "@/components/DateWidget";
-import TimeWidget from "@/components/TimeWidget";
+import { Box, Flex, Heading, Separator, Text, VStack } from '@chakra-ui/react';
+import CategoryGrid from './CategoryGrid';
+import DateWidget from '@/components/DateWidget';
+import TimeWidget from '@/components/TimeWidget';
 
 const Section = ({
   // bg,
@@ -13,12 +13,9 @@ const Section = ({
   subtitle: string;
 }) => (
   <Box h="95vh" w="100%">
-    <Flex h="100%" direction={{ base: "column", md: "row" }} overflow="hidden">
+    <Flex h="100%" direction={{ base: 'column', md: 'row' }} overflow="hidden">
       {/* Left Half */}
-      <Box
-        flex={1}
-        borderRightRadius={{ md: "80px" }}
-      >
+      <Box flex={1} borderRightRadius={{ md: '80px' }}>
         <VStack textAlign="center" px={4}>
           {/* <Heading fontSize={{ base: "3xl", md: "4xl" }}>{title}</Heading>
           <Text fontSize={{ base: "md", md: "lg" }} maxW="md">
@@ -38,7 +35,7 @@ const Section = ({
         justifyContent="center"
         bg="teal.500"
         transform="skewX(-20deg)"
-        borderLeftRadius={{ md: "80px" }}
+        borderLeftRadius={{ md: '80px' }}
         zIndex={-1}
       >
         <Box transform="skewX(10deg)">
@@ -48,18 +45,18 @@ const Section = ({
             position="fixed"
             transform="rotate(50deg)"
             bg="teal.400"
-            left={"10%"}
+            left={'10%'}
             borderRadius="35% 35% 35% 35% / 35% 35% 35% 35%"
             zIndex={-2}
             animation="spin 20s linear infinite"
           />
           <VStack textAlign="center" py={4}>
-            <Heading fontSize={{ base: "3xl", md: "4xl" }}>{title}</Heading>
-            <Text fontSize={{ base: "md", md: "lg" }} maxW="md">
+            <Heading fontSize={{ base: '3xl', md: '4xl' }}>{title}</Heading>
+            <Text fontSize={{ base: 'md', md: 'lg' }} maxW="md">
               {subtitle}
             </Text>
           </VStack>
-          <Separator variant="dashed" bgColor={"teal.500"} />
+          <Separator variant="dashed" bgColor={'teal.500'} />
           <DateWidget />
           <TimeWidget />
         </Box>
@@ -74,10 +71,10 @@ export default function FullPageSections() {
   // const bg3 = "teal.50";
   const sectionsData = [
     {
-      bg: "gray.100",
-      title: "Welcome to ShopEasy",
+      bg: 'gray.100',
+      title: 'Welcome to ShopEasy',
       subtitle:
-        "Discover amazing products, unbeatable prices, and fast delivery, all in one place.",
+        'Discover amazing products, unbeatable prices, and fast delivery, all in one place.',
     },
     // {
     //   bg: "white",
@@ -93,11 +90,7 @@ export default function FullPageSections() {
   return (
     <Box>
       {sectionsData.map((section, index) => (
-        <Section
-          key={index}
-          title={section.title}
-          subtitle={section.subtitle}
-        />
+        <Section key={index} title={section.title} subtitle={section.subtitle} />
       ))}
     </Box>
   );

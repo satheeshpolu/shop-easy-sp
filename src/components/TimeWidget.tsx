@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
-import "./AnimatedClock.css";
+import React, { useEffect, useRef, useState } from 'react';
+import './AnimatedClock.css';
 
-const pad = (n: number) => String(n).padStart(2, "0");
+const pad = (n: number) => String(n).padStart(2, '0');
 
 const Digit: React.FC<{ value: string }> = ({ value }) => {
   const spanRef = useRef<HTMLSpanElement>(null);
@@ -12,10 +12,10 @@ const Digit: React.FC<{ value: string }> = ({ value }) => {
     if (!el) return;
 
     if (prevValue !== value) {
-      el.classList.remove("animate");
+      el.classList.remove('animate');
       void el.offsetWidth;
       el.textContent = value;
-      el.classList.add("animate");
+      el.classList.add('animate');
       setPrevValue(value);
     } else {
       el.textContent = value;
@@ -42,7 +42,7 @@ const TimeWidget: React.FC = () => {
   const seconds = pad(time.getSeconds());
 
   return (
-    <div className="clock" style={{marginTop: '96px'}}>
+    <div className="clock" style={{ marginTop: '96px' }}>
       <Digit value={hours[0]} />
       <Digit value={hours[1]} />
       <div>:</div>

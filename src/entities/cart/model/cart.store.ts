@@ -30,9 +30,7 @@ export const useCartStore = create<CartState>()(
           items:
             quantity <= 0
               ? state.items.filter((item) => item.id !== itemId)
-              : state.items.map((item) =>
-                  item.id === itemId ? { ...item, quantity } : item
-                ),
+              : state.items.map((item) => (item.id === itemId ? { ...item, quantity } : item)),
         })),
 
       clearCart: () => set({ items: [] }),

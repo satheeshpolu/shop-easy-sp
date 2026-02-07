@@ -1,12 +1,4 @@
-import {
-  Box,
-  Image,
-  Text,
-  Link,
-  Badge,
-  Flex,
-  Spacer,
-} from "@chakra-ui/react";
+import { Box, Image, Text, Link, Badge, Flex, Spacer } from '@chakra-ui/react';
 
 export type Article = {
   author: string;
@@ -23,7 +15,7 @@ type ArticleCardProps = {
   article: Article;
 };
 
-const ArticleCard = ({ article} : ArticleCardProps) => {
+const ArticleCard = ({ article }: ArticleCardProps) => {
   const formattedDate = new Date(article.publishedAt).toLocaleString();
 
   return (
@@ -46,7 +38,7 @@ const ArticleCard = ({ article} : ArticleCardProps) => {
           {article.source?.name}
         </Badge>
         <Text fontSize="sm" color="gray.600" mr={2}>
-          By {article.author || "Unknown Author"}
+          By {article.author || 'Unknown Author'}
         </Text>
         <Spacer />
         <Text fontSize="sm" color="gray.500">
@@ -72,17 +64,11 @@ const ArticleCard = ({ article} : ArticleCardProps) => {
 
       {/* Main Content */}
       <Text fontSize="sm" mb={6}>
-        {article.content?.replace(/(\r\n|\n|\r)/gm, "").replace(/<[^>]+>/g, "")}
+        {article.content?.replace(/(\r\n|\n|\r)/gm, '').replace(/<[^>]+>/g, '')}
       </Text>
 
       {/* Read More */}
-      <Link
-        href={article.url}
-        color="blue.700"
-        fontWeight="bold"
-        fontSize="sm"
-        target="_blank"
-      >
+      <Link href={article.url} color="blue.700" fontWeight="bold" fontSize="sm" target="_blank">
         Read Full Article →
       </Link>
     </Box>
