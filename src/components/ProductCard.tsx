@@ -17,24 +17,21 @@ const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <>
       {/* <ProductCardHeader product={product} /> */} {/* TODO */}
-      <Box
-        onClick={() => {
-          toggleFavorite(product.id);
-        }}
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
-        w="100%"
-        p={4}
-        cursor={'pointer'}
-      >
+      <Box display="flex" justifyContent="space-between" alignItems="center" w="100%" p={4}>
         {/* Share icon on the left */}
-        <FaShare size={24} color="rgba(32, 134, 125, 1)" onClick={() => shareProduct(product)} />
-        {product.isFavorite ? (
-          <FaHeart size={30} color="rgba(202, 39, 39, 1)" />
-        ) : (
-          <FaRegHeart size={30} color="rgba(32, 134, 125, 1)" />
-        )}
+        <FaShare
+          size={24}
+          color="rgba(32, 134, 125, 1)"
+          onClick={() => shareProduct(product)}
+          cursor="pointer"
+        />
+        <Box onClick={() => toggleFavorite(product.id)} cursor="pointer">
+          {product.isFavorite ? (
+            <FaHeart size={30} color="rgba(202, 39, 39, 1)" />
+          ) : (
+            <FaRegHeart size={30} color="rgba(32, 134, 125, 1)" />
+          )}
+        </Box>
       </Box>
       <Image
         src={product?.thumbnail}

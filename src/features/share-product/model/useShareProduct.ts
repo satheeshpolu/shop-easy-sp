@@ -3,10 +3,19 @@ import { toaster } from '@/components/ui/toaster';
 
 export const useShareProduct = () => {
   const shareProduct = async (product: Product) => {
+    const { id } = product;
+    const baseUrl = window.location.origin;
+    const currentPath = window.location.pathname;
+
+    const isProductDetailsPage = currentPath.includes('product_details');
+    const productUrl = isProductDetailsPage
+      ? window.location.href
+      : `${baseUrl}/category/${product.category}/${id}/product_details`;
     const shareData = {
-      title: product.title,
-      text: `Check out ${product.title} - $${product.price}`,
-      url: window.location.href,
+      // TODO: Fix it
+      // title: product.title,
+      // text: `Check out ${product.title} - $${product.price}`,
+      url: productUrl,
     };
 
     try {
@@ -23,11 +32,11 @@ export const useShareProduct = () => {
       }
     } catch (error) {
       if ((error as Error).name !== 'AbortError') {
-        toaster.create({
-          title: 'Share failed',
-          description: 'Could not share the product',
-          type: 'error',
-        });
+        // toaster.create({
+        //   title: 'Share failed',
+        //   description: 'Could not share the product',
+        //   type: 'error',
+        // });
       }
     }
   };
