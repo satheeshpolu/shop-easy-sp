@@ -6,6 +6,7 @@ import { Box, Image, Heading, VStack } from '@chakra-ui/react';
 import { FaShare } from 'react-icons/fa';
 import { FaHeart, FaRegHeart } from 'react-icons/fa6';
 import { ProductCardFooter } from './shared/product/ProductCardFooter';
+import { ProductCardHeader } from './shared/product/ProductCardHeader';
 
 type ProductCardProps = {
   product: Product;
@@ -16,23 +17,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
   return (
     <>
-      {/* <ProductCardHeader product={product} /> */} {/* TODO */}
-      <Box display="flex" justifyContent="space-between" alignItems="center" w="100%" p={4}>
-        {/* Share icon on the left */}
-        <FaShare
-          size={24}
-          color="rgba(32, 134, 125, 1)"
-          onClick={() => shareProduct(product)}
-          cursor="pointer"
-        />
-        <Box onClick={() => toggleFavorite(product.id)} cursor="pointer">
-          {product.isFavorite ? (
-            <FaHeart size={30} color="rgba(202, 39, 39, 1)" />
-          ) : (
-            <FaRegHeart size={30} color="rgba(32, 134, 125, 1)" />
-          )}
-        </Box>
-      </Box>
+      <ProductCardHeader product={product} />
       <Image
         src={product?.thumbnail}
         alt={product?.title}
