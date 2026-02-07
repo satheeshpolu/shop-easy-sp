@@ -1,30 +1,9 @@
 const ShoppingCartAnimation = () => (
-  <svg
-    width="300"
-    height="200"
-    viewBox="0 0 300 200"
-    xmlns="http://www.w3.org/2000/svg"
-  >
+  <svg width="300" height="200" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
     {/* Cart body */}
-    <rect
-      x="80"
-      y="100"
-      width="140"
-      height="70"
-      fill="#4FD1C5"
-      rx="10"
-      ry="10"
-    />
+    <rect x="80" y="100" width="140" height="70" fill="#4FD1C5" rx="10" ry="10" />
     {/* Cart handle */}
-    <line
-      x1="80"
-      y1="100"
-      x2="50"
-      y2="50"
-      stroke="#4FD1C5"
-      strokeWidth="8"
-      strokeLinecap="round"
-    />
+    <line x1="80" y1="100" x2="50" y2="50" stroke="#4FD1C5" strokeWidth="8" strokeLinecap="round" />
     {/* Wheels */}
     <circle cx="100" cy="180" r="15" fill="#2C7A7B" />
     <circle cx="200" cy="180" r="15" fill="#2C7A7B" />
@@ -51,12 +30,7 @@ const ShoppingCartAnimation = () => (
     <g className="drop-top" transform="translate(150,0)">
       <ellipse cx="10" cy="10" rx="10" ry="6" fill="#556270" />
       <rect x="0" y="5" width="20" height="6" fill="#C7F464" rx="2" />
-      <path
-        d="M5 5 L15 5 L10 0 Z"
-        fill="#C7F464"
-        stroke="#3E4A50"
-        strokeWidth="1"
-      />
+      <path d="M5 5 L15 5 L10 0 Z" fill="#C7F464" stroke="#3E4A50" strokeWidth="1" />
     </g>
 
     <style>{`

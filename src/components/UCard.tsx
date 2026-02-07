@@ -1,4 +1,4 @@
-import { Avatar, Button, Card } from "@chakra-ui/react";
+import { Avatar, Button, Card } from '@chakra-ui/react';
 
 type UCardProps = {
   author: string;

@@ -1,16 +1,21 @@
-"use client"
+'use client';
 
-import { Portal, Select, createListCollection } from "@chakra-ui/react"
+import { Portal, Select, createListCollection } from '@chakra-ui/react';
 
 type SortItemProps = {
-//   value: string;
+  //   value: string;
   onFilterChange: (value: string) => void;
-}
+};
 
-const SortDropdown = ({onFilterChange}: SortItemProps) => {
+const SortDropdown = ({ onFilterChange }: SortItemProps) => {
   return (
-    <Select.Root collection={frameworks} size="sm" width="200px" onSelect={(item) => onFilterChange(item.value)}>
-      <Select.HiddenSelect />      
+    <Select.Root
+      collection={frameworks}
+      size="sm"
+      width="200px"
+      onSelect={(item) => onFilterChange(item.value)}
+    >
+      <Select.HiddenSelect />
       <Select.Control>
         <Select.Trigger>
           <Select.ValueText placeholder="Sort by …" />
@@ -32,14 +37,14 @@ const SortDropdown = ({onFilterChange}: SortItemProps) => {
         </Select.Positioner>
       </Portal>
     </Select.Root>
-  )
-}
+  );
+};
 
 const frameworks = createListCollection({
   items: [
-    { label: "Name(A→Z)", value: "name" },
-    { label: "Price(Low→High)", value: "price" },
+    { label: 'Name(A→Z)', value: 'name' },
+    { label: 'Price(Low→High)', value: 'price' },
   ],
-})
+});
 
 export default SortDropdown;

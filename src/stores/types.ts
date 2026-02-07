@@ -1,25 +1,15 @@
-import { Product } from "@/utils/types";
+// Re-export types from entities layer for backward compatibility
+export type { Product } from '@/entities/product';
+export type { CartItem, CartState } from '@/entities/cart';
+
+// Legacy types - kept for backward compatibility
+import { Product } from '@/entities/product';
 
 interface RecentStore {
-    recents: Product[];
-    addToRecent: (product: Product) => void;
-    recentProducts: () => Product[];
+  recents: Product[];
+  addToRecent: (product: Product) => void;
+  recentProducts: () => Product[];
 }
-
-interface CartItem {
-  id: number;
-  title: string;
-  price: number;
-  [key: string]: any; // adjust based on your item structure
-}
-
-interface CartState {
-  cart: CartItem[];
-  addToCart: (item: CartItem) => void;
-  removeFromCart: (itemId: number) => void;
-  clearCart: () => void;
-}
-
 
 interface ProductStore {
   products: Product[];
@@ -29,4 +19,4 @@ interface ProductStore {
   sortProducts: (type: string) => void;
 }
 
-export type { RecentStore, CartItem, CartState, Product, ProductStore };
+export type { RecentStore, ProductStore };

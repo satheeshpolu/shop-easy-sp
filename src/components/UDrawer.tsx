@@ -1,4 +1,4 @@
-import { Button, CloseButton, Drawer, Portal } from "@chakra-ui/react"
+import { Button, CloseButton, Drawer, Portal } from '@chakra-ui/react';
 
 const UDrawer = () => {
   return (
@@ -17,8 +17,8 @@ const UDrawer = () => {
             </Drawer.Header>
             <Drawer.Body>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua.
               </p>
             </Drawer.Body>
             <Drawer.Footer>
@@ -32,7 +32,7 @@ const UDrawer = () => {
         </Drawer.Positioner>
       </Portal>
     </Drawer.Root>
-  )
-}
+  );
+};
 
 export default UDrawer;

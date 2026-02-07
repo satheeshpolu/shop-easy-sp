@@ -1,46 +1,36 @@
-import {
-  Box,
-  Grid,
-  Image,
-  Text,
-  Heading,
-  VStack,
-  Button,
-  Stack,
-  Flex,
-} from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import LoadingSkeleton from "../components/LoadingSkeleton";
-import useCartStore from "../stores/useCartStore";
-import useProductStore from "@/stores/useProductStore";
-import { FaCartPlus, FaHeart, FaRegHeart } from "react-icons/fa6";
-import { useRecentStore } from "@/stores/useRecentStore";
-import { BackButton } from "@/components/shared";
-import { t } from "i18next";
-import { EmptyState } from "@/components/shared/empty/EmptyState";
+import { Box, Grid, Image, Text, Heading, VStack, Stack, Flex, Button } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import LoadingSkeleton from '../components/LoadingSkeleton';
+import useProductStore from '@/stores/useProductStore';
+import { useRecentStore } from '@/stores/useRecentStore';
+import { BackButton } from '@/components/shared';
+import { t } from 'i18next';
+import { EmptyState } from '@/components/shared/empty/EmptyState';
+import { Product } from '@/utils/types';
 
 export default function RecentProducts() {
   const { category } = useParams();
   const navigate = useNavigate();
-  const addToCart = useCartStore(
-    (state: { addToCart: any }) => state.addToCart,
-  );
-  const borderColor = "gray.700";
+  // const addToCart = useCartStore(
+  //   (state: { addToCart: any }) => state.addToCart,
+  // );
+  const borderColor = 'gray.700';
   const [loading, setLoading] = useState(false);
   const [isEmpty, setIsEmpty] = useState(true);
-  const { recents } = useRecentStore();
+  const { items } = useRecentStore();
 
   const { fetchProducts, toggleFavorite, favoriteProducts } = useProductStore();
+
   useEffect(() => {
     setLoading(false);
     fetchProducts(category as string);
-    if (recents.length === 0) {
+    if (items?.length === 0) {
       setIsEmpty(true);
     } else {
       setIsEmpty(false);
     }
-  }, [recents]);
+  }, [fetchProducts, category, items]);
 
   return (
     <Box p={6}>
@@ -56,9 +46,9 @@ export default function RecentProducts() {
       </Flex>
 
       <Heading size="lg" mb={6}>
-        {favoriteProducts ? t("recentlyViewed.title") : `Category: {category}`}
+        {favoriteProducts ? t('recentlyViewed.title') : `Category: ${category}`}
       </Heading>
-      {isEmpty && <EmptyState type={"recentlyViewed"} />}
+      {isEmpty && <EmptyState type={'recentlyViewed'} />}
 
       {isEmpty && (
         <Flex justify="center" align="center" minH="60vh">
@@ -66,16 +56,16 @@ export default function RecentProducts() {
             display="flex"
             alignItems="center"
             justifyContent="center"
-            borderRightRadius={{ md: "80px" }}
+            borderRightRadius={{ md: '80px' }}
             px={4}
             py={8}
             bg="#8ef1e4"
           >
             <VStack textAlign="center">
-              <Heading fontSize={{ base: "3xl", md: "4xl" }}>
+              <Heading fontSize={{ base: '3xl', md: '4xl' }}>
                 You haven’t viewed any products recently
               </Heading>
-              <Text fontSize={{ base: "md", md: "lg" }} maxW="md">
+              <Text fontSize={{ base: 'md', md: 'lg' }} maxW="md">
                 Browse the home page to explore products
               </Text>
             </VStack>
@@ -84,10 +74,10 @@ export default function RecentProducts() {
       )}
       <Grid
         templateColumns={{
-          base: "repeat(1, 1fr)",
-          sm: "repeat(2, 1fr)",
-          md: "repeat(3, 1fr)",
-          lg: "repeat(4, 1fr)",
+          base: 'repeat(1, 1fr)',
+          sm: 'repeat(2, 1fr)',
+          md: 'repeat(3, 1fr)',
+          lg: 'repeat(4, 1fr)',
         }}
         gap={6}
       >
@@ -104,7 +94,7 @@ export default function RecentProducts() {
           </>
         )}
 
-        {recents.map((product: any) => (
+        {items?.map((product: Product) => (
           <Box
             key={product?.id}
             borderRadius="lg"
@@ -112,30 +102,25 @@ export default function RecentProducts() {
             bg="#8ef1e4"
             borderColor={borderColor}
             shadow="md"
-            _hover={{ transform: "scale(1.02)", transition: "0.2s" }}
+            _hover={{ transform: 'scale(1.02)', transition: '0.2s' }}
           >
             <Box
               onClick={() => {
-                toggleFavorite(product.id, "favorite");
+                toggleFavorite(product.id, 'favorite');
               }}
               display="flex"
               justifyContent="flex-end"
               alignItems="center"
               w="100%"
               p={4}
-              cursor={"pointer"}
+              cursor={'pointer'}
             >
               {/* {product.isFavorite ? (
                 <FaHeart size={30} color="rgba(202, 39, 39, 1)" />
               ) : (
                 <FaRegHeart size={30} color="rgba(32, 134, 125, 1)" />
               )} */}
-              <Stack
-                direction="row"
-                align="center"
-                justify="space-between"
-                w="full"
-              >
+              <Stack direction="row" align="center" justify="space-between" w="full">
                 <Text fontWeight="bold">${product.price}</Text>
                 <Button
                   type="submit"
@@ -144,12 +129,9 @@ export default function RecentProducts() {
                   bg="#0f695f"
                   color="#c9f9f4"
                   onClick={() => {
-                    navigate(
-                      `/category/${category}/${product.id}/product_details`,
-                      {
-                        state: { data: product },
-                      },
-                    );
+                    navigate(`/category/${category}/${product.id}/product_details`, {
+                      state: { data: product },
+                    });
                   }}
                 >
                   Details
@@ -163,8 +145,8 @@ export default function RecentProducts() {
               w="100%"
               h="120px"
               _hover={{
-                transform: "scale(1.5)",
-                transition: "0.5s",
+                transform: 'scale(1.5)',
+                transition: '0.5s',
                 zIndex: -1,
               }}
             />

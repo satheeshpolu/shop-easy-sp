@@ -1,4 +1,4 @@
-import type { VercelRequest, VercelResponse } from "@vercel/node";
+import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   // const query = req.query.q || "ai";
@@ -26,8 +26,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
 //   res.status(200).json(data);
 // }
-
-
 
 // import type { VercelRequest, VercelResponse } from "@vercel/node";
 

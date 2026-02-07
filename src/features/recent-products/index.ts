@@ -1,0 +1,1 @@
+export { useRecentProductsStore } from './model';

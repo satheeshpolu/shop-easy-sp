@@ -1,28 +1,19 @@
-import { useState } from "react";
-import {
-  Heading,
-  Box,
-  Button,
-  Flex,
-  Stack,
-  Text,
-  Input,
-} from "@chakra-ui/react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { Field, defineStyle } from "@chakra-ui/react";
-import UnderDevelopment from "../components/UnderDevelopment";
-import { BackButton } from "@/components/shared";
+import { useState } from 'react';
+import { Heading, Box, Button, Flex, Stack, Text, Input } from '@chakra-ui/react';
+import { useLocation } from 'react-router-dom';
+import { Field, defineStyle } from '@chakra-ui/react';
+import UnderDevelopment from '../components/UnderDevelopment';
+import { BackButton } from '@/components/shared';
 const CheckoutScreen = () => {
   const location = useLocation();
-  const navigate = useNavigate();
   const { amount } = location.state || {};
 
   // State for each address field
-  const [fullName, setFullName] = useState("");
-  const [streetAddress, setStreetAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [postalCode, setPostalCode] = useState("");
-  const [country, setCountry] = useState("");
+  const [fullName, setFullName] = useState('');
+  const [streetAddress, setStreetAddress] = useState('');
+  const [city, setCity] = useState('');
+  const [postalCode, setPostalCode] = useState('');
+  const [country, setCountry] = useState('');
 
   // Check if all fields have some value
   // const isFormValid =
@@ -33,14 +24,7 @@ const CheckoutScreen = () => {
   //   country.trim();
 
   return (
-    <Flex
-      minH="100vh"
-      align="flex-start"
-      justify="center"
-      bg="gray.100"
-      pt={24}
-      px={4}
-    >
+    <Flex minH="100vh" align="flex-start" justify="center" bg="gray.100" pt={24} px={4}>
       <Box maxW="500px" w="full" bg="white" p={8} rounded="md" shadow="md">
         <UnderDevelopment />
         <Heading size="md" mb={4} textAlign="center">
@@ -48,12 +32,7 @@ const CheckoutScreen = () => {
         </Heading>
 
         <Stack>
-          <Flex
-            justify="space-between"
-            fontWeight="bold"
-            mb={4}
-            color={"teal.500"}
-          >
+          <Flex justify="space-between" fontWeight="bold" mb={4} color={'teal.500'}>
             <Text>Total:</Text>
             <Text>${amount?.toFixed(2) || 0}</Text>
           </Flex>
@@ -111,7 +90,7 @@ const CheckoutScreen = () => {
             width="full"
             color="#c9f9f4"
             variant="outline"
-            onClick={() => alert("Under development...!")}
+            onClick={() => alert('Under development...!')}
             bg="#14b8a6"
           >
             Place Order
@@ -124,23 +103,23 @@ const CheckoutScreen = () => {
 };
 
 const floatingStyles = defineStyle({
-  pos: "absolute",
-  bg: "bg",
-  px: "0.5",
-  top: "-3",
-  insetStart: "2",
-  fontWeight: "normal",
-  pointerEvents: "none",
-  transition: "position",
+  pos: 'absolute',
+  bg: 'bg',
+  px: '0.5',
+  top: '-3',
+  insetStart: '2',
+  fontWeight: 'normal',
+  pointerEvents: 'none',
+  transition: 'position',
   _peerPlaceholderShown: {
-    color: "fg.muted",
-    top: "2.5",
-    insetStart: "3",
+    color: 'fg.muted',
+    top: '2.5',
+    insetStart: '3',
   },
   _peerFocusVisible: {
-    color: "fg",
-    top: "-3",
-    insetStart: "2",
+    color: 'fg',
+    top: '-3',
+    insetStart: '2',
   },
 });
 

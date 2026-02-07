@@ -1,7 +1,7 @@
 .clock {
   display: flex;
   gap: 4px;
-  font-family: "Courier New", monospace;
+  font-family: 'Courier New', monospace;
   font-size: 2rem;
   color: rgb(108, 249, 235);
   position: absolute;

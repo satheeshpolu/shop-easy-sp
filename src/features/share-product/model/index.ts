@@ -1,0 +1,1 @@
+export { useShareProduct } from './useShareProduct';

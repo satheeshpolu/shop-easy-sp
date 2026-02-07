@@ -1,6 +1,7 @@
-import { create } from "zustand";
-import { persist } from "zustand/middleware";
-import { Product, ProductStore } from "./types";
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+import { Product, ProductStore } from './types';
+import { productApi, sortProducts } from '@/entities/product';
 
 const useProductStore = create<ProductStore>()(
   persist(
@@ -10,8 +11,8 @@ const useProductStore = create<ProductStore>()(
 
       fetchProducts: async (category: string) => {
         try {
-          const res = await fetch(`https://dummyjson.com/products/category/${category}`);
-          const data = await res.json();
+          const response = await productApi.getByCategory(category);
+          const data = response as unknown as { products: Product[] };
 
           const favoriteIds = get().favoriteProducts.map((f) => f.id);
 
@@ -22,14 +23,14 @@ const useProductStore = create<ProductStore>()(
 
           set({ products: initializedProducts });
         } catch (error) {
-          console.error("Failed to fetch products:", error);
+          console.error('Failed to fetch products:', error);
         }
       },
 
       toggleFavorite: (productId, pageType) => {
         const { favoriteProducts, products } = get();
-        const dataCollectoin = pageType === 'wishlist' ? favoriteProducts : products;
-        const productToToggle = dataCollectoin.find((p) => p.id === productId); // TODO
+        const dataCollection = pageType === 'wishlist' ? favoriteProducts : products;
+        const productToToggle = dataCollection.find((p) => p.id === productId);
         if (!productToToggle) return;
 
         const isFavorite = favoriteProducts.some((f) => f.id === productId);
@@ -47,26 +48,19 @@ const useProductStore = create<ProductStore>()(
           products: updatedProducts,
         });
       },
+
       sortProducts: (type: string) => {
         const { products } = get();
-        const _sortBy = type === 'price' ? 'price' : 'title';
-        let sortedProducts: Product[] = [];
-        // a[_sortBy].localeCompare(b[_sortBy]));
-        // const sortedProducts = products.sort((a,b) => a[_sortBy].localeCompare(b[_sortBy]));
-        if(_sortBy === 'price') {
-          sortedProducts = products.sort((a,b) => a[_sortBy] - b[_sortBy]);
-        } else {  
-          sortedProducts = products.sort((a,b) => a[_sortBy].localeCompare(b[_sortBy]));
-        }
-        debugger
+        const sortBy = type === 'price' ? 'price' : 'title';
+        const sortedProducts = sortProducts(products, sortBy, 'asc');
         set({
           products: sortedProducts,
         });
       },
     }),
     {
-      name: "favorite-products", // LocalStorage key
-      partialize: (state) => ({ favoriteProducts: state.favoriteProducts }), // Only persist favorites
+      name: 'favorite-products',
+      partialize: (state) => ({ favoriteProducts: state.favoriteProducts }),
     }
   )
 );

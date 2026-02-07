@@ -1,18 +1,6 @@
-import { useQuery } from "@tanstack/react-query";
+// Re-export from entities layer for backward compatibility
+export { useProduct } from '@/entities/product';
 
-const useProduct = (id: number) => {
-  return useQuery({
-    queryKey: ["product", id],
-    queryFn: async () => {
-      const res = await fetch(`https://dummyjson.com/products/${id}`);
-      if (!res.ok) {
-        throw new Error(`Failed to fetch ${id} product`);
-      }
-      return res.json();
-    },
-    staleTime: 1000 * 60 * 5,
-    gcTime: 1000 * 60 * 30,
-  });
-};
-
-export default useProduct;
+// Keep the old hook as default export for compatibility
+import { useProduct as useProductQuery } from '@/entities/product';
+export default useProductQuery;

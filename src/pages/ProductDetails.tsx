@@ -1,4 +1,3 @@
-import useCartStore from "@/stores/useCartStore";
 import {
   Box,
   Badge,
@@ -7,57 +6,45 @@ import {
   HStack,
   Image,
   SimpleGrid,
-  Skeleton,
   Stack,
   Text,
   VStack,
-} from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { Accordion, Span } from "@chakra-ui/react";
-import WeeklyBuyersChart from "@/components/charts/WeeklyBuyersChart";
-import useProduct from "@/hooks/useProduct";
-import { FaChartBar } from "react-icons/fa";
-import { FaShare } from "react-icons/fa6";
-import useShareProduct from "@/hooks/useShareProduct";
-import { BackButton } from "@/components/shared";
+} from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import WeeklyBuyersChart from '@/components/charts/WeeklyBuyersChart';
+import { FaCartPlus, FaShare } from 'react-icons/fa6';
+import useShareProduct from '@/hooks/useShareProduct';
+import { BackButton } from '@/components/shared';
+import { useProduct } from '@/hooks/useProduct';
+import { useAddToCart } from '@/features/add-to-cart';
 
 export default function ProductDetails() {
   // const [product, setProduct] = useState<any>(null);
-  const [mainImage, setMainImage] = useState<string>("");
+  const [mainImage, setMainImage] = useState();
   const { shareProduct } = useShareProduct();
   const { id } = useParams();
-  const addToCart = useCartStore(
-    (state: { addToCart: any }) => state.addToCart
-  );
-  const navigate = useNavigate();
-  const { data: product, isLoading } = id
-    ? useProduct(Number(id))
-    : { data: null, isLoading: true };
+  // const addToCart = useCartStore((state) => state.addToCart);
+
+  const { addToCart } = useAddToCart();
+
+  const { data: productResponse, isLoading } = useProduct(Number(id) || 0);
+  const product = productResponse ?? null;
+  // console.log('Product Details:', productResponse);
   // const WeeklyBuyersChart = React.lazy(
   //   () => import("@/components/charts/WeeklyBuyersChart")
   // );
   useEffect(() => {
-    setMainImage(product?.thumbnail || product?.images?.[0]); // Default image
-  }, [product]);
+    setMainImage(productResponse?.thumbnail || productResponse?.images?.[0]); // Default image
+  }, [productResponse]);
 
   if (isLoading) {
-    return (
-      <Box p={6} maxW="6xl" mx="auto">
-        <Skeleton height="600px" />
-      </Box>
-    );
+    return;
   }
+  // TODO: Cleanup
 
   return (
-    <Box
-      p={{ base: 4, md: 8 }}
-      maxW="6xl"
-      mx="auto"
-      bg="white"
-      rounded="xl"
-      boxShadow="lg"
-    >
+    <Box p={{ base: 4, md: 8 }} maxW="6xl" mx="auto" bg="white" rounded="xl" boxShadow="lg">
       <BackButton />
       <Button
         type="submit"
@@ -68,15 +55,11 @@ export default function ProductDetails() {
         ml={4}
         mr={4}
       >
-        Add to Cart
+        <FaCartPlus />
       </Button>
       {/* Share icon on the left */}
       <Button colorScheme="teal" variant="outline">
-        <FaShare
-          size={24}
-          color="rgba(32, 134, 125, 1)"
-          onClick={() => shareProduct(product)}
-        />
+        <FaShare size={24} color="rgba(32, 134, 125, 1)" onClick={() => shareProduct(product)} />
       </Button>
 
       <SimpleGrid columns={{ base: 1, md: 2 }}>
@@ -84,7 +67,7 @@ export default function ProductDetails() {
         <VStack align="start">
           <Image
             src={mainImage}
-            alt={product.title}
+            alt={product?.title}
             borderRadius="md"
             w="100%"
             h="auto"
@@ -93,7 +76,7 @@ export default function ProductDetails() {
           />
 
           <HStack wrap="wrap">
-            {product.images.slice(0, 5).map((img: string, idx: number) => (
+            {product?.images?.slice(0, 5).map((img: string, idx: number) => (
               <Image
                 key={idx}
                 src={img}
@@ -101,10 +84,10 @@ export default function ProductDetails() {
                 boxSize="75px"
                 objectFit="cover"
                 borderRadius="md"
-                border={mainImage === img ? "2px solid teal" : "1px solid #eee"}
+                border={mainImage === img ? '2px solid teal' : '1px solid #eee'}
                 cursor="pointer"
                 onClick={() => setMainImage(img)}
-                _hover={{ transform: "scale(1.05)" }}
+                _hover={{ transform: 'scale(1.05)' }}
               />
             ))}
           </HStack>
@@ -112,54 +95,50 @@ export default function ProductDetails() {
 
         {/* Details Section */}
         <VStack align="start">
-          <Heading size="lg">{product.title}</Heading>
+          <Heading size="lg">{product?.title}</Heading>
           <Text color="gray.600" fontSize="md">
-            <strong>Brand:</strong> {product.brand} | <strong>Category:</strong>{" "}
-            {product.category}
+            <strong>Brand:</strong> {product?.brand} | <strong>Category:</strong>{' '}
+            {product?.category}
           </Text>
 
           <HStack>
             <Text fontSize="2xl" fontWeight="bold" color="teal.600">
-              ${product.price}
+              ${product?.price}
             </Text>
             <Badge colorScheme="green" fontSize="0.9em">
-              -{product.discountPercentage}%
+              -{product?.discountPercentage}%
             </Badge>
           </HStack>
 
           <Text fontSize="md" color="gray.700">
-            {product.description}
+            {product?.description}
           </Text>
           <Box p="8px" />
 
           <Badge
-            colorScheme={
-              product.availabilityStatus === "In Stock" ? "teal" : "red"
-            }
+            colorScheme={product?.availabilityStatus === 'In Stock' ? 'teal' : 'red'}
             fontSize="0.9em"
-            colorPalette={
-              product.availabilityStatus === "In Stock" ? "green" : "red"
-            }
+            colorPalette={product?.availabilityStatus === 'In Stock' ? 'green' : 'red'}
           >
-            {product.availabilityStatus}
+            {product?.availabilityStatus}
           </Badge>
 
           <Stack fontSize="sm" color="gray.600">
-            <Text>Stock: {product.stock}</Text>
-            <Text>Min Order: {product.minimumOrderQuantity}</Text>
-            <Text>Weight: {product.weight} kg</Text>
+            <Text>Stock: {product?.stock}</Text>
+            <Text>Min Order: {product?.minimumOrderQuantity}</Text>
+            <Text>Weight: {product?.weight} kg</Text>
           </Stack>
           <Box p="8px" />
 
           <Stack fontSize="sm" color="gray.600">
-            <Text>Shipping: {product.shippingInformation}</Text>
-            <Text>Warranty: {product.warrantyInformation}</Text>
-            <Text>Return Policy: {product.returnPolicy}</Text>
+            <Text>Shipping: {product?.shippingInformation}</Text>
+            <Text>Warranty: {product?.warrantyInformation}</Text>
+            <Text>Return Policy: {product?.returnPolicy}</Text>
           </Stack>
           <Box p="8px" />
           <HStack>
             <Text>QR:</Text>
-            <Image src={product.meta?.qrCode} alt="QR Code" boxSize="60px" />
+            <Image src={product?.meta?.qrCode} alt="QR Code" boxSize="60px" />
           </HStack>
           <WeeklyBuyersChart />
         </VStack>
